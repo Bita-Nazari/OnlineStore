@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.DataAccess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.DataAccess.Db.SqlServer", "OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.DataAccess.Db.SqlServer.csproj", "{6412509D-52EC-47A7-B66E-9ED29AF09D72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Domain.AppService", "OS.Domain.AppService\OS.Domain.AppService.csproj", "{0FD34F50-FBBB-407F-ACDD-F48486C9F820}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{6412509D-52EC-47A7-B66E-9ED29AF09D72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6412509D-52EC-47A7-B66E-9ED29AF09D72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6412509D-52EC-47A7-B66E-9ED29AF09D72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FD34F50-FBBB-407F-ACDD-F48486C9F820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FD34F50-FBBB-407F-ACDD-F48486C9F820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FD34F50-FBBB-407F-ACDD-F48486C9F820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FD34F50-FBBB-407F-ACDD-F48486C9F820}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{56DC66F5-FD83-4ECD-86B9-A9BAFF6064AD} = {A962B63B-2A2A-4681-8730-C2E235936E37}
 		{7E325AEB-4866-4176-9644-61ED124D46E0} = {E9B7F830-CD25-45C3-872B-4A80FD9DEB31}
 		{6412509D-52EC-47A7-B66E-9ED29AF09D72} = {C5391528-3FC4-4145-91F8-3D646C3DB898}
+		{0FD34F50-FBBB-407F-ACDD-F48486C9F820} = {A962B63B-2A2A-4681-8730-C2E235936E37}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {172B832A-E7D4-4E65-9CFA-0CDCA89583C9}
