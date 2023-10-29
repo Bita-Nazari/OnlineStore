@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Domain.Service", "OS.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.DataAccess.EfRepo", "OS.Infrastucture.DataAccess.EfRepo\OS.Infrastucture.DataAccess.EfRepo.csproj", "{7E325AEB-4866-4176-9644-61ED124D46E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.DataAccess.Db.SqlServer", "OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.DataAccess.Db.SqlServer.csproj", "{6412509D-52EC-47A7-B66E-9ED29AF09D72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.Db.SqlServer", "OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.Db.SqlServer.csproj", "{6412509D-52EC-47A7-B66E-9ED29AF09D72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Domain.AppService", "OS.Domain.AppService\OS.Domain.AppService.csproj", "{0FD34F50-FBBB-407F-ACDD-F48486C9F820}"
 EndProject
