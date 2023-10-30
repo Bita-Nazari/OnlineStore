@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Contracts.AppService
+namespace OS.Domain.Core.Dtos
 {
-    public interface IAuctionAppService
+    internal class CategoryDto
     {
-        Task<List<AuctionDto>> GetAll();
     }
 }
