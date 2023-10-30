@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OS.Domain.AppService\OS.Domain.AppService.csproj" />
     <ProjectReference Include="..\OS.Domain.Service\OS.Domain.Service.csproj" />
     <ProjectReference Include="..\OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.Db.SqlServer.csproj" />
