@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OS.Domain.Core.Dtos;
 
 namespace OS.Domain.Core.Contracts.Service
 {
-    internal interface ICityService
+    public interface ICityService
     {
+        Task<List<CityDto>> GetAll(CancellationToken cancellationToken);
     }
 }
