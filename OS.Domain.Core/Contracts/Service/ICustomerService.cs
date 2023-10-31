@@ -10,7 +10,7 @@ namespace OS.Domain.Core.Contracts.Service
     public interface ICustomerService
     {
         Task HardDelete(int customerId, CancellationToken cancellationToken);
-        Task Update(int customerId, CancellationToken cancellationToken);
+        Task Update(CustomerDto customerDto, CancellationToken cancellationToken);
         Task<List<CustomerDto>> GetAll(CancellationToken cancellationToken);
         Task<CustomerDto> Detail(int customerId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetCustomerOrders(int productId, CancellationToken cancellationToken);

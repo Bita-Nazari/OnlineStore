@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using OS.Domain.Core.Entities;
 
-namespace OS.Infrastucture.Db.SqlServer.Entities;
+namespace OS.Infrastucture.Db.SqlServer.DataBase;
 
 public partial class OnlineStoreContext : DbContext
 {

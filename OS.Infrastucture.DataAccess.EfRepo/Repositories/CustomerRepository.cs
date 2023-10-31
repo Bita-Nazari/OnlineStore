@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Contracts.AppService
+namespace OS.Infrastucture.DataAccess.EfRepo
 {
-    public interface ICartProductAppService
+    internal class CustomerRepository
     {
     }
 }

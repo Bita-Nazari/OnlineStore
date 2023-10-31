@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OS.Infrastucture.Db.SqlServer.Entities;
+namespace OS.Domain.Core.Entities;
+
 
 public partial class Booth
 {

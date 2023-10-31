@@ -12,7 +12,7 @@ namespace OS.Domain.Core.Contracts.Repository
         Task Create(CategoryDto categoryDto, CancellationToken cancellationToken);
         Task HardDelete(int categoryId, CancellationToken cancellationToken);
         Task SoftDelete(int categoryId, CancellationToken cancellationToken);
-        Task Update(int CategoryId, CancellationToken cancellationToken);
+        Task Update(CategoryDto categoryDto, CancellationToken cancellationToken);
         Task<List<CategoryDto>> GetAll(CancellationToken cancellationToken);
     }
 }
