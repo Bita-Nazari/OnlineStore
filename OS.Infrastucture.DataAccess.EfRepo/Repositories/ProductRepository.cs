@@ -21,10 +21,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 Id = productDto.Id,
                 Name = productDto.Name,
-                BoothId = productDto.BoothId,
                 Description = productDto.Description,
                 CreatedAt = DateTime.Now,
-                Price = productDto.Price,
+                BasePrice = productDto.Price,
                 SubCategoryId = productDto.SubCategoryId,
 
             };
@@ -39,10 +38,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 {
                     Id = p.Id,
                     Name = p.Name,
-                    BoothId = p.BoothId,
                     Description = p.Description,
                     CreatedAt = p.CreatedAt,
-                    Price = p.Price,
+                    Price = p.BasePrice,
                     SubCategoryId = p.SubCategoryId,
 
 
@@ -88,7 +86,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 product.Name = productDto.Name;
                 product.Description = productDto.Description;
-                product.Price = productDto.Price;
+                product.BasePrice = productDto.Price;
                 product.SubCategory = productDto.SubCategory;
                 await _storeContext.SaveChangesAsync(cancellationToken);
             }

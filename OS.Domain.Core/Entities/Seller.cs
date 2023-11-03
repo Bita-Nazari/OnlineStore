@@ -35,4 +35,6 @@ public partial class Seller
     public virtual City City { get; set; } = null!;
 
     public virtual Picture Picture { get; set; } = null!;
+
+    public User User { get; set; }
 }

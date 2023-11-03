@@ -10,7 +10,7 @@ public partial class Product
 
     public string Name { get; set; } = null!;
 
-    public long Price { get; set; }
+    public long BasePrice { get; set; }
 
     public string Description { get; set; } = null!;
 
@@ -19,8 +19,6 @@ public partial class Product
     public bool IsConfirmed { get; set; }
 
     public DateTime CreatedAt { get; set; }
-
-    public int BoothId { get; set; }
 
     public int SubCategoryId { get; set; }
 
@@ -33,6 +31,7 @@ public partial class Product
     public virtual ICollection<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
     public virtual ICollection<ProductPicture> ProductPictures { get; set; } = new List<ProductPicture>();
+    public virtual ICollection<ProductBooth> ProductBooths { get; set; } = new List<ProductBooth>();
 
     public virtual SubCategory SubCategory { get; set; } = null!;
 }

@@ -25,7 +25,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 CustomerId = CartDto.CustomerId,
                 CreatedAt = DateTime.Now,
-                BoothId = CartDto.BoothId,
                 Id = CartDto.Id,
             };
             await _storeContext.Carts.AddAsync(Cart);
@@ -42,7 +41,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 CustomerId = cart.CustomerId,
                 CreatedAt = cart.CreatedAt,
-                BoothId = cart.BoothId
 
             };
             return cartDto;
@@ -56,7 +54,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 CustomerId = c.CustomerId,
                 CreatedAt= c.CreatedAt,
-                BoothId = c.BoothId
             }).ToListAsync(cancellationToken);
             return CartList;
         }

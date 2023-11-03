@@ -14,7 +14,7 @@ namespace OS.Domain.AppService
         private readonly ICategoryService _categoryService;
         public CategoryAppService(ICategoryService categoryService)
         {
-         _categoryService          
+            _categoryService = categoryService;   
         }
         public Task Create(CategoryDto categoryDto, CancellationToken cancellationToken)
         {

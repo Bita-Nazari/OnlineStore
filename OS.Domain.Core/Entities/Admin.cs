@@ -16,4 +16,5 @@ public partial class Admin
     public long PhoneNumber { get; set; }
 
     public int? UserId { get; set; }
+    public User User { get; set; }
 }

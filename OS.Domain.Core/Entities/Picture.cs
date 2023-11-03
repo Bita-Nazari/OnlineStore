@@ -6,6 +6,10 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Picture
 {
+    #region Properties
+
+
+    #endregion Properties
     public int Id { get; set; }
 
     public string Url { get; set; } = null!;

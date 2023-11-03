@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OS.Domain.Core.Entities;
 
 namespace OS.Infrastucture.Db.SqlServer.DataBase;
 
-public partial class OnlineStoreContext : DbContext
+public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<int>, int>
 {
     public OnlineStoreContext()
     {
@@ -57,6 +57,7 @@ public partial class OnlineStoreContext : DbContext
     public virtual DbSet<Status> Statuses { get; set; }
 
     public virtual DbSet<SubCategory> SubCategories { get; set; }
+    public virtual DbSet<ProductBooth> ProductBooths { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
@@ -133,10 +134,6 @@ public partial class OnlineStoreContext : DbContext
 
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
-            entity.HasOne(d => d.Booth).WithMany(p => p.Carts)
-                .HasForeignKey(d => d.BoothId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Cart_Booth");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.CustomerId)
@@ -253,12 +250,8 @@ public partial class OnlineStoreContext : DbContext
 
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.Name).HasMaxLength(50);
-            entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.BasePrice).HasColumnName("price");
 
-            entity.HasOne(d => d.Booth).WithMany(p => p.Products)
-                .HasForeignKey(d => d.BoothId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Product_Booth");
 
             entity.HasOne(d => d.SubCategory).WithMany(p => p.Products)
                 .HasForeignKey(d => d.SubCategoryId)
@@ -268,9 +261,7 @@ public partial class OnlineStoreContext : DbContext
 
         modelBuilder.Entity<ProductCart>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ProductCart");
+            entity.HasKey(pb => pb.Id);
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
@@ -283,6 +274,16 @@ public partial class OnlineStoreContext : DbContext
                 .HasForeignKey(d => d.ProductBoothId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ProductCart_Product");
+        });
+        modelBuilder.Entity<ProductBooth>(entity =>
+        {
+            entity.HasKey(pb => pb.Id);
+            entity.HasOne(pb => pb.Product)
+        .WithMany(p => p.ProductBooths)
+        .HasForeignKey(pb => pb.ProductId);
+            entity.HasOne(pb => pb.booth)
+        .WithMany(b => b.ProductBooths) 
+        .HasForeignKey(pb => pb.BoothId);
         });
 
         modelBuilder.Entity<ProductOrder>(entity =>

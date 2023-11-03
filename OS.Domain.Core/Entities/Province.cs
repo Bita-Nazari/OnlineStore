@@ -6,6 +6,10 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Province
 {
+    #region Properties
+
+
+    #endregion Properties
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;

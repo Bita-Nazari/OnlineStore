@@ -30,7 +30,8 @@ public partial class Booth
 
     public virtual Medal Medal { get; set; } = null!;
 
-    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+    public virtual ICollection<ProductBooth> ProductBooths { get; set; } = new List<ProductBooth>();
+
 
     public virtual Seller Seller { get; set; } = null!;
 }

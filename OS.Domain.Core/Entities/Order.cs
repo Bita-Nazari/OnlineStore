@@ -6,6 +6,10 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Order
 {
+    #region Properties
+
+
+    #endregion Properties
     public int Id { get; set; }
 
     public long TotalPrice { get; set; }

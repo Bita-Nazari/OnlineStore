@@ -6,6 +6,10 @@ namespace OS.Domain.Core.Entities;
 
 public partial class ProductCart
 {
+    #region Properties
+
+
+    #endregion Properties
     public int Id { get; set; }
 
     public int ProductBoothId { get; set; }

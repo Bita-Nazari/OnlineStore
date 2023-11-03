@@ -6,6 +6,10 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Auction
 {
+    #region Properties
+ 
+
+    #endregion Properties
     public int Id { get; set; }
 
     public long StartPrice { get; set; }
