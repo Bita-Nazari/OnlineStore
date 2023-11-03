@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OS.Domain.Core.Contracts.AppService
 {
-    internal interface IMedalAppService
+    public interface IMedalAppService
     {
     }
 }

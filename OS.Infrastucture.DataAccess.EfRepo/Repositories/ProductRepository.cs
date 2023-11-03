@@ -34,7 +34,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)
         {
-            var productList = await _storeContext.Products
+            var productList = await _storeContext.Products.AsNoTracking()
                 .Select(p => new ProductDto()
                 {
                     Id = p.Id,
@@ -64,8 +64,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task HardDelete(int ProductId, CancellationToken cancellationToken)
         {
             var product = await _storeContext.Products
-                .Where(p => p.Id == ProductId)
-                .SingleOrDefaultAsync(p => p.Id == ProductId);
+                .FirstOrDefaultAsync(p => p.Id == ProductId);
             _storeContext.Remove(product);
             await _storeContext.SaveChangesAsync(cancellationToken);
 
@@ -75,7 +74,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var product = await _storeContext.Products
             .Where(p => p.Id == ProductId)
-            .SingleOrDefaultAsync();
+            .FirstOrDefaultAsync();
             product.IsDeleted = true;
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
@@ -84,15 +83,25 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var product = await _storeContext.Products
             .Where(p => p.Id == productDto.Id)
-            .SingleOrDefaultAsync();
+            .FirstOrDefaultAsync();
             if (product != null)
             {
                 product.Name = productDto.Name;
                 product.Description = productDto.Description;
                 product.Price = productDto.Price;
                 product.SubCategory = productDto.SubCategory;
+                await _storeContext.SaveChangesAsync(cancellationToken);
             }
-            await _storeContext.SaveChangesAsync(cancellationToken);
+            try
+            {
+                await _storeContext.SaveChangesAsync(cancellationToken);
+            }
+            catch (Exception exc)
+            {
+
+                throw;
+            }
+            
 
         }
     }

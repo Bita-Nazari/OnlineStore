@@ -15,7 +15,7 @@ namespace OS.Domain.Core.Contracts.AppService
         Task<CartDto> Detail(int CartId, CancellationToken cancellationToken);
         Task<List<CartDto>> GetAll(CancellationToken cancellationToken);
         Task<List<CartDto>>GetAllBoothCarts(int boothId , CancellationToken cancellationToken);
-        Task<List<ProductDto>>GetAllProduct(CartDto cartDto,CancellationToken cancellationToken);
+        
         
     }
 }

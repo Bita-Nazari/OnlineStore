@@ -85,7 +85,15 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
 
             }
-            await _storeContext.SaveChangesAsync();
+            try
+            {
+                await _storeContext.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
 
         }

@@ -35,6 +35,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task<List<SubcategoryDto>> GetAll(CancellationToken cancellationToken)
         {
             var subcategoryList = await _storeContext.SubCategories
+                .AsNoTracking()
                 .Select(c => new SubcategoryDto()
             {
                 Id = c.Id,
@@ -74,6 +75,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 subcategory.CategoryId = subcategoryDto.Id;
                 subcategory.Name = subcategoryDto.Name;
             }
+            await _storeContext.SaveChangesAsync(cancellationToken);
 
         }
     }

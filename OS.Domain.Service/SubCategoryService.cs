@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Contracts.Repository
+namespace OS.Domain.Service
 {
-    public interface IMedalRepository
+    internal class SubCategoryService
     {
     }
 }

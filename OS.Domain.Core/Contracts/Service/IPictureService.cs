@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OS.Domain.Core.Contracts.Service
 {
-    internal interface IPictureService
+    public interface IPictureService
     {
     }
 }

@@ -34,7 +34,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<List<CategoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            var CategoryList =await _storeContext.Categories
+            var CategoryList =await _storeContext.Categories.AsNoTracking()
                 .Select(c => new CategoryDto()
                 {
                     Id = c.Id,

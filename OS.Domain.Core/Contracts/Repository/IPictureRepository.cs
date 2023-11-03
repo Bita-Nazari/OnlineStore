@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OS.Domain.Core.Contracts.Repository
 {
-    internal interface IPictureRepository
+    public interface IPictureRepository
     {
     }
 }

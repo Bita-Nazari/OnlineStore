@@ -279,8 +279,8 @@ public partial class OnlineStoreContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ProductCart_Cart");
 
-            entity.HasOne(d => d.Product).WithMany()
-                .HasForeignKey(d => d.ProductId)
+            entity.HasOne(d => d.ProductBooth).WithMany()
+                .HasForeignKey(d => d.ProductBoothId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ProductCart_Product");
         });
