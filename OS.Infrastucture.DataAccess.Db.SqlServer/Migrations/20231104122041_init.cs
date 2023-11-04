@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OS.Infrastucture.Db.SqlServer.Migrations
 {
     /// <inheritdoc />
-    public partial class initnew : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -310,6 +310,31 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    price = table.Column<long>(type: "bigint", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    SubCategoryId = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_SubCategory",
+                        column: x => x.SubCategoryId,
+                        principalTable: "SubCategory",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customer",
                 columns: table => new
                 {
@@ -385,6 +410,31 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductPicture",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    PictureId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductPicture", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductPicture_Picture",
+                        column: x => x.PictureId,
+                        principalTable: "Picture",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductPicture_Product",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Booth",
                 columns: table => new
                 {
@@ -410,96 +460,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         name: "FK_Booth_Seller",
                         column: x => x.SellerId,
                         principalTable: "Seller",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cart",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    BoothId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cart", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cart_Booth_BoothId",
-                        column: x => x.BoothId,
-                        principalTable: "Booth",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Cart_Customer",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Product",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    price = table.Column<long>(type: "bigint", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    IsConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    SubCategoryId = table.Column<int>(type: "int", nullable: false),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    BoothId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Product", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Product_Booth_BoothId",
-                        column: x => x.BoothId,
-                        principalTable: "Booth",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Product_SubCategory",
-                        column: x => x.SubCategoryId,
-                        principalTable: "SubCategory",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalPrice = table.Column<long>(type: "bigint", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    Commession = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Order_Cart",
-                        column: x => x.CartId,
-                        principalTable: "Cart",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Order_Customer",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Order_Status",
-                        column: x => x.StatusId,
-                        principalTable: "Status",
                         principalColumn: "Id");
                 });
 
@@ -539,7 +499,33 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductBooths",
+                name: "Cart",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    BoothId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cart_Booth_BoothId",
+                        column: x => x.BoothId,
+                        principalTable: "Booth",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cart_Customer",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductBooth",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -551,15 +537,15 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductBooths", x => x.Id);
+                    table.PrimaryKey("PK_ProductBooth", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductBooths_Booth_BoothId",
+                        name: "FK_ProductBooth_Booth",
                         column: x => x.BoothId,
                         principalTable: "Booth",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductBooths_Product_ProductId",
+                        name: "FK_ProductBooth_Product",
                         column: x => x.ProductId,
                         principalTable: "Product",
                         principalColumn: "Id",
@@ -567,28 +553,87 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductPicture",
+                name: "Bid",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    PictureId = table.Column<int>(type: "int", nullable: false)
+                    SuggestedPrice = table.Column<long>(type: "bigint", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    IsCreated = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    AuctionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductPicture", x => x.Id);
+                    table.PrimaryKey("PK_Bid", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductPicture_Picture",
-                        column: x => x.PictureId,
-                        principalTable: "Picture",
+                        name: "FK_Bid_Auction",
+                        column: x => x.AuctionId,
+                        principalTable: "Auction",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductPicture_Product",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Bid_Customer",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TotalPrice = table.Column<long>(type: "bigint", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false),
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    Commession = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_Cart",
+                        column: x => x.CartId,
+                        principalTable: "Cart",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_Customer",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_Status",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductCarts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductBoothId = table.Column<int>(type: "int", nullable: false),
+                    CartId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductCarts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductCart_Cart",
+                        column: x => x.CartId,
+                        principalTable: "Cart",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductCart_Product",
+                        column: x => x.ProductBoothId,
+                        principalTable: "ProductBooth",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -646,58 +691,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         name: "FK_ProductOrder_Product",
                         column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Bid",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SuggestedPrice = table.Column<long>(type: "bigint", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    IsCreated = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
-                    AuctionId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bid", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Bid_Auction",
-                        column: x => x.AuctionId,
-                        principalTable: "Auction",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Bid_Customer",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductCarts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductBoothId = table.Column<int>(type: "int", nullable: false),
-                    CartId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductCarts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductCart_Cart",
-                        column: x => x.CartId,
-                        principalTable: "Cart",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductCart_Product",
-                        column: x => x.ProductBoothId,
-                        principalTable: "ProductBooths",
                         principalColumn: "Id");
                 });
 
@@ -850,23 +843,18 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_BoothId",
-                table: "Product",
-                column: "BoothId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Product_SubCategoryId",
                 table: "Product",
                 column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBooths_BoothId",
-                table: "ProductBooths",
+                name: "IX_ProductBooth_BoothId",
+                table: "ProductBooth",
                 column: "BoothId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductBooths_ProductId",
-                table: "ProductBooths",
+                name: "IX_ProductBooth_ProductId",
+                table: "ProductBooth",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -965,7 +953,7 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 name: "Auction");
 
             migrationBuilder.DropTable(
-                name: "ProductBooths");
+                name: "ProductBooth");
 
             migrationBuilder.DropTable(
                 name: "Order");

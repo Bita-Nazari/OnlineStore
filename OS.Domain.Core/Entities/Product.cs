@@ -31,8 +31,6 @@ public partial class Product
 
     public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
-    public virtual Booth Booth { get; set; } = null!;
-
     public virtual ICollection<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
     public virtual ICollection<ProductPicture> ProductPictures { get; set; } = new List<ProductPicture>();

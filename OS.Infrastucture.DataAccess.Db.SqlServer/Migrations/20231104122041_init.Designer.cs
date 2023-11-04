@@ -12,8 +12,8 @@ using OS.Infrastucture.Db.SqlServer.DataBase;
 namespace OS.Infrastucture.Db.SqlServer.Migrations
 {
     [DbContext(typeof(OnlineStoreContext))]
-    [Migration("20231104085343_initnew")]
-    partial class initnew
+    [Migration("20231104122041_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -589,9 +589,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("price");
 
-                    b.Property<int>("BoothId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
@@ -617,8 +614,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BoothId");
 
                     b.HasIndex("SubCategoryId");
 
@@ -651,7 +646,7 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBooths");
+                    b.ToTable("ProductBooth", (string)null);
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.ProductCart", b =>
@@ -985,6 +980,7 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.Product", "Product")
                         .WithMany("Auctions")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Auction_Product");
 
@@ -1161,19 +1157,12 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Product", b =>
                 {
-                    b.HasOne("OS.Domain.Core.Entities.Booth", "Booth")
-                        .WithMany()
-                        .HasForeignKey("BoothId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OS.Domain.Core.Entities.SubCategory", "SubCategory")
                         .WithMany("Products")
                         .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Product_SubCategory");
-
-                    b.Navigation("Booth");
 
                     b.Navigation("SubCategory");
                 });
@@ -1184,13 +1173,15 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .WithMany("ProductBooths")
                         .HasForeignKey("BoothId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_ProductBooth_Booth");
 
                     b.HasOne("OS.Domain.Core.Entities.Product", "Product")
                         .WithMany("ProductBooths")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_ProductBooth_Product");
 
                     b.Navigation("Product");
 
@@ -1208,6 +1199,7 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.ProductBooth", "ProductBooth")
                         .WithMany()
                         .HasForeignKey("ProductBoothId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_ProductCart_Product");
 

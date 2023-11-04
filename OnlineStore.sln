@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineStore", "OnlineStore\OnlineStore.csproj", "{E02680A1-0D9B-41FC-B667-37C87B09BDDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineStore", "OnlineStore\OnlineStore.csproj", "{E02680A1-0D9B-41FC-B667-37C87B09BDDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Domain", "01-Domain", "{3785C13B-2997-461F-A638-52C0D20A4878}"
 EndProject
@@ -19,15 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Db", "Db", "{C5391528-3FC4-4145-91F8-3D646C3DB898}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Domain.Core", "OS.Domain.Core\OS.Domain.Core.csproj", "{D27DCD21-F42F-47E1-8631-123B8CF674EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OS.Domain.Core", "OS.Domain.Core\OS.Domain.Core.csproj", "{D27DCD21-F42F-47E1-8631-123B8CF674EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Domain.Service", "OS.Domain.Service\OS.Domain.Service.csproj", "{56DC66F5-FD83-4ECD-86B9-A9BAFF6064AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OS.Domain.Service", "OS.Domain.Service\OS.Domain.Service.csproj", "{56DC66F5-FD83-4ECD-86B9-A9BAFF6064AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.DataAccess.EfRepo", "OS.Infrastucture.DataAccess.EfRepo\OS.Infrastucture.DataAccess.EfRepo.csproj", "{7E325AEB-4866-4176-9644-61ED124D46E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OS.Infrastucture.DataAccess.EfRepo", "OS.Infrastucture.DataAccess.EfRepo\OS.Infrastucture.DataAccess.EfRepo.csproj", "{7E325AEB-4866-4176-9644-61ED124D46E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Infrastucture.Db.SqlServer", "OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.Db.SqlServer.csproj", "{6412509D-52EC-47A7-B66E-9ED29AF09D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OS.Infrastucture.Db.SqlServer", "OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.Db.SqlServer.csproj", "{6412509D-52EC-47A7-B66E-9ED29AF09D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OS.Domain.AppService", "OS.Domain.AppService\OS.Domain.AppService.csproj", "{0FD34F50-FBBB-407F-ACDD-F48486C9F820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OS.Domain.AppService", "OS.Domain.AppService\OS.Domain.AppService.csproj", "{0FD34F50-FBBB-407F-ACDD-F48486C9F820}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -60,7 +60,7 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
     public virtual DbSet<ProductBooth> ProductBooths { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("DefaultConnection");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-2SMDACM\\SQLEXPRESS;Initial Catalog=onlineStore;TrustServerCertificate=True;Integrated Security=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -96,7 +96,7 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
 
             entity.HasOne(d => d.Product).WithMany(p => p.Auctions)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_Auction_Product");
 
             entity.HasOne(d => d.Winner).WithMany(p => p.Auctions)
@@ -268,7 +268,7 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
 
             entity.HasOne(d => d.SubCategory).WithMany(p => p.Products)
                 .HasForeignKey(d => d.SubCategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_Product_SubCategory");
         });
 
@@ -285,18 +285,25 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
 
             entity.HasOne(d => d.ProductBooth).WithMany()
                 .HasForeignKey(d => d.ProductBoothId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_ProductCart_Product");
         });
         modelBuilder.Entity<ProductBooth>(entity =>
         {
-            entity.HasKey(pb => pb.Id);
-            entity.HasOne(pb => pb.Product)
-        .WithMany(p => p.ProductBooths)
-        .HasForeignKey(pb => pb.ProductId);
-            entity.HasOne(pb => pb.booth)
-        .WithMany(b => b.ProductBooths) 
-        .HasForeignKey(pb => pb.BoothId);
+            entity.ToTable("ProductBooth");
+
+            entity.HasOne(d => d.Product)
+                .WithMany(p => p.ProductBooths)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ProductBooth_Product");
+
+            entity.HasOne(d => d.booth)  
+                .WithMany(b => b.ProductBooths)
+                .HasForeignKey(d => d.BoothId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_ProductBooth_Booth");
+
         });
 
         modelBuilder.Entity<ProductOrder>(entity =>
