@@ -7,9 +7,6 @@ namespace OS.Domain.Core.Entities;
 public partial class Order
 {
     #region Properties
-
-
-    #endregion Properties
     public int Id { get; set; }
 
     public long TotalPrice { get; set; }
@@ -22,6 +19,10 @@ public partial class Order
 
     public int Commession { get; set; }
 
+
+    #endregion Properties
+
+    #region Navigation properties
     public virtual Cart Cart { get; set; } = null!;
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
@@ -31,4 +32,8 @@ public partial class Order
     public virtual ICollection<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
     public virtual Status Status { get; set; } = null!;
+
+    #endregion Navigation properties
+
+
 }

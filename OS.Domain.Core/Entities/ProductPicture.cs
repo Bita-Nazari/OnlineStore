@@ -8,15 +8,21 @@ public partial class ProductPicture
 {
     #region Properties
 
-
-    #endregion Properties
     public int Id { get; set; }
 
     public int ProductId { get; set; }
 
     public int PictureId { get; set; }
+    #endregion Properties
+
+    #region Navigation properties
 
     public virtual Picture Picture { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;
+
+    #endregion Navigation properties
+
+
+
 }

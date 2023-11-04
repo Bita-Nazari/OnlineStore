@@ -11,8 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<OnlineStoreContext>(options
-    => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings")));
+    => options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentity<User, IdentityRole<int>>(
     options =>
@@ -31,6 +32,21 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
 .AddEntityFrameworkStores<OnlineStoreContext>();
 
 builder.Services.AddScoped<IAuctionAppService,AuctionAppService>();
+builder.Services.AddScoped<IBidAppService,BidAppService>();
+builder.Services.AddScoped<IBoothAppService,BoothAppService>();
+builder.Services.AddScoped<ICartAppService,CartAppService>();
+builder.Services.AddScoped<ICartProductAppService,CartProductAppService>();
+builder.Services.AddScoped<ICategoryAppService,CategoryAppService>();
+builder.Services.AddScoped<ICityAppService,CityAppService>();
+builder.Services.AddScoped<ICommentAppService,CommentAppService>();
+builder.Services.AddScoped<ICustomerAppService,CustomerAppService>();
+builder.Services.AddScoped<IMedalAppService,MedalAppService>();
+builder.Services.AddScoped<IOrderAppService,OrderAppService>();
+builder.Services.AddScoped<IPictureAppService,PictureAppService>();
+builder.Services.AddScoped<IProductAppService,ProductAppService>();
+builder.Services.AddScoped<IProvinceAppService,ProvinceAppService>();
+builder.Services.AddScoped<ISellerAppService,SellerAppService>();
+builder.Services.AddScoped<ISubCategoryAppService,SubCategoryAppService>();
 
 
 

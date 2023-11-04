@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OS.Domain.Service
 {
-    internal class CartProductService
+    public class CartProductService
     {
     }
 }

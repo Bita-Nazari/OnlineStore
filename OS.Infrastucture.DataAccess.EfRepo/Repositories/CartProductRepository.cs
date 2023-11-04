@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
-    internal class CartProductRepository
+    public class CartProductRepository
     {
     }
 }

@@ -14,8 +14,13 @@ namespace OS.Domain.Core.Entities
         public bool IsSeller { get; set; }
 
         #endregion Properties
+
+        #region Navigation properties
         public Customer? Customer { get; set; }
         public Seller? Seller { get; set; }
         public Admin? Admin { get; set; }
+
+        #endregion Navigation properties
+
     }
 }

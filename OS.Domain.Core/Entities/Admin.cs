@@ -5,6 +5,7 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Admin
 {
+    #region Properties
     public int Id { get; set; }
 
     public string FirstName { get; set; } = null!;
@@ -16,5 +17,13 @@ public partial class Admin
     public long PhoneNumber { get; set; }
 
     public int? UserId { get; set; }
+
+    #endregion Properties
+
+    #region Navigation properties
+
     public User User { get; set; }
+
+    #endregion Navigation properties
+
 }

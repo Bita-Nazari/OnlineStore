@@ -6,6 +6,8 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Booth
 {
+    #region Properties
+
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
@@ -22,6 +24,9 @@ public partial class Booth
 
     public int MedalId { get; set; }
 
+    #endregion Properties
+
+    #region Navigation properties
     public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
@@ -34,4 +39,9 @@ public partial class Booth
 
 
     public virtual Seller Seller { get; set; } = null!;
+
+
+    #endregion Navigation properties
+
+
 }

@@ -7,9 +7,6 @@ namespace OS.Domain.Core.Entities;
 public partial class SubCategory
 {
     #region Properties
-
-
-    #endregion Properties
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
@@ -18,7 +15,16 @@ public partial class SubCategory
 
     public bool IsDeleted { get; set; }
 
+    #endregion Properties
+
+    #region Navigation properties
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+
+    #endregion Navigation properties
+
+
+
 }

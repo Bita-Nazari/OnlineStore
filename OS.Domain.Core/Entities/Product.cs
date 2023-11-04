@@ -6,6 +6,7 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Product
 {
+    #region Properties
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
@@ -24,6 +25,10 @@ public partial class Product
 
     public bool IsAvailable { get; set; }
 
+    #endregion Properties
+
+    #region Navigation properties
+
     public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
     public virtual Booth Booth { get; set; } = null!;
@@ -34,4 +39,9 @@ public partial class Product
     public virtual ICollection<ProductBooth> ProductBooths { get; set; } = new List<ProductBooth>();
 
     public virtual SubCategory SubCategory { get; set; } = null!;
+
+    #endregion Navigation properties
+
+
+
 }

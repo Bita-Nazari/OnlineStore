@@ -6,6 +6,8 @@ namespace OS.Domain.Core.Entities;
 
 public partial class Customer
 {
+    #region Properties
+
     public int Id { get; set; }
 
     public string FirstName { get; set; } = null!;
@@ -28,6 +30,11 @@ public partial class Customer
 
     public int? UserId { get; set; }
 
+    #endregion Properties
+
+
+
+    #region Navigation properties
     public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
@@ -42,4 +49,9 @@ public partial class Customer
 
     public virtual Picture Picture { get; set; } = null!;
     public User User { get; set; }
+
+
+    #endregion Navigation properties
+
+
 }

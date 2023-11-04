@@ -7,9 +7,6 @@ namespace OS.Domain.Core.Entities;
 public partial class Auction
 {
     #region Properties
- 
-
-    #endregion Properties
     public int Id { get; set; }
 
     public long StartPrice { get; set; }
@@ -26,6 +23,10 @@ public partial class Auction
 
     public int BidCount { get; set; }
 
+    #endregion Properties
+
+    #region Navigation properties
+
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 
     public virtual Booth Booth { get; set; } = null!;
@@ -33,4 +34,9 @@ public partial class Auction
     public virtual Product Product { get; set; } = null!;
 
     public virtual Customer? Winner { get; set; }
+
+    #endregion Navigation properties
+
+
+
 }

@@ -60,16 +60,27 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
     public virtual DbSet<ProductBooth> ProductBooths { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
+        => optionsBuilder.UseSqlServer("DefaultConnection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+        });
+        modelBuilder.Entity<IdentityRole<int>>(entity =>
+        {
+            entity.HasKey(e =>e.Id);
+        });
         modelBuilder.Entity<Admin>(entity =>
         {
             entity.ToTable("Admin");
 
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
+            entity.HasOne(x => x.User).WithOne(x => x.Admin);
         });
 
         modelBuilder.Entity<Auction>(entity =>
@@ -198,6 +209,8 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
                 .HasForeignKey(d => d.PictureId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Customer_Picture");
+
+            entity.HasOne(x => x.User).WithOne(x => x.Customer);
         });
 
         modelBuilder.Entity<Medal>(entity =>
@@ -339,6 +352,8 @@ public partial class OnlineStoreContext : IdentityDbContext<User, IdentityRole<i
                 .HasForeignKey(d => d.PictureId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Seller_Picture");
+
+            entity.HasOne(x => x.User).WithOne(x => x.Seller);
         });
 
         modelBuilder.Entity<Status>(entity =>

@@ -7,9 +7,6 @@ namespace OS.Domain.Core.Entities;
 public partial class Bid
 {
     #region Properties
-
-
-    #endregion Properties
     public int Id { get; set; }
 
     public long SuggestedPrice { get; set; }
@@ -24,7 +21,16 @@ public partial class Bid
 
     public int AuctionId { get; set; }
 
+
+    #endregion Properties
+
+    #region Navigation properties
+
     public virtual Auction Auction { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
+
+    #endregion Navigation properties
+
+
 }
