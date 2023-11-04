@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionString = builder.Configuration.GetConnectionString("Data Source=DESKTOP-2SMDACM\\\\SQLEXPRESS;Initial Catalog=OnlineStore;TrustServerCertificate=True;Integrated Security=True;") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<OnlineStoreContext>(options
     => options.UseSqlServer(connectionString));
 
