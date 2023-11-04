@@ -16,7 +16,7 @@ public partial class Booth
 
     public DateTime CreatedAt { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public int SellerId { get; set; }
 

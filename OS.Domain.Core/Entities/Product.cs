@@ -15,7 +15,7 @@ public partial class Product
 
     public string Description { get; set; } = null!;
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public bool IsConfirmed { get; set; }
 

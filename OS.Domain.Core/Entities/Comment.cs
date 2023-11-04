@@ -21,7 +21,7 @@ public partial class Comment
 
     public bool IsConfirmed { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     #endregion Properties
 

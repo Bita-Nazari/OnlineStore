@@ -15,7 +15,7 @@ public partial class Bid
 
     public bool IsCreated { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public DateTime CreatedAt { get; set; }
 

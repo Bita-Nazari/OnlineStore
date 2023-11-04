@@ -11,7 +11,9 @@ public partial class Category
 
     public string Name { get; set; } = null!;
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
+
+    public string? PictureUrl { get; set; }
 
 
     #endregion Properties

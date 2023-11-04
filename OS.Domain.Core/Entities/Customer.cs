@@ -22,7 +22,7 @@ public partial class Customer
 
     public int PictureId { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public long Wallet { get; set; }
 

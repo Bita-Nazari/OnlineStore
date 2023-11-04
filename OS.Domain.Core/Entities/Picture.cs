@@ -12,7 +12,7 @@ public partial class Picture
 
     public string Url { get; set; } = null!;
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public bool IsConfirmed { get; set; }
 

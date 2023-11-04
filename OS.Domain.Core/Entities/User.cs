@@ -13,6 +13,7 @@ namespace OS.Domain.Core.Entities
         #region Properties
         public bool IsSeller { get; set; }
 
+
         #endregion Properties
 
         #region Navigation properties

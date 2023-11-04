@@ -13,7 +13,7 @@ public partial class SubCategory
 
     public int CategoryId { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     #endregion Properties
 

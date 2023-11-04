@@ -22,7 +22,7 @@ public partial class Seller
 
     public int PictureId { get; set; }
 
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     public DateTime CreatedAt { get; set; }
 
