@@ -16,7 +16,6 @@ public partial class Seller
 
     public long NationalCode { get; set; }
 
-    public long PhoneNumber { get; set; }
 
     public int CityId { get; set; }
 

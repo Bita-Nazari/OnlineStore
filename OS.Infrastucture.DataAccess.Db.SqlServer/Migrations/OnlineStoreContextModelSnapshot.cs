@@ -173,9 +173,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
@@ -205,6 +202,9 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.Property<int>("BoothId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime");
 
@@ -217,16 +217,13 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("WinnerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BoothId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("CustomerId");
 
-                    b.HasIndex("WinnerId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Auction", (string)null);
                 });
@@ -315,7 +312,7 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BoothId")
+                    b.Property<int?>("BoothId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -349,9 +346,68 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "کالای دیجیتال"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "خانه وآشپزخانه"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsDeleted = false,
+                            Name = "مد و پوشاک"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsDeleted = false,
+                            Name = "کتاب و لوازم تحریر"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsDeleted = false,
+                            Name = "اسباب بازی،کودک و نوزاد"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsDeleted = false,
+                            Name = "زیبایی و سلامت"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsDeleted = false,
+                            Name = "ورزش و سفر"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsDeleted = false,
+                            Name = "ابزارآلات و تجهیزات"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsDeleted = false,
+                            Name = "اکسسوری"
+                        });
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.City", b =>
@@ -375,6 +431,440 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasIndex("ProvinceId");
 
                     b.ToTable("City", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "یزد",
+                            ProvinceId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "میبد",
+                            ProvinceId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "همدان",
+                            ProvinceId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "ملایر",
+                            ProvinceId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "بندرعباس",
+                            ProvinceId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "میناب",
+                            ProvinceId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "اراک",
+                            ProvinceId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "خمین",
+                            ProvinceId = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "ساری",
+                            ProvinceId = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "بابل",
+                            ProvinceId = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "بروجرد",
+                            ProvinceId = 6
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "کوهدشت",
+                            ProvinceId = 6
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "آستارا",
+                            ProvinceId = 7
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "بندر انزلی",
+                            ProvinceId = 7
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "گرگان",
+                            ProvinceId = 8
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "گنبدکاووس",
+                            ProvinceId = 8
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "یاسوج",
+                            ProvinceId = 9
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "دهدشت",
+                            ProvinceId = 9
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "جوانرود",
+                            ProvinceId = 10
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "کرمانشاه",
+                            ProvinceId = 10
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "کرمان",
+                            ProvinceId = 11
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "رفسنجان",
+                            ProvinceId = 11
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "سنندج",
+                            ProvinceId = 12
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "سقز",
+                            ProvinceId = 12
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "قم",
+                            ProvinceId = 13
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "جعفریه",
+                            ProvinceId = 13
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "قزوین",
+                            ProvinceId = 14
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "تاکستان",
+                            ProvinceId = 14
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "کازرون",
+                            ProvinceId = 15
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = "مرودشت",
+                            ProvinceId = 15
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = "زاهدان",
+                            ProvinceId = 16
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Name = "چابهار",
+                            ProvinceId = 16
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Name = "شاهرود",
+                            ProvinceId = 17
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Name = "دامغان",
+                            ProvinceId = 17
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Name = "زنجان",
+                            ProvinceId = 18
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Name = "ابهر",
+                            ProvinceId = 18
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Name = "دزفول",
+                            ProvinceId = 19
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Name = "اهواز",
+                            ProvinceId = 19
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Name = "بجنورد",
+                            ProvinceId = 20
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Name = "شیروان",
+                            ProvinceId = 20
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Name = "نیشابور",
+                            ProvinceId = 21
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Name = "سبزوار",
+                            ProvinceId = 21
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Name = "بیرجند",
+                            ProvinceId = 22
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Name = "فردوس",
+                            ProvinceId = 22
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Name = "شهرکرد",
+                            ProvinceId = 23
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Name = "بروجن",
+                            ProvinceId = 23
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Name = "تهران",
+                            ProvinceId = 24
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Name = "ری",
+                            ProvinceId = 24
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Name = "پاکدشت",
+                            ProvinceId = 24
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Name = "ورامین",
+                            ProvinceId = 24
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Name = "بندربوشهر",
+                            ProvinceId = 25
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Name = "برازجان",
+                            ProvinceId = 25
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Name = "ایلام",
+                            ProvinceId = 26
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Name = "ایوان",
+                            ProvinceId = 26
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Name = "اشتهارد",
+                            ProvinceId = 27
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Name = "طالقان",
+                            ProvinceId = 27
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Name = "کاشان",
+                            ProvinceId = 28
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Name = "اصفهان",
+                            ProvinceId = 28
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Name = "اردبیل",
+                            ProvinceId = 29
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Name = "پارس آباد",
+                            ProvinceId = 29
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Name = "مشکین شهر",
+                            ProvinceId = 29
+                        },
+                        new
+                        {
+                            Id = 62,
+                            Name = "ارومیه",
+                            ProvinceId = 30
+                        },
+                        new
+                        {
+                            Id = 63,
+                            Name = "خوی",
+                            ProvinceId = 30
+                        },
+                        new
+                        {
+                            Id = 64,
+                            Name = "بوکان",
+                            ProvinceId = 30
+                        },
+                        new
+                        {
+                            Id = 65,
+                            Name = "میانه",
+                            ProvinceId = 31
+                        },
+                        new
+                        {
+                            Id = 66,
+                            Name = "سراب",
+                            ProvinceId = 31
+                        },
+                        new
+                        {
+                            Id = 67,
+                            Name = "تبریز",
+                            ProvinceId = 31
+                        },
+                        new
+                        {
+                            Id = 68,
+                            Name = "اسلام شهر",
+                            ProvinceId = 24
+                        },
+                        new
+                        {
+                            Id = 69,
+                            Name = "شهریار",
+                            ProvinceId = 24
+                        },
+                        new
+                        {
+                            Id = 70,
+                            Name = "خمینی شهر",
+                            ProvinceId = 28
+                        },
+                        new
+                        {
+                            Id = 71,
+                            Name = "نجف اباد",
+                            ProvinceId = 28
+                        },
+                        new
+                        {
+                            Id = 72,
+                            Name = "شاهین شهر",
+                            ProvinceId = 28
+                        });
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Comment", b =>
@@ -448,9 +938,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("PictureId")
                         .HasColumnType("int");
@@ -731,6 +1218,163 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Province", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = " یزد"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = " همدان"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = " هرمزگان"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = " مرکزی"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = " مازندران"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = " لرستان"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = " گیلان"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = " گلستان"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = " کهگیلویه و بویر احمد"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = " کرمانشاه"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = " کرمان"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = " کردستان"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = " قم"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = " قزوین"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = " فارس"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = " سیستان و بلوچستان"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = " سمنان"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = " زنجان"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = " خوزستان"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = " خراسان شمالی"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = " خراسان رضوی"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = " خراسان جنوبی"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = " چهارمحال بختیاری"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = " تهران"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = " بوشهر"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = " ایلام"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = " البرز"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = " اصفهان"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = " اردبیل"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Name = " آذربایجان غربی"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Name = " آذربایجان شرقی"
+                        });
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Seller", b =>
@@ -761,9 +1405,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<long>("NationalCode")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("PhoneNumber")
                         .HasColumnType("bigint");
 
                     b.Property<int>("PictureId")
@@ -832,6 +1473,260 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "موبایل"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "لپ تاپ"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "دوربین"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "کنسول بازی"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "کامپیوتر و تجهیزات"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 1,
+                            IsDeleted = false,
+                            Name = "ساعت دیجیتال"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            IsDeleted = false,
+                            Name = "شستشو و نظافت"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 2,
+                            IsDeleted = false,
+                            Name = "آشپزخانه"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 2,
+                            IsDeleted = false,
+                            Name = "سرو پذیرایی"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 2,
+                            IsDeleted = false,
+                            Name = "لوازم خانگی برقی"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 2,
+                            IsDeleted = false,
+                            Name = "فرش و گلیم"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 2,
+                            IsDeleted = false,
+                            Name = "دکوراسیون"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryId = 3,
+                            IsDeleted = false,
+                            Name = "مردانه"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryId = 3,
+                            IsDeleted = false,
+                            Name = "زنانه"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CategoryId = 3,
+                            IsDeleted = false,
+                            Name = "بچگانه"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CategoryId = 3,
+                            IsDeleted = false,
+                            Name = "کفش "
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CategoryId = 4,
+                            IsDeleted = false,
+                            Name = "کتاب"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CategoryId = 4,
+                            IsDeleted = false,
+                            Name = "مجلات"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CategoryId = 4,
+                            IsDeleted = false,
+                            Name = "لوازم تحریر"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CategoryId = 5,
+                            IsDeleted = false,
+                            Name = "تغذیه و رشد کودک"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CategoryId = 5,
+                            IsDeleted = false,
+                            Name = "بهداشت و حمام"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CategoryId = 6,
+                            IsDeleted = false,
+                            Name = "لوازم آرایشی"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CategoryId = 6,
+                            IsDeleted = false,
+                            Name = "لوازم بهداشتی"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CategoryId = 6,
+                            IsDeleted = false,
+                            Name = "لوازم شخصی برقی"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CategoryId = 6,
+                            IsDeleted = false,
+                            Name = "عطر و ادکلن"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CategoryId = 7,
+                            IsDeleted = false,
+                            Name = "پوشاک ورزشی"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CategoryId = 7,
+                            IsDeleted = false,
+                            Name = "کفش ورزشی"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CategoryId = 7,
+                            IsDeleted = false,
+                            Name = "لوازم ورزشی"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CategoryId = 8,
+                            IsDeleted = false,
+                            Name = "ابزار غیربرقی"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CategoryId = 8,
+                            IsDeleted = false,
+                            Name = "باغبانی و کشاورزی"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CategoryId = 8,
+                            IsDeleted = false,
+                            Name = "ابزار برقی و شارژی"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CategoryId = 9,
+                            IsDeleted = false,
+                            Name = "گردنبند"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CategoryId = 9,
+                            IsDeleted = false,
+                            Name = "انگشتر"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CategoryId = 9,
+                            IsDeleted = false,
+                            Name = "عینک آفتابی"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CategoryId = 9,
+                            IsDeleted = false,
+                            Name = "دستبند"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CategoryId = 9,
+                            IsDeleted = false,
+                            Name = "کلاه"
+                        });
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.User", b =>
@@ -974,17 +1869,17 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Auction_Booth");
 
+                    b.HasOne("OS.Domain.Core.Entities.Customer", "Winner")
+                        .WithMany("Auctions")
+                        .HasForeignKey("CustomerId")
+                        .HasConstraintName("FK_Auction_Customer");
+
                     b.HasOne("OS.Domain.Core.Entities.Product", "Product")
                         .WithMany("Auctions")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Auction_Product");
-
-                    b.HasOne("OS.Domain.Core.Entities.Customer", "Winner")
-                        .WithMany("Auctions")
-                        .HasForeignKey("WinnerId")
-                        .HasConstraintName("FK_Auction_Customer");
 
                     b.Navigation("Booth");
 
@@ -998,12 +1893,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.Auction", "Auction")
                         .WithMany("Bids")
                         .HasForeignKey("AuctionId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Bid_Auction");
 
                     b.HasOne("OS.Domain.Core.Entities.Customer", "Customer")
                         .WithMany("Bids")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Bid_Customer");
 
@@ -1033,19 +1930,16 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Cart", b =>
                 {
-                    b.HasOne("OS.Domain.Core.Entities.Booth", "Booth")
+                    b.HasOne("OS.Domain.Core.Entities.Booth", null)
                         .WithMany("Carts")
-                        .HasForeignKey("BoothId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BoothId");
 
                     b.HasOne("OS.Domain.Core.Entities.Customer", "Customer")
                         .WithMany("Carts")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Cart_Customer");
-
-                    b.Navigation("Booth");
 
                     b.Navigation("Customer");
                 });
@@ -1136,12 +2030,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Order_Customer");
 
                     b.HasOne("OS.Domain.Core.Entities.Status", "Status")
                         .WithMany("Orders")
                         .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_Order_Status");
 
@@ -1169,14 +2065,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.Booth", "booth")
                         .WithMany("ProductBooths")
                         .HasForeignKey("BoothId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_ProductBooth_Booth");
 
                     b.HasOne("OS.Domain.Core.Entities.Product", "Product")
                         .WithMany("ProductBooths")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
                         .HasConstraintName("FK_ProductBooth_Product");
 

@@ -19,13 +19,13 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
 
             builder.HasOne(d => d.Auction).WithMany(p => p.Bids)
                 .HasForeignKey(d => d.AuctionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_Bid_Auction");
 
             builder.HasOne(d => d.Customer).WithMany(p => p.Bids)
-                .HasForeignKey(d => d.CustomerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Bid_Customer");
+       .HasForeignKey(d => d.CustomerId)
+       .OnDelete(DeleteBehavior.NoAction)
+       .HasConstraintName("FK_Bid_Customer");
         }
     }
 }

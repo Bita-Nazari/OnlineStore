@@ -14,8 +14,6 @@ public partial class Customer
 
     public string LastName { get; set; } = null!;
 
-    public long PhoneNumber { get; set; }
-
     public string Address { get; set; } = null!;
 
     public int CityId { get; set; }

@@ -28,7 +28,7 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
                 .HasConstraintName("FK_Auction_Product");
 
             builder.HasOne(d => d.Winner).WithMany(p => p.Auctions)
-                .HasForeignKey(d => d.WinnerId)
+                .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK_Auction_Customer");
         }
     }

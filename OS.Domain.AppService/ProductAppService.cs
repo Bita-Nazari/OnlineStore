@@ -12,6 +12,10 @@ namespace OS.Domain.AppService
     public class ProductAppService : IProductAppService
     {
         private readonly IProductService _productService;
+        public ProductAppService(IProductService productService)
+        {
+            _productService = productService;   
+        }
         public Task Create(ProductDto productDto, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

@@ -21,7 +21,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 StartPrice = auctionDto.StartPrice,
                 StartTime = auctionDto.StartTime,
                 EndTime = auctionDto.EndTime,
-                WinnerId = auctionDto.WinnerId,
+                CustomerId = auctionDto.WinnerId,
                 ProductId = auctionDto.ProductId,
                 BoothId = auctionDto.BoothId
 
@@ -38,7 +38,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 StartPrice = a.StartPrice,
                 StartTime = a.StartTime,
                 EndTime = a.EndTime,
-                WinnerId = a.WinnerId,
+                WinnerId = a.CustomerId,
                 ProductId = a.ProductId,
                 BoothId = a.BoothId
 
@@ -65,7 +65,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 StartTime = auction.StartTime,
                 EndTime = auction.EndTime,
                 BoothId = auction.BoothId,
-                WinnerId = auction.WinnerId
+                WinnerId = auction.CustomerId
             };
             return auctionDto;
 

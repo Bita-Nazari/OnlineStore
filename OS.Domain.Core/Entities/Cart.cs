@@ -17,7 +17,6 @@ public partial class Cart
 
     #region Navigation properties
 
-    public virtual Booth Booth { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
 

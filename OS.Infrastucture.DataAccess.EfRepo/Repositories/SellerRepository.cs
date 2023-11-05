@@ -29,7 +29,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 CityId = s.CityId,
                 CreatedAt = s.CreatedAt,
                 PictureId = s.PictureId,
-                PhoneNumber = s.PhoneNumber,
 
             }).ToListAsync(cancellationToken);
             return sellerList;
@@ -46,7 +45,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 ,
                 FirstName = seller.FirstName,
                 LastName = seller.LastName,
-                PhoneNumber = seller.PhoneNumber,
                 CityId = seller.CityId,
                 CreatedAt = seller.CreatedAt,
                 PictureId = seller.PictureId,
@@ -84,7 +82,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 seller.FirstName = sellerDto.FirstName;
                 seller.LastName = sellerDto.LastName;
                 seller.ShabaNumber = sellerDto.ShabaNumber;
-                seller.PhoneNumber = sellerDto.PhoneNumber;
                 seller.CityId = sellerDto.CityId;
                 seller.NationalCode = sellerDto.NationalCode;
                 seller.PictureId = sellerDto.PictureId;

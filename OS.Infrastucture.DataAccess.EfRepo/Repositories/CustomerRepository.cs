@@ -30,7 +30,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Address = customer.Address,
                 CityId = customer.CityId,
                 PictureId = customer.PictureId,
-                PhoneNumber = customer.PhoneNumber,
 
             };
             return customerDto;
@@ -48,7 +47,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Address = c.Address,
                     CityId = c.CityId,
                     PictureId = c.PictureId,
-                    PhoneNumber = c.PhoneNumber,
 
                 }).ToListAsync(cancellationToken);
             return customerList;
@@ -80,7 +78,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 customer.Address= customerDto.Address;
                 customer.CityId= customerDto.CityId;
                 customer.PictureId= customerDto.PictureId;
-                customer.PhoneNumber= customerDto.PhoneNumber;
                 customer.FirstName= customerDto.FirstName;
                 customer.LastName= customerDto.LastName;
             }

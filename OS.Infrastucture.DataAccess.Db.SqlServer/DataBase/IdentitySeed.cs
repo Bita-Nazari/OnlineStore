@@ -36,6 +36,14 @@ namespace OS.Infrastucture.Db.SqlServer.DataBase
                     UserName = "Bita33",
                     NormalizedUserName = "BITA33",
                     PhoneNumberConfirmed = true,
+                    Admin = new Admin()
+                    {
+                        FirstName = "Bita",
+                        LastName = "Nazari",
+                        Id = 1,
+                        UserId = 1,
+                        Wallet = 123456789
+                    }
 
                 };
 

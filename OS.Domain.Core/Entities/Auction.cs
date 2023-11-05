@@ -17,7 +17,7 @@ public partial class Auction
 
     public DateTime EndTime { get; set; }
 
-    public int? WinnerId { get; set; }
+    public int? CustomerId { get; set; }
 
     public int ProductId { get; set; }
 

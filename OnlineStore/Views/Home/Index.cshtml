@@ -2,7 +2,835 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>فروشگاه رستا</title>
+    <link rel="shortcut icon" href="img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="js/plugin/countdown/countdown.css">
+     <link rel="stylesheet" href="js/plugin/back-to-top/jquery-backToTop.min.css">
+    <link rel="stylesheet" href="js/plugin/hint-css/hint-css.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+
+
+
+    <div class="home py-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-9 mt-lg-0 mt-3 order-lg-2 order-1">
+                    <div class="swiper homeSlider sugget-Moment h-100">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide rounded-circle">
+                                <a href=""><img src="img/slider/slide1-2.jpg" class="img-fluid" alt=""></a>
+                            </div>
+                            <div class="swiper-slide rounded-circle">
+                                <a href=""><img src="img/slider/slide2-2.jpg" class="img-fluid" alt=""></a>
+                            </div>
+                            <div class="swiper-slide rounded-circle">
+                                <a href=""><img src="img/slider/slide3-1.jpg" class="img-fluid" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next d-none d-lg-flex"></div>
+                        <div class="swiper-button-prev d-none d-lg-flex"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 mt-lg-0 mt-3 order-lg-1 order-2">
+                    <div class="banner-slider h-100">
+                        <div class="row h-100">
+                            <div class="col-lg-12 col-6 h-50">
+                                <div class="banner-item m-0 mb-3 h-100">
+                                    <a href="category.html" class="h-100">
+                                        <img src="img/banner/new/banner-1.jpg" alt=""
+                                            class="img-fluid m-0 h-100 shadow-md">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-6 h-50">
+                                <div class="banner-item mb-0 h-100">
+                                    <a href="category.html" class="h-100">
+                                        <img src="img/banner/new/banner-2.jpg" alt=""
+                                            class="img-fluid m-0 h-100 shadow-md">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main slider -->
+
+    <div class="banner p-0">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-1.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-2.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-3.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-4.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner -->
+
+
+    <div class="banner-product">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="banner-product-item bg-danger d-flex align-items-center justify-content-between"
+                        style="background: linear-gradient(to left top,#0ccda3,#c1fcd3)">
+                        <div class="banner-product-desc h-100 px-3">
+                            <h4 class="text-white mb-5">انواع موبایل</h4>
+                            <a href="" class="btn btn-outline-light waves-effect waves-light">مشاهده و خرید</a>
+                        </div>
+                        <div class="banner-product-img ">
+                            <img src="img/banner-product/mobile-logo2.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="banner-product-item bg-danger d-flex align-items-center justify-content-between"
+                        style="background: linear-gradient(to left top,#9618f7,#a3c9e2)">
+                        <div class="banner-product-desc h-100 px-3">
+                            <h4 class="text-white mb-5">انواع کالای دیجیتال
+                            </h4>
+                            <a href="" class="btn btn-outline-light waves-effect waves-light">مشاهده و خرید</a>
+                        </div>
+                        <div class="banner-product-img">
+                            <img src="img/banner-product/laptop.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="banner-product-item bg-danger d-flex align-items-center justify-content-between"
+                        style="background: linear-gradient(to left top,#f9957f,#f2f5d0)">
+                        <div class="banner-product-desc h-100 px-3">
+                            <h4 class="text-white mb-5">انواع پوشاک
+                            </h4>
+                            <a href="" class="btn btn-outline-light waves-effect waves-light">مشاهده و خرید</a>
+                        </div>
+                        <div class="banner-product-img">
+                            <img src="img/banner-product/pooshak.png" alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner-product -->
+
+    <!-- end offers -->
+
+    <div class="main-category">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="main-category-title">
+                    <h4 class="main-title">دسته بندی های فروشگاه</h4>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/poshak.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>اکسسوری</h6>
+                               
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/kalaye-degital.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>کالای دیجیتال</h6>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/ashpazkhane.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>خانه و آشپزخانه</h6>
+                            
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/autr.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>زیبایی و سلامت</h6>
+                               
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/children.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>اسباب بازی کودک و نوزاد</h6>
+                               
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/lavazem-tahrir.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>کتاب و لوازم تحریر</h6>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/poshak.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>پوشاک</h6>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/varzeshi.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>ورزش و سفر</h6>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/mobile.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>موبابل</h6>
+                                
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-sm-4 col-6 mb-3">
+                    <a href="category.html">
+                        <div class="cart-small">
+                            <div class="cart-small-icon">
+                                <img width="50" src="img/main-category/abzar-khodro.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="cart-small-desc ms-lg-3 text-center">
+                                <h6>ابزارآلات و تجهیزات</h6>
+                            
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main main-category -->
+
+    <div class="banner">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-1.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-33.jpg" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner -->
+
+    <div class="product-box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-box-title">
+                        <h2 class="slider-title">کالا های مزایده ای</h2>
+                        <a href="category.html">مشاهده همه <i class="bi bi-chevron-left"></i></a>
+                    </div>
+                    <div class="swiper product-box-items pt-md-0 pt-4 prodcut-box-one-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="product-box-item">
+                                    <div class="product-box-item-img">
+                                        <a href="">
+                                            <img src="img/product/wach2.jpg" alt="" class="img-fluid one-image">
+                                            <img src="img/product/wach3.jpg" alt="" class="img-fluid two-image">
+                                        </a>
+                                        <div class="product-box-item-hover">
+                                            <div class="product-box-item-hover-btn">
+                                                <span class="see-more hint--right" data-hint="مشاهده سریع"
+                                                    data-bs-toggle="modal" data-bs-target="#productModal"><i
+                                                        class="bi bi-eye"></i></span>
+                                                <span class="add-cart hint--right" data-hint="افزودن به سبد خرید"><i
+                                                        class="bi bi-cart-plus"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="product.html">
+                                        <div class="product-box-item-desc">
+                                            <div class="product-box-item-title">
+                                                <h6>
+                                                    گوشی موبایل اپل مدل iPhone 13 Pro Max A2644 دو سیم‌ کارت ظرفیت 256
+                                                    گیگابایت و رم 6 گیگابایت
+                                                </h6>
+                                            </div>
+                                            <div class="product-box-price default">
+                                                <span class="new-price">590,000 تومان</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            
+                            <div class="swiper-slide">
+                                <div class="product-box-item see-more-item">
+                                    <div class="see-all">
+                                        <a href="category.html">
+                                            <i class="bi bi-arrow-left-circle"></i>
+                                            <p>مشاهده همه</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end product box -->
+
+
+    <div class="banner">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-1.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-2.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-3.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-four-4.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner -->
+    <div class="product-box-two">
+        <div class="container-fluid">
+            <div class="pbt">
+                <div class="pbt-header">
+                    <div class="pbt-header-title">
+                        <h6 class="slider-title">جدیدترین محصولات </h6>
+                    </div>
+                    <div class="pbt-header-link">
+                        <a href="category.html" class="fromCenter border-animate">مشاهده همه</a>
+                    </div>
+                </div>
+                <div class="swiper prodcut-box-one-slider">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="product-box-item">
+                                <div class="product-box-item-img">
+                                    <a href="">
+                                        <img src="img/product/product-image1.jpg" alt="" class="img-fluid one-image">
+                                        <img src="img/product/product-image2.jpg" alt="" class="img-fluid two-image">
+                                    </a>
+                                    <div class="product-box-item-hover">
+                                        <div class="product-box-item-hover-btn">
+                                            <span class="see-more hint--right" data-hint="مشاهده محصول"
+                                                data-bs-toggle="modal" data-bs-target="#productModal"><i
+                                                    class="bi bi-eye"></i></span>
+                                            <span class="add-cart hint--right" data-hint="افزودن به سبد خرید"><i
+                                                    class="bi bi-cart-plus"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="product.html">
+                                    <div class="product-box-item-desc">
+                                        <div class="product-box-item-title">
+                                            <h6>
+                                                گوشی موبایل اپل مدل iPhone 13 Pro Max A2644 دو سیم‌ کارت ظرفیت 256
+                                                گیگابایت و رم 6 گیگابایت
+                                            </h6>
+                                        </div>
+                                        <div class="product-box-price default">
+                                            <span class="new-price">590,000 تومان</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        
+                        <div class="swiper-slide">
+                            <div class="product-box-item see-more-item">
+                                <div class="see-all">
+                                    <a href="category.html">
+                                        <i class="bi bi-arrow-left-circle"></i>
+                                        <p>مشاهده همه</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next sb2"></div>
+                    <div class="swiper-button-prev sb2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- end product box -->
+
+    <div class="banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-5.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="banner-item">
+                        <a href="category.html">
+                            <img src="img/banner/banner-4.jpg" alt="" class="img-fluid shadow-md">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end banner -->
+
+
+    <!-- end product box two -->
+
+
+
+
+    <div class="copy-right bg-white">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <p class="text-muted text-center mb-sm-0 mb-3">برای استفاده از مطالب فروشگاه، داشتن «هدف غیرتجاری» و
+                        ذکر «منبع» کافیست.
+                        تمام
+                        حقوق اين وب‌سايت نیز برای شرکت رستا است.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="social mt-md-0 mt-2">
+                        <div class="social-link justify-content-md-end justify-content-center">
+                            <a href="" class="bi bi-instagram"></a>
+                            <a href="" class="bi bi-twitter"></a>
+                            <a href="" class="bi bi-whatsapp"></a>
+                            <a href="" class="bi bi-youtube"></a>
+                            <a href="" class="bi bi-linkedin"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end copyright -->
+
+    <div class="modal fade modal-lg product-modal" id="productModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <a href="">
+                            <div class="d-flex">
+                                <i class="bi bi-bag-plus me-1"></i>
+                                <h4>گوشی موبابل شیائومی مدل 12x2002548 دو سیم کارت ظرفیت 256 گیگابایت و رم 8 گیگابایت
+                                </h4>
+                            </div>
+                        </a>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 mb-md-0 mb-2">
+                            <div class="swiper product-modal">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="img/product/laptop(1).png" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="img/product/watch.png" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="img/product/mobile.png" alt="" class="img-fluid">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="img/product/shirt1.jpg" alt="" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next sb"></div>
+                                <div class="swiper-button-prev sb"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="product-modal-detail">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="product-meta-item text-muted">
+                                            <i class="bi bi-tag"></i>
+                                            مدل:
+                                            <a href="">شیائومی</a>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="product-meta-item text-muted">
+                                            <i class="bi bi-tag"></i>
+                                            دسته بندی:
+                                            <a href="">کالای دیجیتال</a>,
+                                            <a href="">تلفن همراه</a>,
+                                            <a href="">شیائومی</a>,
+                                            <a href="">ارزان کالا</a>,
+                                        </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="product-meta-item text-muted">
+                                            <i class="bi bi-shield-check"></i>
+                                            گارانتی:
+                                            <span>گارانتی 18 ماهه گرین</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="product-meta-item text-muted">
+                                            <i class="bi bi-tag"></i>
+                                            برچسب:
+                                            <a href="">کالای دیجیتال</a>,
+                                            <a href="">تلفن همراه</a>,
+                                            <a href="">شیائومی</a>,
+                                            <a href="">ارزان کالا</a>,
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-modal-feature">
+                                <strong>ویژگی های محصول:</strong>
+                                <ul>
+                                    <li>
+                                        <span class="title">سری پردازنده:</span>
+                                        <span class="desc">Core i7</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">مقدار رم:</span>
+                                        <span class="desc">16 گیگابایت</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">حافظه داخلی:</span>
+                                        <span class="desc">512 گیگابایت</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">شبکه های ارتباطی:</span>
+                                        <span class="desc">بدون سیم کارت</span>
+                                    </li>
+                                    <li>
+                                        <span class="title">رابط ها:</span>
+                                        <span class="desc">جک 3.5 میلیمتری صدا</span>
+                                    </li>
+                                    <li class="read-more-target">
+                                        <span class="title">محدوده عملکرد:</span>
+                                        <span class="desc">10 متر</span>
+                                    </li>
+                                    <li class="read-more-target">
+                                        <span class="title">عمر باتری:</span>
+                                        <span class="desc">4.5 ساعت</span>
+                                    </li>
+                                    <li class="read-more-target">
+                                        <span class="title">نوع گوشی:</span>
+                                        <span class="desc">2 گوشی</span>
+                                    </li>
+                                </ul>
+                                <label for="post-2" class="read-more-trigger"></label>
+                            </div>
+                            <div class="product-modal-price">
+                                <span class="old">1,800,000 تومان</span>
+                                <span class="new">730,000 تومان</span>
+                            </div>
+                            <div class="product-modal-link">
+                                <form action="">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-6">
+                                            <div class="cart-counter">
+                                                <input type="text" name="count" class="counter"
+                                                    value="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <button
+                                                class="shadow-sm fw-bold btn-add-to-cart mt-sm-0 mt-2 waves-effect waves-light">افزودن
+                                                به سبد
+                                                خرید</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade login-modal" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <div class="d-flex">
+                            <i class="bi bi-person me-1"></i>
+                            <h6 class="text-center">فرم ورود کاربران</h6>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="item">
+                        <form action="">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control" placeholder="نام کاربری">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                    <input type="password" placeholder="رمز عبور" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-check form-check-box">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    مرا فراموش نکن
+                                </label>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button type="submit" class="btn-login me-2 waves-effect waves-light"><i
+                                        class="bi bi-person"></i> ورود به
+                                    سایت</button>
+                                <a class="btn-login forget waves-effect waves-light" href="forget.html"><i
+                                        class="bi bi-person"></i>
+                                    فراموشی رمز عبور
+                                </a>
+                            </div>
+
+                        </form>
+                        <div class="register-box">
+                            <div class="dash-border">
+                                <span>یا</span>
+                            </div>
+                            <div class="register-link">
+                                <a href="register.html" class="btn btn-outline-secondary waves-effect waves-light">ثبت نام <i
+                                        class="bi bi-person-plus ms-1"></i></a>
+                            </div>
+                        </div>
+                        <div class="social">
+                            <a href="" class="bi bi-google"></a>
+                            <a href="" class="bi bi-facebook"></a>
+                            <a href="" class="bi bi-github"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end login modal -->
+
+    <div class="cart-slides" id="cartSlide">
+        <div class="cart-slide-overlay"></div>
+        <div class="cart-slide col-md-5 col-lg-3 col-sm-6 col-8">
+            <div class="cart-slide-title">
+                <h6>سبد خرید</h6>
+                <i class="bi bi-x-lg" id="cartSlideColse"></i>
+            </div>
+            <div class="cart-slide-desc">
+                <div class="empty-cart d-none">
+                    <img src="img/other/cart-empty.png" alt="" class="img-fluid">
+                    <h6>سبد خرید خالی میباشد</h6>
+                </div>
+                <div class="cart-product">
+                    <div class="title">
+                        <div class="d-flex align-items-center">
+                            <img src="img/product/laptop1.jpg" alt="">
+                            <h6 class="fw-bold text-start">تبلت مایکروسافت مدل Surface Pro 8 - F ظرفیت 512 گیگابایت
+                            </h6>
+                            <i class="bi bi-x-circle-fill pointer text-muted"></i>
+                        </div>
+                        <div class="count">
+                            <span>1 ×</span>
+                            <span>5,500,000 تومان</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-product">
+                    <div class="title">
+                        <div class="d-flex align-items-center">
+                            <img src="img/product/wach4.jpg" alt="">
+                            <h6 class="fw-bold text-start">ساعت هوشمند هوآوی مدل Watch 3 بند سیلیکونی</h6>
+                            <i class="bi bi-x-circle-fill pointer text-muted"></i>
+                        </div>
+                        <div class="count">
+                            <span>1 ×</span>
+                            <span>750,000 تومان</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-product">
+                    <div class="title">
+                        <div class="d-flex align-items-center">
+                            <img src="img/product/wach4.jpg" alt="">
+                            <h6 class="fw-bold text-start">ساعت هوشمند هوآوی مدل Watch 3 بند سیلیکونی</h6>
+                            <i class="bi bi-x-circle-fill pointer text-muted"></i>
+                        </div>
+                        <div class="count">
+                            <span>1 ×</span>
+                            <span>750,000 تومان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-price">
+                <div class="cart-price-count">
+                    <span>مجموع :</span>
+                    <span> 63,000,000 تومان</span>
+                </div>
+                <div class="cart-price-btn">
+                    <a href="" class="btn-main waves-effect waves-light">مشاهده سبد خرید</a>
+                    <a href="" class="btn-outline waves-effect waves-light">تسویه حساب</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end cart slide -->
+
+
+<script src="js/jquery-3.6.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/swiper-bundle.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/plugin/countdown/countdown.js"></script>
+    <script src="js/plugin/back-to-top/jquery-backToTop.min.js"></script>
+    <script src="js/plugin/hint-css/hint-css.js"></script>
+    <script src="js/jquery-app.js"></script>
+    <script src="js/plugin/waves/waves.js"></script>
+    <script src="js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+
+
+</body>
+

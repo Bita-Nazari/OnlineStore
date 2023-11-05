@@ -18,13 +18,13 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
             builder.HasOne(d => d.Product)
                 .WithMany(p => p.ProductBooths)
                 .HasForeignKey(d => d.ProductId)
-                .OnDelete(DeleteBehavior.SetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_ProductBooth_Product");
 
             builder.HasOne(d => d.booth)
                 .WithMany(b => b.ProductBooths)
                 .HasForeignKey(d => d.BoothId)
-                .OnDelete(DeleteBehavior.SetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_ProductBooth_Booth");
 
         }

@@ -14,7 +14,6 @@ public partial class Admin
 
     public long Wallet { get; set; }
 
-    public long PhoneNumber { get; set; }
 
     public int? UserId { get; set; }
 

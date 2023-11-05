@@ -20,7 +20,7 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
 
             builder.HasOne(d => d.Customer).WithMany(p => p.Carts)
                 .HasForeignKey(d => d.CustomerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.NoAction)
                 .HasConstraintName("FK_Cart_Customer");
         }
     }

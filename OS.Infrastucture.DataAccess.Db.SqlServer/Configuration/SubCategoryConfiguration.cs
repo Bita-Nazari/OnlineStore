@@ -53,7 +53,7 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
             new SubCategory { Id = 33, Name = "انگشتر", CategoryId = 9  },
             new SubCategory { Id = 34, Name = "عینک آفتابی", CategoryId = 9 },
             new SubCategory { Id = 35, Name = "دستبند", CategoryId = 9 },
-            new SubCategory { Id = 35, Name = "کلاه", CategoryId =9  }
+            new SubCategory { Id =36 , Name = "کلاه", CategoryId =9  }
 
 
                 );
