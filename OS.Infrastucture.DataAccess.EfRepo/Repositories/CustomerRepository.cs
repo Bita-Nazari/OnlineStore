@@ -28,8 +28,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Address = customer.Address,
-                CityId = customer.CityId,
-                PictureId = customer.PictureId,
+                //CityId = customer.CityId,
+                //PictureId = customer.PictureId,
 
             };
             return customerDto;
@@ -45,8 +45,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     FirstName = c.FirstName,
                     LastName = c.LastName,
                     Address = c.Address,
-                    CityId = c.CityId,
-                    PictureId = c.PictureId,
+                    //CityId = c.CityId,
+                    //PictureId = c.PictureId,
 
                 }).ToListAsync(cancellationToken);
             return customerList;

@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
+using OS.Domain.Core.Contracts.Repository;
+using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Entities;
+using OS.Domain.Service;
+using OS.Infrastucture.DataAccess.EfRepo.Repositories;
 using OS.Infrastucture.Db.SqlServer.DataBase;
 using System.Data;
 using System.Data.Entity;
@@ -31,6 +35,7 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
         options.Password.RequireDigit = false;
         options.Password.RequiredLength = 4;
         options.Password.RequireNonAlphanumeric = false;
+        
     }
     )
 .AddEntityFrameworkStores<OnlineStoreContext>();
@@ -51,6 +56,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
 //builder.Services.AddScoped<IProvinceAppService,ProvinceAppService>();
 //builder.Services.AddScoped<ISellerAppService,SellerAppService>();
 //builder.Services.AddScoped<ISubCategoryAppService,SubCategoryAppService>();
+builder.Services.AddScoped<IUserAppService, UserAppService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 
@@ -69,6 +77,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
