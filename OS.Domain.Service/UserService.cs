@@ -23,6 +23,16 @@ namespace OS.Domain.Service
             return _userRepository.FindUserByName(userName, cancellationToken);
         }
 
+        public Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDto> GetById(int id, CancellationToken cancellationToken)
+        {
+           return _userRepository.GetById(id, cancellationToken);
+        }
+
         public async Task<List<string>> GetRole(int userId, CancellationToken cancellationtoken)
         {
             return await _userRepository.GetRole(userId, cancellationtoken);

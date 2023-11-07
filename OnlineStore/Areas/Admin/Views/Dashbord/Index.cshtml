@@ -1,0 +1,141 @@
+﻿@model OnlineStore.Models.UserViewModel;
+@{
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<body>
+
+    <div class="content">
+        <div class="dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="ui-boxs">
+                            <div class="ui-box">
+                                <div class="ui-box-item">
+                                    <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
+                                        <div class="dashboard-user-img-profile">
+                                            <img src="~/img/default-icon/user-profile.png" width="80" height="80"
+                                                 class="img-fluid rounded-circle" alt="">
+                                        </div>
+                                        <div class="dashboard-user-info">
+                                            <h6 class="user-name">@Model.UserName</h6>
+                                            <h6 class="text-muted user-number">@Model.PhoneNumber</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-box">
+                                <div class="ui-box-item">
+                                    <div class="ui-box-item-title" style="padding: 15px;">
+                                        <h4 class="fw-bold">
+                                            حساب کاربری شما
+                                        </h4>
+                                    </div>
+                                    <div class="ui-box-item-desc p-0">
+                                        <ul class="nav flex-column sidebar-menu">
+                                            <li class="nav-item">
+                                                <a href="profile.html" class="nav-link text-muted">
+                                                    <i class="bi bi-person-circle"></i>
+                                                    <span>نمایه کاربری</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="order.html" class="nav-link text-muted">
+                                                    <i class="bi bi-basket-fill"></i>
+                                                    <span>سفارش های ثبت شده</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="favorite.html" class="nav-link text-muted">
+                                                    <i class="bi bi-house"></i>
+                                                    <span>غرفه ها</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="favorite.html" class="nav-link text-muted">
+                                                    <i class="bi bi-pin-map"></i>
+                                                    <span> کاربران</span>
+                                                </a>
+                                            </li>
+                                            
+                                            <li class="nav-item">
+                                                <a href="favorite.html" class="nav-link text-muted">
+                                                    <i class="bi bi-basket-fill"></i>
+                                                    <span>  محصولات</span>
+                                                </a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a href="address.html" class="nav-link text-muted">
+                                                    <i class="bi bi-pencil"></i>
+                                                    <span>اضافه کردن محصول جدید</span>
+                                                </a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a href="notification.html" class="nav-link text-muted">
+                                                    <i class="bi bi-pencil"></i>
+                                                    <span>تایید محصولات ها</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="notification.html" class="nav-link text-muted">
+                                                    <i class="bi bi-chat-dots"></i>
+                                                    <span>تایید کامنت ها</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="content-box" style="padding:40px 20px;">
+                            <div class="row g-3">
+                                <div class="col-xl-3 col-6 dashboard-cart-col">
+                                    <div class="dashboard-cart shadow-box">
+                                        <div class="dashboard-cart-title">
+                                            <i class="bi bi-bag-check"></i> کالا های ثبت شده
+                                            شده
+                                        </div>
+                                        <div class="dashboard-cart-footer" style="background: #0476D0;">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-6 dashboard-cart-col">
+                                    <div class="dashboard-cart shadow-box">
+                                        <div class="dashboard-cart-title">
+                                            <i class="bi bi-activity"></i> تعداد کاربران سایت
+                                        </div>
+                                        <div class="dashboard-cart-footer" style="background: #F6A21E;">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-6 dashboard-cart-col">
+                                    <div class="dashboard-cart shadow-box">
+                                        <div class="dashboard-cart-title">
+                                            <i class="bi bi-repeat"></i> تعداد کامنت های ثبت شده
+                                            شده
+                                        </div>
+                                        <div class="dashboard-cart-footer" style="background: #0db47f;">0</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-6 dashboard-cart-col">
+                                    <div class="dashboard-cart shadow-box">
+                                        <div class="dashboard-cart-title">
+                                            <i class="bi bi-bag-check"></i> تعداد غرفه ها
+                                        </div>
+                                        <div class="dashboard-cart-footer" style="background: #BA0F30;">0</div>
+                                    </div>
+                                </div>
+                            </div>
+  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

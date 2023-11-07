@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
-using System.Data.Entity;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
@@ -31,6 +31,32 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Id = user.Id
             };
 
+            return userdto;
+        }
+
+        public async Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
+        {
+            var UserList = await _onlineStoreContext.Users.AsNoTracking().Select(x => new UserDto()
+            {
+                Id = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+            }).ToListAsync();
+            return UserList;
+        }
+
+        public async Task<UserDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            var user = await _onlineStoreContext.Users.Where(e=> e.Id== id).FirstOrDefaultAsync(cancellationToken);
+            var userdto = new UserDto()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                PhoneNumber= user.PhoneNumber,
+                
+            };
             return userdto;
         }
 

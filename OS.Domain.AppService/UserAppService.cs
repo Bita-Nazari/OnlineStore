@@ -23,6 +23,16 @@ namespace OS.Domain.AppService
             return _userService.FindUserByName(userName, cancellationToken);
         }
 
+        public Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            return _userService.GetById(id, cancellationToken);
+        }
+
         public async Task<List<string>> GetRole(int userId ,CancellationToken cancellationToken)
         {
             return await _userService.GetRole(userId ,cancellationToken);

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
+﻿
 using Microsoft.AspNetCore.Identity;
 using OS.Domain.Core.Dtos;
 using System;
@@ -17,5 +17,7 @@ namespace OS.Domain.Core.Contracts.Repository
         public Task LogOut(CancellationToken cancellationtoken);
         public Task<List<string>> GetRole(int userId, CancellationToken cancellationtoken);
         public Task<UserDto> FindUserByName(string userName, CancellationToken cancellationToken);
+        public Task<List<UserDto>> GetAll(CancellationToken cancellationToken);
+        public Task<UserDto> GetById(int id, CancellationToken cancellationToken);
     }
 }

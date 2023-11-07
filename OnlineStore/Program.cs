@@ -9,7 +9,7 @@ using OS.Domain.Service;
 using OS.Infrastucture.DataAccess.EfRepo.Repositories;
 using OS.Infrastucture.Db.SqlServer.DataBase;
 using System.Data;
-using System.Data.Entity;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,8 +81,15 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.MapAreaControllerRoute(
+    name: "areas",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Dashbord}/{action=Index}/{id?}");
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 
 app.Run();

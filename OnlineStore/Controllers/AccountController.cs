@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
+﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
@@ -47,7 +47,7 @@ namespace OnlineStore.Controllers
                     {
                         if (role == "Admin")
                         {
-                            return RedirectToAction("Index", "Home", new { area = "Admin" });
+                            return RedirectToAction("Index", "Dashbord", new { area = "Admin" , id = usern.Id });
                         }
                         if (role == "Customer")
                         {
