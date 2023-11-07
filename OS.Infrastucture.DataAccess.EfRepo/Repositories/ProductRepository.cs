@@ -7,7 +7,7 @@ using OS.Infrastucture.Db.SqlServer.DataBase;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
-    internal class ProductRepository : IProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly OnlineStoreContext _storeContext;
         public ProductRepository(OnlineStoreContext storeContext)

@@ -23,7 +23,7 @@ namespace OS.Domain.Service
 
         public Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetAll(cancellationToken);
         }
 
         public Task<List<ProductDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)

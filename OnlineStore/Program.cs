@@ -52,7 +52,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
 //builder.Services.AddScoped<IMedalAppService,MedalAppService>();
 //builder.Services.AddScoped<IOrderAppService,OrderAppService>();
 //builder.Services.AddScoped<IPictureAppService,PictureAppService>();
-//builder.Services.AddScoped<IProductAppService,ProductAppService>();
+builder.Services.AddScoped<IProductAppService, ProductAppService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 //builder.Services.AddScoped<IProvinceAppService,ProvinceAppService>();
 //builder.Services.AddScoped<ISellerAppService,SellerAppService>();
 //builder.Services.AddScoped<ISubCategoryAppService,SubCategoryAppService>();
