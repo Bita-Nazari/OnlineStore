@@ -2,6 +2,7 @@
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
+using OS.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,10 @@ namespace OS.Domain.AppService
 
         public Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           return _userService.GetAll(cancellationToken);
         }
+
+      
 
         public Task<UserDto> GetById(int id, CancellationToken cancellationToken)
         {
@@ -37,6 +40,7 @@ namespace OS.Domain.AppService
         {
             return await _userService.GetRole(userId ,cancellationToken);
         }
+
 
         public async Task<SignInResult> LogIn(UserDto userDto, CancellationToken cancellationtoken)
         {

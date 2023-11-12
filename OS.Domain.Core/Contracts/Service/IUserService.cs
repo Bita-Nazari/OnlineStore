@@ -17,5 +17,6 @@ namespace OS.Domain.Core.Contracts.Service
         public Task<UserDto> FindUserByName(string userName, CancellationToken cancellationToken);
         public Task<List<UserDto>> GetAll(CancellationToken cancellationToken);
         public Task<UserDto> GetById(int id, CancellationToken cancellationToken);
+
     }
 }

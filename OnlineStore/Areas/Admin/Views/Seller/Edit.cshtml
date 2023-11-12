@@ -1,0 +1,127 @@
+﻿@using OnlineStore.Areas.Admin.Models;
+@model AllUserViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+
+<!------ Include the above in your HEAD tag ---------->
+<body>
+<form class="form-horizontal" method="post">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>PRODUCTS</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" >نام</label>
+            <div class="col-md-4">
+                <input asp-for="FirstName"  placeholder="نام" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_name">نام خانوادگی</label>
+            <div class="col-md-4">
+                <input asp-for="LastName" placeholder="نام خانوادگی" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="product_name_fr">ایمیل</label>
+                <div class="col-md-4">
+                    <input asp-for="Email" placeholder="ایمیل" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="product_name">نام کاربری</label>
+                <div class="col-md-4">
+                    <input asp-for="UserName" placeholder="نام کاربری" class="form-control input-md" required="" type="text">
+
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_name_fr">شماره تماس</label>
+            <div class="col-md-4">
+                <input asp-for="PhoneNumber" placeholder="شماره تماس" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="product_name_fr">کد ملی</label>
+            <div class="col-md-4">
+                <input asp-for="NationalCode" placeholder="کدملی" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="available_quantity">شماره شبا</label>
+            <div class="col-md-4">
+                <input asp-for="ShabaNumber" placeholder="شماره شبا" class="form-control input-md" required="" type="text">
+
+            </div>
+        </div>
+@*        <div class="form-group">
+            <label class="col-md-4 control-label" for="available_quantity">رمز عبور</label>
+            <div class="col-md-4">
+                    <input asp-for="Password" name="available_quantity" placeholder="رمز عبور " class="form-control input-md" required="" type="password">
+
+            </div>
+
+        </div>*@
+
+        <!-- Select Basic -->
+        <div class="form-group">
+
+                    @Html.LabelFor(x => Model.CityId, htmlAttributes: new { @class = "col-md-4 control-label" })
+                <div class="col-md-4">
+                     @Html.DropDownListFor(x => Model.CityId, new SelectList(Model.cities, "Id", "Name"), htmlAttributes: new { @class = "form-control", id = "Country"})
+                    @Html.ValidationMessageFor(x => x.CityName, "", new { @class = "text-danger" })
+                </div>
+            
+
+        </div>
+            <div class="form-group">
+
+                <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-warning">ثبت</button>
+                </div>
+            </div>
+
+
+        <!-- File Button -->
+       @* <div class="form-group">
+            <label class="col-md-4 control-label" for="filebutton">main_image</label>
+            <div class="col-md-4">
+                <input id="filebutton" name="filebutton" class="input-file" type="file">
+            </div>
+        </div>*@
+        <!-- File Button -->
+        <!-- Button -->
+
+
+    </fieldset>
+</form>
+
+
+<script src="~/js/jquery-3.6.1.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/swiper-bundle.min.js"></script>
+<script src="~/js/app.js"></script>
+<script src="~/js/plugin/countdown/countdown.js"></script>
+<script src="~/js/plugin/back-to-top/jquery-backToTop.min.js"></script>
+<script src="~/js/plugin/hint-css/hint-css.js"></script>
+<script src="~/js/jquery-app.js"></script>
+<script src="~/js/plugin/waves/waves.js"></script>
+<script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+</body>
+</html>

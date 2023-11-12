@@ -9,10 +9,13 @@ namespace OS.Domain.Core.Contracts.Repository
 {
     public interface ISellerRepository
     {
-        Task<List<SellerDto>> GetAll(CancellationToken cancellationToken);
-        Task Update(SellerDto sellerDto, CancellationToken cancellationToken);
-        Task<SellerDto> GetDetail(int SellerId, CancellationToken cancellationToken);
-        Task SoftDelete(int SellerId, CancellationToken cancellationToken);
-        Task HardDelete(int SellerId, CancellationToken cancellationToken);
+
+        public Task<List<AlluserDto>> GetAllSellers(CancellationToken cancellationToken);
+
+        public Task<AlluserDto> GetSellerById(int SellerId, CancellationToken cancellationToken);
+
+        public Task EditSeller(AlluserDto user, CancellationToken cancellationToken);
+
+        public Task DeleteSeller(int id, CancellationToken cancellationToken);
     }
 }

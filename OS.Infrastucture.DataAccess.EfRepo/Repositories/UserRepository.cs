@@ -18,6 +18,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             _userManager = userManager;
             _signInManager = signInManager;
         }
+       
 
         public async Task<UserDto> FindUserByName(string userName, CancellationToken cancellationToken)
         {
@@ -46,6 +47,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             return UserList;
         }
 
+
         public async Task<UserDto> GetById(int id, CancellationToken cancellationToken)
         {
             var user = await _onlineStoreContext.Users.Where(e=> e.Id== id).FirstOrDefaultAsync(cancellationToken);
@@ -60,6 +62,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             return userdto;
         }
 
+
+      
         public async Task<List<string>> GetRole(int userId, CancellationToken cancellationtoken)
         {
             var user = await _onlineStoreContext.Users.FindAsync(userId);
@@ -70,6 +74,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var role = await _userManager.GetRolesAsync(user);
             return role.ToList();
         }
+
+      
 
         public async Task<SignInResult> LogIn(UserDto userDto, CancellationToken cancellationtoken)
         {

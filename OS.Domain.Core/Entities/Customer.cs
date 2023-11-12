@@ -45,7 +45,7 @@ public partial class Customer
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual Picture Picture { get; set; } = null!;
+    public virtual Picture? Picture { get; set; } = null!;
     public User User { get; set; }
 
 

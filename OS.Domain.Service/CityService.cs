@@ -18,7 +18,7 @@ namespace OS.Domain.Service
         }
         public Task<List<CityDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _cityRepository.GetAll(cancellationToken);
         }
     }
 }

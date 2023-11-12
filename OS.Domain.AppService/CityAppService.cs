@@ -19,7 +19,7 @@ namespace OS.Domain.AppService
         }
         public Task<List<CityDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _cityService.GetAll(cancellationToken);
         }
     }
 }

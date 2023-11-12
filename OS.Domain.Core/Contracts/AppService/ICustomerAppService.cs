@@ -9,10 +9,13 @@ namespace OS.Domain.Core.Contracts.AppService
 {
     public interface ICustomerAppService
     {
-        Task HardDelete(int customerId, CancellationToken cancellationToken);
-        Task Update(CustomerDto customerDto, CancellationToken cancellationToken);
-        Task<List<CustomerDto>> GetAll(CancellationToken cancellationToken);
-        Task<CustomerDto> Detail(int customerId, CancellationToken cancellationToken);
-        Task<List<OrderDto>> GetCustomerOrders(int productId, CancellationToken cancellationToken);
+        public Task<List<AlluserDto>> GetAllCustomers(CancellationToken cancellationToken);
+
+        public Task<AlluserDto> GetCustomerById(int CustomerId, CancellationToken cancellationToken);
+
+        public Task EditCustomer(AlluserDto user, CancellationToken cancellationToken);
+
+        public Task DeleteCustomer(int id, CancellationToken cancellationToken);
     }
+
 }

@@ -16,29 +16,25 @@ namespace OS.Domain.AppService
         {
             _sellerservice= sellerService;
         }
-        public Task<List<SellerDto>> GetAll(CancellationToken cancellationToken)
+
+        public  async Task DeleteSeller(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           await  _sellerservice.DeleteSeller(id, cancellationToken);
         }
 
-        public Task<SellerDto> GetDetail(int SellerId, CancellationToken cancellationToken)
+        public async Task EditSeller(AlluserDto user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           await _sellerservice.EditSeller(user, cancellationToken);
         }
 
-        public Task HardDelete(int SellerId, CancellationToken cancellationToken)
+        public async Task<List<AlluserDto>> GetAllSellers(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _sellerservice.GetAllSellers(cancellationToken);
         }
 
-        public Task SoftDelete(int SellerId, CancellationToken cancellationToken)
+        public async Task<AlluserDto> GetSellerById(int SellerId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(SellerDto sellerDto, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+           return await _sellerservice.GetSellerById(SellerId, cancellationToken);
         }
     }
 }

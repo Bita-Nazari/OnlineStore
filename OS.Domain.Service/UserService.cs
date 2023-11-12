@@ -2,6 +2,7 @@
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
+using OS.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +26,25 @@ namespace OS.Domain.Service
 
         public Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           return _userRepository.GetAll(cancellationToken);
         }
 
-        public Task<UserDto> GetById(int id, CancellationToken cancellationToken)
+
+        public async Task<UserDto> GetById(int id, CancellationToken cancellationToken)
         {
-           return _userRepository.GetById(id, cancellationToken);
+           return await _userRepository.GetById(id, cancellationToken);
         }
+
+
+
+    
 
         public async Task<List<string>> GetRole(int userId, CancellationToken cancellationtoken)
         {
             return await _userRepository.GetRole(userId, cancellationtoken);
         }
+
+   
 
         public async Task<SignInResult> LogIn(UserDto userDto, CancellationToken cancellationtoken)
         {

@@ -2,11 +2,6 @@
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Infrastucture.Db.SqlServer.DataBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
@@ -17,71 +12,117 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             _storeContext = storeContext;
         }
-        public async Task<CustomerDto> Detail(int customerId, CancellationToken cancellationToken)
+        public async Task DeleteCustomer(int id, CancellationToken cancellationToken)
         {
-            var customer = await _storeContext.Customers
-                .Where(c=>c.Id== customerId)
-                .FirstOrDefaultAsync(cancellationToken);
-            var customerDto = new CustomerDto()
-            {
-                Id = customer.Id,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                Address = customer.Address,
-                //CityId = customer.CityId,
-                //PictureId = customer.PictureId,
-
-            };
-            return customerDto;
-
-        }
-
-        public async Task<List<CustomerDto>> GetAll(CancellationToken cancellationToken)
-        {
-            var customerList = await _storeContext.Customers.AsNoTracking()
-                .Select(c => new CustomerDto()
+                var customer = await _storeContext.Customers
+               .Where(p => p.Id == id)
+               .FirstOrDefaultAsync();
+                if (customer == null)
                 {
-                    Id= c.Id,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
-                    Address = c.Address,
-                    //CityId = c.CityId,
-                    //PictureId = c.PictureId,
-
-                }).ToListAsync(cancellationToken);
-            return customerList;
-        }
-
-        public Task<List<OrderDto>> GetCustomerOrders(int productId, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task HardDelete(int customerId, CancellationToken cancellationToken)
-        {
-            var customer = await _storeContext.Customers
-                .Where(c=> c.Id == customerId)
-                .FirstOrDefaultAsync();
-            _storeContext.Customers.Remove(customer);
-            await _storeContext.SaveChangesAsync(cancellationToken);
-
+                    throw new NullReferenceException(nameof(customer));
+                }
+                customer.IsDeleted = true;
+                await _storeContext.SaveChangesAsync(cancellationToken);
             
         }
 
-        public async Task Update(CustomerDto customerDto, CancellationToken cancellationToken)
+
+
+        public async Task EditCustomer(AlluserDto user, CancellationToken cancellationToken)
         {
-            var customer = await _storeContext.Customers
-              .Where(c => c.Id == customerDto.Id)
-              .FirstOrDefaultAsync();
-            if(customer != null)
+            var User = await _storeContext.Customers.Where(s => s.Id == user.Id)
+            .Include(u => u.User)
+            .Include(u => u.City).FirstOrDefaultAsync();
+            if (User == null)
             {
-                customer.Address= customerDto.Address;
-                customer.CityId= customerDto.CityId;
-                customer.PictureId= customerDto.PictureId;
-                customer.FirstName= customerDto.FirstName;
-                customer.LastName= customerDto.LastName;
+                throw new NullReferenceException("user did not found");
             }
+            User.FirstName = user.FirstName;
+            User.LastName = user.LastName;
+            User.CityId = user.CityId;
+            User.Wallet = user.Wallet;
+            User.User.Email = user.Email;
+            User.User.PhoneNumber = user.PhoneNumber;
+            User.User.UserName = user.UserName;
+            User.User.PasswordHash = user.Password;
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
+
+
+
+
+        public async Task<List<UserDto>> GetAll(CancellationToken cancellationToken)
+        {
+            var UserList = await _storeContext.Users.AsNoTracking().Select(x => new UserDto()
+            {
+                Id = x.Id,
+                UserName = x.UserName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+            }).ToListAsync();
+            return UserList;
+        }
+
+        public async Task<List<AlluserDto>> GetAllCustomers(CancellationToken cancellationToken)
+        {
+            var user = await _storeContext.Customers.AsNoTracking().Select(a => new AlluserDto()
+            {
+                Id = a.Id,
+                UserName = a.User.UserName,
+                PhoneNumber = a.User.PhoneNumber,
+                Email = a.User.Email,
+                Address = a.Address,
+                CreatedAt = a.CreatedAt,
+                FirstName = a.FirstName,
+                LastName = a.LastName,
+                Wallet = a.Wallet,
+                CityName = a.City.Name,
+                IsDeleted = a.IsDeleted,
+
+            }).ToListAsync();
+            return user;
+        }
+
+
+
+
+
+
+        public async Task<AlluserDto> GetCustomerById(int CustomerId, CancellationToken cancellationToken)
+        {
+            var customer = await _storeContext.Customers.Where(c => c.Id == CustomerId)
+                .Include(u => u.User)
+                .Include(c => c.City)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (customer == null)
+            {
+                throw new NullReferenceException("User did not found");
+            }
+            var userdto = new AlluserDto()
+            {
+                Id = customer.Id,
+                UserName = customer.User.UserName,
+                PhoneNumber = customer.User.PhoneNumber,
+                Email = customer.User.Email,
+                Address = customer.Address,
+                CreatedAt = customer.CreatedAt,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Wallet = customer.Wallet,
+                CityName = customer.City.Name
+                ,
+                PictureId = customer.PictureId,
+
+            };
+            return userdto;
+        }
+
+
+
+
+
+
+
     }
 }
+

@@ -1,7 +1,8 @@
-﻿@using OnlineStore.Models;
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model UserViewModel
+﻿
+@Layout
 <!DOCTYPE html>
+
+
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -35,8 +36,8 @@
                                                  class="img-fluid rounded-circle" alt="">
                                         </div>
                                         <div class="dashboard-user-info">
-                                            <h6 class="user-name">@Model.UserName</h6>
-                                            <h6 class="text-muted user-number">@Model.PhoneNumber</h6>
+                                           @* <h6 class="user-name">@/*Model.UserName*/</h6>*@
+                                           @* <h6 class="text-muted user-number">@Model.PhoneNumber</h6>*@
                                         </div>
                                         <div class="dashboard-user-btn">
                                             <div>
@@ -75,15 +76,9 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a asp-area="Admin" asp-controller="Seller" asp-action="Seller" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="User" asp-action="AllUser" class="nav-link text-muted">
                                                     <i class="bi bi-pin-map"></i>
-                                                    <span>لیست فروشندگان</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a asp-area="Admin" asp-controller="Customer" asp-action="Customer" class="nav-link text-muted">
-                                                    <i class="bi bi-pin-map"></i>
-                                                    <span>لیست مشتریان</span>
+                                                    <span>کاربران</span>
                                                 </a>
                                             </li>
 
@@ -161,11 +156,11 @@
                             </div>
 
                         </div>
-
+                  
                     </div>
-                    
+                   
                 </div>
-               
+                @RenderBody()
             </div>
         </div>
     </div>
@@ -179,5 +174,15 @@
     <script src="~/js/jquery-app.js"></script>
     <script src="~/js/plugin/waves/waves.js"></script>
     <script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
-    </body>
-    </html>
+
+</body>
+</html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        
+    </div>
+</body>
