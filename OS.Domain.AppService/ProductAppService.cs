@@ -16,14 +16,20 @@ namespace OS.Domain.AppService
         {
             _productService = productService;   
         }
-        public Task Create(ProductDto productDto, CancellationToken cancellationToken)
+
+        public async Task Confirm(int ProductId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _productService.Confirm(ProductId, cancellationToken);
         }
 
-        public Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)
+        public async Task Create(ProductDto productDto, CancellationToken cancellationToken)
         {
-            return _productService.GetAll(cancellationToken);
+            await _productService.Create(productDto, cancellationToken);
+        }
+
+        public async Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _productService.GetAll(cancellationToken);
         }
 
         public Task<List<ProductDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
@@ -36,19 +42,24 @@ namespace OS.Domain.AppService
             throw new NotImplementedException();
         }
 
+        public async Task<ProductDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            return await _productService.GetById(id, cancellationToken);
+        }
+
         public Task HardDelete(int ProductId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task SoftDelete(int ProductId, CancellationToken cancellationToken)
+        public async Task SoftDelete(int ProductId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _productService.SoftDelete(ProductId, cancellationToken);
         }
 
-        public Task Update(ProductDto productDto, CancellationToken cancellationToken)
+        public async Task Update(ProductDto productDto, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _productService.Update(productDto, cancellationToken);
         }
     }
 }

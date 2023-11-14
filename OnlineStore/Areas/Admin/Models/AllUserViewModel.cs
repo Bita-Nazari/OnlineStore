@@ -18,7 +18,7 @@ namespace OnlineStore.Areas.Admin.Models
         [Display(Name = "شهر")]
         public string? CityName { get; set; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         [Display(Name = "ایمیل")]
         public string? Email { get; set; }
         [Display(Name = "یوزرنیم")]
@@ -41,6 +41,6 @@ namespace OnlineStore.Areas.Admin.Models
 
         public Customer? Customer { get; set; }
         public Seller? Seller { get; set; }
-        public List<City> cities { get; set; }
+        public List<City>? cities { get; set; }
     }
 }

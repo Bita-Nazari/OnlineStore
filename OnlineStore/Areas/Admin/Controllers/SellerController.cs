@@ -32,6 +32,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 IsDeleted = x.IsDeleted,
+                
             }).ToList();
             return View(userviewModel);
         }
@@ -69,7 +70,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 LastName = seller.LastName,
                 ShabaNumber = seller.ShabaNumber,
                 NationalCode = seller.NationalCode,
-                CityName = seller.CityName,
+                //CityName = seller.CityName,
                 Password = seller.Password,
                 cities = cities.Select(s => new OS.Domain.Core.Entities.City
                 {

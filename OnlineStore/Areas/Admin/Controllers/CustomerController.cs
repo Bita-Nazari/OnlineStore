@@ -95,6 +95,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 CityId = user.CityId,
                 ShabaNumber = user.ShabaNumber,
                 Password = user.Password,
+                Address = user.Address,
 
             };
             await _customerAppService.EditCustomer(seller, cancellationToken);

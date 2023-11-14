@@ -25,7 +25,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 CreatedAt = DateTime.Now,
                 BasePrice = productDto.Price,
                 SubCategoryId = productDto.SubCategoryId,
-
+                IsConfirmed = false,
+                IsDeleted = false,
+                IsAvailable = true
             };
             await _storeContext.Products.AddAsync(product);
             await _storeContext.SaveChangesAsync(cancellationToken);
@@ -33,15 +35,24 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)
         {
-            var productList = await _storeContext.Products.AsNoTracking()
-                .Select(p => new ProductDto()
+            var productList = await _storeContext.Products
+                .Include(s => s.SubCategory)
+                .Include(p => p.ProductPictures)
+                .ThenInclude(n => n.Picture)
+
+                .AsNoTracking()
+                .Select(m => new ProductDto()
                 {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    CreatedAt = p.CreatedAt,
-                    Price = p.BasePrice,
-                    SubCategoryId = p.SubCategoryId,
+                    Id = m.Id,
+                    Name = m.Name,
+                    Description = m.Description,
+                    CreatedAt = m.CreatedAt,
+                    Price = m.BasePrice,
+                    SubcategoryName = m.SubCategory.Name,
+                    Pictures = m.ProductPictures.Select(p => p.Picture).ToList()
+                    ,
+                    IsDeleted = m.IsDeleted,
+                    IsConfirmed = m.IsConfirmed,
 
 
 
@@ -81,13 +92,14 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var product = await _storeContext.Products
             .Where(p => p.Id == productDto.Id)
+            .Include(c => c.SubCategory)
             .FirstOrDefaultAsync();
             if (product != null)
             {
                 product.Name = productDto.Name;
                 product.Description = productDto.Description;
                 product.BasePrice = productDto.Price;
-                product.SubCategory = productDto.SubCategory;
+                product.SubCategoryId = productDto.SubCategoryId;
                 await _storeContext.SaveChangesAsync(cancellationToken);
             }
             try
@@ -99,8 +111,40 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
                 throw;
             }
-            
 
+
+        }
+        public async Task<ProductDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            var product = await _storeContext.Products
+                .Where(p => p.Id == id)
+                .Include(c => c.SubCategory)
+                .Select(p => new ProductDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    Price = p.BasePrice,
+                    SubcategoryName = p.SubCategory.Name,
+                    SubCategoryId = p.SubCategoryId
+
+
+                })
+                .FirstOrDefaultAsync();
+            if (product == null)
+            {
+                throw new NullReferenceException();
+            }
+            return product;
+        }
+
+        public async Task Confirm(int ProductId, CancellationToken cancellationToken)
+        {
+            var product = await _storeContext.Products
+.Where(p => p.Id == ProductId)
+.FirstOrDefaultAsync();
+            product.IsConfirmed = true;
+            await _storeContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

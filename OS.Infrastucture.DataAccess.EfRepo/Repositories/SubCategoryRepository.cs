@@ -4,15 +4,9 @@ using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
-    public class SubCategoryRepository :ISubCategoryRepository
+    public class SubCategoryRepository : ISubCategoryRepository
     {
         private readonly OnlineStoreContext _storeContext;
         public SubCategoryRepository(OnlineStoreContext storeContext)
@@ -37,12 +31,12 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var subcategoryList = await _storeContext.SubCategories
                 .AsNoTracking()
                 .Select(c => new SubcategoryDto()
-            {
-                Id = c.Id,
-                Name = c.Name,
-                CategoryId = c.CategoryId,
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    CategoryId = c.CategoryId,
 
-            }).ToListAsync(cancellationToken);
+                }).ToListAsync(cancellationToken);
             return subcategoryList;
 
         }
@@ -61,7 +55,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var subcategory = await _storeContext.SubCategories
             .Where(s => s.Id == subcategoryId)
             .FirstOrDefaultAsync();
-            subcategory.IsDeleted= true;
+            subcategory.IsDeleted = true;
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
 

@@ -1,7 +1,7 @@
 ﻿@using OnlineStore.Areas.Admin.Models;
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model AllUserViewModel
+@model List<ProductViewModel>
 @{
     Layout = null;
 }
@@ -178,10 +178,12 @@
                                             <div class="ui-box-item-title">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h4 class="fw-bold">
-                                                       جزییات
+                                                        لیست محصولات
                                                     </h4>
                                                 </div>
                                             </div>
+                                            @foreach (var item in Model)
+                                            {
                                                 <div class="ui-box-item-desc">
                                                     <div class="product-list-row">
                                                         <div class="product-row">
@@ -193,58 +195,44 @@
                                                                                  width="100">
                                                                         </div>
                                                                         <div class="product-row-title">
-                                                                        <h4>@Model.UserName</h4>
-                                                                        <hr />
-                                                                        <dl class="row">
-                                                                            <dt class="col-sm-2">
-                                                                                @Html.DisplayNameFor(model => model.FirstName)
-                                                                            </dt>
-                                                                            <dd class="col-sm-10">
-                                                                                @Html.DisplayFor(model => model.FirstName)
-                                                                            </dd>
-                                                                            <dt class="col-sm-2">
-                                                                                @Html.DisplayNameFor(model => model.LastName)
-                                                                            </dt>
-                                                                            <dd class="col-sm-10">
-                                                                                @Html.DisplayFor(model => model.LastName)
-                                                                            </dd>
-                                                                            <dt class="col-sm-2">
-                                                                                @Html.DisplayNameFor(model => model.PhoneNumber)
-                                                                            </dt>
-                                                                            <dd class="col-sm-10">
-                                                                                @Html.DisplayFor(model => model.PhoneNumber)
-                                                                            </dd>
-                                                  
-                                                                            <dt class="col-sm-2">
-                                                                                @Html.DisplayNameFor(model => model.CityName)
-                                                                            </dt>
-                                                                            <dd class="col-sm-10">
-                                                                                @Html.DisplayFor(model => model.CityName)
-                                                                            </dd>
-                                                                            <dt class="col-sm-2">
-                                                                                @Html.DisplayNameFor(model => model.Address)
-                                                                            </dt>
-                                                                            <dd class="col-sm-10">
-                                                                                @Html.DisplayFor(model => model.Address)
-                                                                            </dd>
-                                                                            <dt class="col-sm-2">
-                                                                                @Html.DisplayNameFor(model => model.Wallet)
-                                                                            </dt>
-                                                                            <dd class="col-sm-10">
-                                                                                @Html.DisplayFor(model => model.Wallet)
-                                                                            </dd>
-                                                                        </dl>
+
+                                                                            <div class="product-price">
+
+                                                                                <p>@item.Name</p>
+
+
+                                                                            </div>
+
                                                                         </div>
 
                                                                     </div>
-                         
+                                                                    <div class="product-row-icon">
+                                                                        @if (item.IsConfirmed == false)
+                                                                        {
+                                                                            <a class="btn btn-sm btn-danger" asp-action="Confirm" asp-route-id="@item.Id">تایید نشده</a>
+                                                                        }
+                                                                        @if (item.IsConfirmed == true)
+                                                                        {
+                                                                            <a class="btn btn-sm btn-success"> تایید شده</a>
+                                                                        }
+                                                                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">ویرایش</a>
+                                                                        <a class="btn btn-sm btn-warning" asp-action="Detail" asp-route-id="@item.Id">جزئیات</a>
+                                                                        @if (item.IsDeleted == false)
+                                                                        {
+                                                                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">حذف</a>
+                                                                        }
+                                                                        @if (item.IsDeleted == true)
+                                                                        {
+                                                                            <a class="btn btn-sm btn-danger">حذف شد</a>
+                                                                        }
+
                                                                     </div>
                                                                 </div>
                                                             </a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            
+                                            }
 
                                         </div>
                                     </div>
@@ -256,7 +244,7 @@
             </div>
         </div>
         <!-- end dashboard -->
-    
+    </div>
 
     <script src="~/js/jquery-3.6.1.min.js"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
@@ -272,4 +260,6 @@
 
 </body>
 </html>
+
+
 

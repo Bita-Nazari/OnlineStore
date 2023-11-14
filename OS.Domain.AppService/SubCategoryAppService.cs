@@ -23,7 +23,7 @@ namespace OS.Domain.AppService
 
         public Task<List<SubcategoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _subCategoryService.GetAll(cancellationToken);
         }
 
         public Task HardDelete(int subcategoryId, CancellationToken cancellationToken)

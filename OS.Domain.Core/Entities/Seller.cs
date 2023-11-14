@@ -35,7 +35,7 @@ public partial class Seller
     #region Navigation properties
     public virtual ICollection<Booth> Booths { get; set; } = new List<Booth>();
 
-    public virtual City City { get; set; } = null!;
+    public virtual City? City { get; set; } = null!;
 
     public virtual Picture Picture { get; set; } = null!;
 

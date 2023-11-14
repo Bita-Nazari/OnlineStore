@@ -11,13 +11,13 @@ namespace OS.Domain.Core.Dtos
     {
         public int Id { get; set; }
 
-        public string FirstName { get; set; } = null!;
+        public string? FirstName { get; set; } = null!;
 
         public string LastName { get; set; } = null!;
 
         public long? NationalCode { get; set; }
 
-        public long PhoneNumber { get; set; }
+        public long? PhoneNumber { get; set; }
 
         public int? CityId { get; set; }
 

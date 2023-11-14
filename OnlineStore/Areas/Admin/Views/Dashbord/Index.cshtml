@@ -86,17 +86,23 @@
                                                     <span>لیست مشتریان</span>
                                                 </a>
                                             </li>
+                                 @*           <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="Customer" asp-action="Customer" class="nav-link text-muted">
+                                                    <i class="bi bi-pin-map"></i>
+                                                    <span>لیست مشتریان</span>
+                                                </a>
+                                            </li>*@
 
 
                                             <li class="nav-item">
-                                                <a href="favorite.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Product" asp-action="Product" class="nav-link text-muted">
                                                     <i class="bi bi-basket-fill"></i>
                                                     <span>  محصولات</span>
                                                 </a>
                                             </li>
 
                                             <li class="nav-item">
-                                                <a href="address.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="NewProduct" asp-action="Create" class="nav-link text-muted">
                                                     <i class="bi bi-pencil"></i>
                                                     <span>اضافه کردن محصول جدید</span>
                                                 </a>

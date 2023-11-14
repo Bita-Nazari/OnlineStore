@@ -10,9 +10,9 @@ public partial class ProductPicture
 
     public int Id { get; set; }
 
-    public int ProductId { get; set; }
+    public int? ProductId { get; set; }
 
-    public int PictureId { get; set; }
+    public int? PictureId { get; set; }
     #endregion Properties
 
     #region Navigation properties

@@ -1,21 +1,18 @@
 ﻿using OS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace OS.Domain.Core.Dtos
+namespace OnlineStore.Areas.Admin.Models
 {
-    public class ProductDto
+    public class ProductViewModel
     {
         public int Id { get; set; }
 
         public string? Name { get; set; } = null!;
 
+        [DisplayName("قیمت")]
         public long Price { get; set; }
-
-        public string? Description { get; set; } = null!;
+        [DisplayName("توضیحات")]
+        public string Description { get; set; } 
 
         public bool? IsDeleted { get; set; }
 
@@ -26,10 +23,13 @@ namespace OS.Domain.Core.Dtos
         public int? BoothId { get; set; }
 
         public int SubCategoryId { get; set; }
+        [DisplayName("کتگوری")]
         public string? SubcategoryName { get; set; }
 
         public bool? IsAvailable { get; set; }
-        public string? url { get; set; }
+
+        public int? ProductId { get; set; }
+        public int? PictureId { get; set; }
 
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
@@ -40,8 +40,8 @@ namespace OS.Domain.Core.Dtos
         public virtual ICollection<ProductPicture> ProductPictures { get; set; } = new List<ProductPicture>();
 
         public virtual SubCategory SubCategory { get; set; } = null!;
-        public virtual List<Picture> Pictures { get; set; } = null!;
 
-        public virtual Product Product { get; set; } = null!;
+        
+        public List<SubCategory> subCategories { get; set; }
     }
 }

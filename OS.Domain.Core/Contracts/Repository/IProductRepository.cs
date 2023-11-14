@@ -16,6 +16,7 @@ namespace OS.Domain.Core.Contracts.Repository
         Task<List<ProductDto>> GetAll(CancellationToken cancellationToken);
         Task<List<ProductDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken);
         Task<List<ProductDto>> GetAllBySubCategoryId(int SubCategoryId, CancellationToken cancellationToken);
-
+         Task<ProductDto> GetById(int id, CancellationToken cancellationToken);
+        Task Confirm(int ProductId, CancellationToken cancellationToken);
     }
 }

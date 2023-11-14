@@ -110,6 +110,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                         Seller = new Seller()
                         {
                             CreatedAt = DateTime.Now,
+                            CityId = 32
                         }
 
                     };
@@ -129,6 +130,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                         Customer = new Customer()
                         {
                             CreatedAt = DateTime.Now,
+                            CityId = 32
                             
                         }
                     };
