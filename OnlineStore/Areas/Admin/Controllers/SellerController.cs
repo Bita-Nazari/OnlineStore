@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Areas.Admin.Models;
-using OnlineStore.Models;
-using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
 
@@ -12,12 +10,12 @@ namespace OnlineStore.Areas.Admin.Controllers
     {
         private readonly ISellerAppService _sellerAppService;
         private readonly ICityAppService _cityAppService;
-        public SellerController(ISellerAppService sellerAppService ,ICityAppService cityAppService)
+        public SellerController(ISellerAppService sellerAppService, ICityAppService cityAppService)
         {
             _sellerAppService = sellerAppService;
             _cityAppService = cityAppService;
         }
-        
+
 
 
         public async Task<IActionResult> Seller(CancellationToken cancellationToken)
@@ -32,7 +30,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 FirstName = x.FirstName,
                 LastName = x.LastName,
                 IsDeleted = x.IsDeleted,
-                
+
             }).ToList();
             return View(userviewModel);
         }
@@ -47,8 +45,8 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Email = seller.Email,
                 FirstName = seller.FirstName,
                 LastName = seller.LastName,
-               ShabaNumber = seller.ShabaNumber,
-               NationalCode = seller.NationalCode,
+                ShabaNumber = seller.ShabaNumber,
+                NationalCode = seller.NationalCode,
                 CityName = seller.CityName,
                 CreatedAt = seller.CreatedAt,
                 Wallet = seller.Wallet,
@@ -56,7 +54,7 @@ namespace OnlineStore.Areas.Admin.Controllers
             return View(userviewmodel);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(int id ,CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
         {
             var cities = await _cityAppService.GetAll(cancellationToken);
             var seller = await _sellerAppService.GetSellerById(id, cancellationToken);
@@ -74,8 +72,8 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Password = seller.Password,
                 cities = cities.Select(s => new OS.Domain.Core.Entities.City
                 {
-                    Id=s.Id,
-                    Name=s.Name,
+                    Id = s.Id,
+                    Name = s.Name,
                 }).ToList(),
                 CreatedAt = seller.CreatedAt,
                 Wallet = seller.Wallet,
@@ -103,7 +101,7 @@ namespace OnlineStore.Areas.Admin.Controllers
             await _sellerAppService.EditSeller(seller, cancellationToken);
             return RedirectToAction("Seller");
         }
-        public async Task<IActionResult>Delete(int id , CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             await _sellerAppService.DeleteSeller(id, cancellationToken);
             return RedirectToAction("Seller");

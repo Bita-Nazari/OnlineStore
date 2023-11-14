@@ -42,7 +42,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
 
 //builder.Services.AddScoped<IAuctionAppService,AuctionAppService>();
 //builder.Services.AddScoped<IBidAppService,BidAppService>();
-//builder.Services.AddScoped<IBoothAppService,BoothAppService>();
+builder.Services.AddScoped<IBoothAppService, BoothAppService>();
+builder.Services.AddScoped<IBoothService , BoothService>();
+builder.Services.AddScoped<IBoothRepository, BoothRepository>();
 //builder.Services.AddScoped<ICartAppService,CartAppService>();
 //builder.Services.AddScoped<ICartProductAppService,CartProductAppService>();
 //builder.Services.AddScoped<ICategoryAppService,CategoryAppService>();
@@ -54,7 +56,9 @@ builder.Services.AddScoped<ICustomerAppService, CustomerAppService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-//builder.Services.AddScoped<IMedalAppService,MedalAppService>();
+builder.Services.AddScoped<IMedalAppService, MedalAppService>();
+builder.Services.AddScoped<IMedalRepository, MedalRepository>();
+builder.Services.AddScoped<IMedalService, MedalService>();
 //builder.Services.AddScoped<IOrderAppService,OrderAppService>();
 //builder.Services.AddScoped<IPictureAppService,PictureAppService>();
 builder.Services.AddScoped<IProductAppService, ProductAppService>();

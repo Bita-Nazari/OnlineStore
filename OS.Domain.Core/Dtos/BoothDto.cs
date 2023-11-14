@@ -1,9 +1,4 @@
 ﻿using OS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OS.Domain.Core.Dtos
 {
@@ -11,19 +6,26 @@ namespace OS.Domain.Core.Dtos
     {
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!;
+        public string? Name { get; set; } = null!;
 
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; } = null!;
 
         public DateTime CreatedAt { get; set; }
 
         public bool IsDeleted { get; set; }
 
+        public string? SellerName { get; set; }
         public int SellerId { get; set; }
 
-        public int TotalCount { get; set; }
+        public int? TotalCount { get; set; }
 
         public int MedalId { get; set; }
+        public string? Medalname { get; set; }
+        public long NewPrice { get; set; }
+        public int Count
+        {
+            get; set;
+        }
 
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
@@ -33,7 +35,7 @@ namespace OS.Domain.Core.Dtos
 
         public virtual Medal Medal { get; set; } = null!;
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<ProductBooth> Products { get; set; } = new List<ProductBooth>();
 
         public virtual Seller Seller { get; set; } = null!;
     }

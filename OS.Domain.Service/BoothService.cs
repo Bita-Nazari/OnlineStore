@@ -21,14 +21,14 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task<BoothDto> Detail(int BoothId, CancellationToken cancellationToken)
+        public async Task<BoothDto> Detail(int BoothId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _boothRepository.Detail(BoothId, cancellationToken);
         }
 
-        public Task<List<BoothDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<BoothDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _boothRepository.GetAll(cancellationToken);
         }
 
         public Task HardDelete(int BoothId, CancellationToken cancellationToken)
@@ -36,14 +36,14 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task SoftDelete(int BoothId, CancellationToken cancellationToken)
+        public async Task SoftDelete(int BoothId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _boothRepository.SoftDelete(BoothId, cancellationToken);
         }
 
-        public Task Update(BoothDto boothdto, CancellationToken cancellationToken)
+        public async Task Update(BoothDto boothdto, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _boothRepository.Update(boothdto, cancellationToken);
         }
     }
 }

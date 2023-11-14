@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OS.Domain.Core.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace OS.Domain.Core.Contracts.AppService
 {
     public interface IMedalAppService
     {
+        Task<List<MedalDto>> GetAll(CancellationToken cancellationToken);
     }
 }

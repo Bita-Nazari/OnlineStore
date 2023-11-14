@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace OS.Domain.Core.Dtos
 {
-    internal class MedalDto
+    public class MedalDto
     {
+        public int Id { get; set; }
+
+        public int MedalTypeId { get; set; }
+
+        public int Discount { get; set; }
+        public string MedalName { get; set; }
     }
 }
