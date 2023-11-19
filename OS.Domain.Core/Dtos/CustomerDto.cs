@@ -11,21 +11,21 @@ namespace OS.Domain.Core.Dtos
     {
         public int Id { get; set; }
 
-        public string FirstName { get; set; } = null!;
+        public string? FirstName { get; set; } = null!;
 
-        public string LastName { get; set; } = null!;
+        public string? LastName { get; set; } = null!;
 
-        public long PhoneNumber { get; set; }
+        public long? PhoneNumber { get; set; }
 
-        public string Address { get; set; } = null!;
+        public string? Address { get; set; } = null!;
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
-        public int PictureId { get; set; }
+        public int? PictureId { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
 
-        public long Wallet { get; set; }
+        public long? Wallet { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

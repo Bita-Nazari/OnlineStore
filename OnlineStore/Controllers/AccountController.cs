@@ -55,7 +55,7 @@ namespace OnlineStore.Controllers
                         }
                         if (role == "Seller")
                         {
-                            return RedirectToAction("Index", "Home", new { area = "Seller" });
+                            return RedirectToAction("Index", "Dashbord", new { area = "Seller", id = usern.Id });
                         }
                     }
 

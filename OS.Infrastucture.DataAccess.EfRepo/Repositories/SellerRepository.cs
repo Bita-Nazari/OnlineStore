@@ -47,7 +47,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             User.User.Email = user.Email;
             User.User.PhoneNumber = user.PhoneNumber;
             User.User.UserName = user.UserName;
-            User.User.PasswordHash = user.Password;
             await _storeContext.SaveChangesAsync(cancellationToken);
 
         }
@@ -121,8 +120,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 FirstName = seller.FirstName,
                 LastName = seller.LastName,
                 Wallet = seller.Wallet,
-                CityName = seller.City.Name,
-                Password = seller.User.PasswordHash
+                CityName = seller.City?.Name,
+                
+    
 
             };
             return userdto;

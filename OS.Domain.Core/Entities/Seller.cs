@@ -30,6 +30,8 @@ public partial class Seller
     public long? ShabaNumber { get; set; }
 
     public long? Wallet { get; set; }
+
+    public bool? HaveBooth { get; set; }
     #endregion Properties
 
     #region Navigation properties
@@ -37,7 +39,7 @@ public partial class Seller
 
     public virtual City? City { get; set; } = null!;
 
-    public virtual Picture Picture { get; set; } = null!;
+    public virtual Picture? Picture { get; set; } = null!;
 
     public User User { get; set; }
 

@@ -11,7 +11,7 @@ namespace OS.Domain.Core.Contracts.Repository
     {
         Task Create(CommentDto commentDto, CancellationToken cancellationToken);
         Task HardDelete(int commentId, CancellationToken cancellationToken);
-        Task Update(int commentId, CancellationToken cancellationToken);
+        Task Confirm(int commentId, CancellationToken cancellationToken);
         Task<List<CommentDto>> GetAll(CancellationToken cancellationToken);
         Task<CommentDto> Detail(int commentId, CancellationToken cancellationToken);
         Task<List<CommentDto>> GetProductComments(int productId, CancellationToken cancellationToken);

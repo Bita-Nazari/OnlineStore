@@ -39,7 +39,7 @@ public partial class Customer
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
-    public virtual City City { get; set; } = null!;
+    public virtual City? City { get; set; } = null!;
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

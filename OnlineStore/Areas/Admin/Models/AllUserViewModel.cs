@@ -5,7 +5,8 @@ namespace OnlineStore.Areas.Admin.Models
 {
     public class AllUserViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
+        public int SellerId { get; set; }
 
         [Display(Name = "نام")]
         public string? FirstName { get; set; } = null!;
@@ -40,7 +41,7 @@ namespace OnlineStore.Areas.Admin.Models
         public string? Address { get; set; } = null!;
 
         public Customer? Customer { get; set; }
-        public Seller? Seller { get; set; }
+        //public Seller? Seller { get; set; }
         public List<City>? cities { get; set; }
     }
 }

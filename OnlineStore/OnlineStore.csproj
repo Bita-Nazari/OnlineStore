@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Seller\Views\AddProduct\" />
     <Folder Include="Controllers\" />
     <Folder Include="Data\" />
     <Folder Include="wwwroot\css\" />

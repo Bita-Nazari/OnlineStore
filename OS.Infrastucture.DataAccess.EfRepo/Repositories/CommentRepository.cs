@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Contracts.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
@@ -31,9 +32,24 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           
+            var Comments = await _storeContext.Comments.Include(x=> x.Booth).Include(c=>c.Customer).Select(
+               x=> new CommentDto
+               {
+                   Text= x.Text,
+                   Id = x.Id,
+                   IsDeleted= x.IsDeleted,
+                   IsConfirmed= x.IsConfirmed,
+                   BoothName = x.Booth.Name,
+                   CustomerName = x.Customer.FirstName + " "+ x.Customer.LastName,
+
+               }
+                
+                
+                ).ToListAsync(cancellationToken);
+            return Comments;
         }
 
         public Task<List<CommentDto>> GetProductComments(int productId, CancellationToken cancellationToken)
@@ -46,7 +62,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task Update(int commentId, CancellationToken cancellationToken)
+        public Task Confirm(int commentId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

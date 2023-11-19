@@ -13,6 +13,7 @@ namespace OS.Domain.Core.Dtos
         public DateTime CreatedAt { get; set; }
 
         public bool IsDeleted { get; set; }
+        public bool? HaveBooth { get; set; }
 
         public string? SellerName { get; set; }
         public int SellerId { get; set; }
@@ -35,7 +36,7 @@ namespace OS.Domain.Core.Dtos
 
         public virtual Medal Medal { get; set; } = null!;
 
-        public virtual ICollection<ProductBooth> Products { get; set; } = new List<ProductBooth>();
+        public virtual List<Product> Products { get; set; } = new List<Product>();
 
         public virtual Seller Seller { get; set; } = null!;
     }

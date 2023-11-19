@@ -10,22 +10,32 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
     public class BoothRepository : IBoothRepository
     {
         private readonly OnlineStoreContext _storeContext;
-        public BoothRepository(OnlineStoreContext storeContext)
+        private readonly ISellerRepository _sellerRepository;
+        public BoothRepository(OnlineStoreContext storeContext, ISellerRepository sellerRepository)
         {
             _storeContext = storeContext;
+            _sellerRepository = sellerRepository;
         }
         public async Task Create(BoothDto boothDto, CancellationToken cancellationToken)
         {
+            var seller = await _storeContext.Sellers.Where(c=>c.Id == boothDto.SellerId).FirstOrDefaultAsync();
+
             var booth = new Booth()
             {
                 Id = boothDto.Id,
                 Name = boothDto.Name,
                 CreatedAt = DateTime.Now,
                 Description = boothDto.Description,
-
+                IsDeleted = false,
+                MedalId = 1,
                 SellerId = boothDto.SellerId,
 
+
             };
+
+            seller.HaveBooth = true;
+
+
             await _storeContext.Booths.AddAsync(booth);
             await _storeContext.SaveChangesAsync(cancellationToken);
 
@@ -35,13 +45,15 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var booth = await _storeContext.Booths
                 .Where(b => b.Id == BoothId)
-                
+
                 .Include(s => s.Seller)
                 .Include(m => m.Medal)
                 .ThenInclude(mt => mt.MedalType)
                 .Include(p => p.ProductBooths).ThenInclude(m => m.Product)
                 .FirstOrDefaultAsync(cancellationToken);
-            var product = await _storeContext.ProductBooths.Where(p=>p.Id == BoothId).FirstOrDefaultAsync(cancellationToken);
+            var product = await _storeContext.ProductBooths
+                .Where(p => p.Id == BoothId)
+                .FirstOrDefaultAsync(cancellationToken);
             if (booth != null)
             {
                 var boothdto = new BoothDto()
@@ -52,10 +64,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Description = booth.Description,
                     MedalId = booth.MedalId,
                     Medalname = booth.Medal.MedalType.Type,
-                    SellerName = booth.Seller.FirstName + " " + booth.Seller.LastName,
-                    //Products = booth.ProductBooths.Select(
-                        
-                    //    )
+                    Products = booth.ProductBooths.Select(p => p.Product).ToList(),
+                    HaveBooth = booth.Seller.HaveBooth,
                 };
                 return boothdto;
             }
@@ -83,12 +93,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Medalname = b.Medal.MedalType.Type,
                     SellerName = b.Seller.FirstName + " " + b.Seller.LastName,
                     IsDeleted = b.IsDeleted,
-                    //Products = b.ProductBooths.Select(c => new ProductBoothDto() {
-                    //Id = c.Id,
-                    //ProductName = c.Product.Name,
-                    //NewPrice = c.NewPrice,
-                    //Count = c.Count,
-                    //}).ToList(),
+
                 }
             ).ToListAsync(cancellationToken);
             return boothList;
@@ -126,8 +131,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 booth.Name = boothdto.Name;
                 booth.Description = boothdto.Description;
-               
-               
+
+
 
             }
             try

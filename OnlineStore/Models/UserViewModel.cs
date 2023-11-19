@@ -8,6 +8,7 @@
         public string? Password { get; set; }
         public string? PhoneNumber { get; set; }
         public string? ConfirmPassword { get; set; }
+        public int? SellerId { get; set; }
         public string? Role { get; set; }
         public bool IsSeller { get; set; }
         public List<string>? Roles { get; set; }

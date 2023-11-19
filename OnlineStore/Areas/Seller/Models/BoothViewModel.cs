@@ -1,29 +1,32 @@
 ﻿using OS.Domain.Core.Entities;
-using System.ComponentModel;
 
-namespace OnlineStore.Areas.Admin.Models
+namespace OnlineStore.Areas.Seller.Models
 {
     public class BoothViewModel
     {
-
         public int Id { get; set; }
-        [DisplayName("نام غرفه")]
+
         public string? Name { get; set; } = null!;
-        [DisplayName("توضیحات")]
+
         public string? Description { get; set; } = null!;
 
-        public DateTime? CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public bool IsDeleted { get; set; }
-        [DisplayName("نام فروشنده")]
+       
+
         public string? SellerName { get; set; }
         public int SellerId { get; set; }
-        [DisplayName("فروش کل")]
+
         public int? TotalCount { get; set; }
 
         public int MedalId { get; set; }
-        [DisplayName("مدال")]
         public string? Medalname { get; set; }
+        public long NewPrice { get; set; }
+        public int Count
+        {
+            get; set;
+        }
 
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
@@ -34,7 +37,7 @@ namespace OnlineStore.Areas.Admin.Models
         public virtual Medal Medal { get; set; } = null!;
 
         public virtual List<Product> Products { get; set; } = new List<Product>();
-        public virtual ICollection<Medal> Medals { get; set; } = new List<Medal>();
 
+       
     }
 }

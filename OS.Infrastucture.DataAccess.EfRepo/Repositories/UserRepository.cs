@@ -50,13 +50,15 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<UserDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var user = await _onlineStoreContext.Users.Where(e=> e.Id== id).FirstOrDefaultAsync(cancellationToken);
+            var user = await _onlineStoreContext.Users.Where(e=> e.Id== id).Include(s=>s.Seller).FirstOrDefaultAsync(cancellationToken);
             var userdto = new UserDto()
             {
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
                 PhoneNumber= user.PhoneNumber,
+                SellerId= user.Seller?.Id,
+                //MedalName = user.Seller.Booths.
                 
             };
             return userdto;
@@ -110,7 +112,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                         Seller = new Seller()
                         {
                             CreatedAt = DateTime.Now,
-                            CityId = 32
+                            HaveBooth = false
+                            //CityId = 73
                         }
 
                     };
@@ -130,7 +133,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                         Customer = new Customer()
                         {
                             CreatedAt = DateTime.Now,
-                            CityId = 32
+                            //CityId = 73
                             
                         }
                     };

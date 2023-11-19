@@ -59,6 +59,10 @@ builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IMedalAppService, MedalAppService>();
 builder.Services.AddScoped<IMedalRepository, MedalRepository>();
 builder.Services.AddScoped<IMedalService, MedalService>();
+
+builder.Services.AddScoped<ICommentAppService, CommentAppService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 //builder.Services.AddScoped<IOrderAppService,OrderAppService>();
 //builder.Services.AddScoped<IPictureAppService,PictureAppService>();
 builder.Services.AddScoped<IProductAppService, ProductAppService>();
@@ -100,6 +104,10 @@ app.MapAreaControllerRoute(
     name: "areas",
     areaName: "Admin",
     pattern: "Admin/{controller=Dashbord}/{action=Index}/{id?}");
+app.MapAreaControllerRoute(
+    name: "areas",
+    areaName: "Seller",
+    pattern: "Seller/{controller=Dashbord}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

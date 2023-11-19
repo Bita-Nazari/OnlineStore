@@ -28,7 +28,7 @@ namespace OS.Domain.Service
 
         public Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _commentRepository.GetAll(cancellationToken);
         }
 
         public Task<List<CommentDto>> GetProductComments(int productId, CancellationToken cancellationToken)
@@ -41,7 +41,7 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task Update(int commentId, CancellationToken cancellationToken)
+        public Task Confirm(int commentId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

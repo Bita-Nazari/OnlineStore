@@ -17,9 +17,9 @@ namespace OS.Domain.AppService
         {
             _boothService   = boothService;
         }
-        public Task Create(BoothDto boothDto, CancellationToken cancellationToken)
+        public async Task Create(BoothDto boothDto, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           await _boothService.Create(boothDto, cancellationToken);
         }
 
         public async Task<BoothDto> Detail(int BoothId, CancellationToken cancellationToken)

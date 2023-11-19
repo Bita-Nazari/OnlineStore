@@ -28,7 +28,7 @@ namespace OS.Domain.AppService
 
         public Task<List<CommentDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return _commentService.GetAll(cancellationToken);
         }
 
         public Task<List<CommentDto>> GetProductComments(int productId, CancellationToken cancellationToken)
@@ -37,6 +37,11 @@ namespace OS.Domain.AppService
         }
 
         public Task HardDelete(int commentId, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Confirm(int commentId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -26,6 +26,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Medalname = x.Medalname,
                 SellerName = x.SellerName,
                 IsDeleted = x.IsDeleted,
+                Products = x.Products,
             }).ToList();
             return View(boothViewmodel);
         }
@@ -39,6 +40,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Medalname = booth.Medalname,
                 SellerName = booth.SellerName,
                 Description = booth.Description,
+                Products = booth.Products,
             };
             return View(boothviewmodel);
         }

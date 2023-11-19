@@ -10,7 +10,7 @@ namespace OS.Domain.Core.Dtos
     public class AlluserDto
     {
 
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string? FirstName { get; set; } = null!;
 
@@ -24,6 +24,7 @@ namespace OS.Domain.Core.Dtos
         public string? CityName { get; set; }
         public int? CityId { get; set; }
         public string ? Password { get; set; }
+        public bool? HaveBooth { get; set; }
 
         public int? PictureId { get; set; }
 
