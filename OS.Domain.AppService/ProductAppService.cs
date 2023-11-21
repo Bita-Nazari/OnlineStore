@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Contracts.AppService;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
 using System;
@@ -22,9 +23,9 @@ namespace OS.Domain.AppService
             await _productService.Confirm(ProductId, cancellationToken);
         }
 
-        public async Task Create(ProductDto productDto, CancellationToken cancellationToken)
+        public async Task Create(ProductDto productDto, IFormFile file, CancellationToken cancellationToken)
         {
-            await _productService.Create(productDto, cancellationToken);
+            await _productService.Create(productDto,file, cancellationToken);
         }
 
         public async Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)

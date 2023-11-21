@@ -1,6 +1,8 @@
-﻿using OS.Domain.Core.Contracts.Repository;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +24,9 @@ namespace OS.Domain.Service
            await _productRepository.Confirm(ProductId, cancellationToken);
         }
 
-        public async Task Create(ProductDto productDto, CancellationToken cancellationToken)
+        public async Task Create(ProductDto productDto, IFormFile file,CancellationToken cancellationToken)
         {
-            await _productRepository.Create(productDto , cancellationToken);
+            await _productRepository.Create(productDto, file, cancellationToken);
         }
 
         public async Task<List<ProductDto>> GetAll(CancellationToken cancellationToken)

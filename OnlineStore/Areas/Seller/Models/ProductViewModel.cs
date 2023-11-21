@@ -1,5 +1,6 @@
 ﻿using OS.Domain.Core.Entities;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineStore.Areas.Seller.Models
 {
@@ -30,6 +31,9 @@ namespace OnlineStore.Areas.Seller.Models
 
         public int? ProductId { get; set; }
         public int? PictureId { get; set; }
+        public int SellerId { get; set; }
+        [DataType(DataType.Upload)]
+        public IFormFile Image { get; set; }
 
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 

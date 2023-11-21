@@ -15,5 +15,6 @@ namespace OS.Domain.Core.Contracts.AppService
         Task Update(BoothDto boothdto, CancellationToken cancellationToken);
         Task<BoothDto>Detail(int BoothId, CancellationToken cancellationToken);
         Task<List<BoothDto>> GetAll(CancellationToken cancellationToken);
+        Task<BoothDto> GetBoothBySeller(int sellerId, CancellationToken cancellationToken);
     }
 }

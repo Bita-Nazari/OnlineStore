@@ -30,6 +30,7 @@ namespace OnlineStore.Areas.Admin.Models
 
         public int? ProductId { get; set; }
         public int? PictureId { get; set; }
+        public IFormFile Image { get; set; }
 
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 

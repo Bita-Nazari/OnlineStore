@@ -13,7 +13,7 @@ namespace OnlineStore.Areas.Seller.Models
         public DateTime CreatedAt { get; set; }
 
         public bool IsDeleted { get; set; }
-       
+        public bool? HaveBooth { get; set; }
 
         public string? SellerName { get; set; }
         public int SellerId { get; set; }

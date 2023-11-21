@@ -11,20 +11,30 @@ namespace OnlineStore.Areas.Seller.Controllers
     {
         private readonly IBoothAppService _boothAppService;
         private readonly ISellerAppService _sellerAppService;
-        public BoothController(IBoothAppService boothAppService , ISellerAppService sellerAppService)
+        private readonly IProductAppService _productAppService;
+        private readonly IProductBoothAppService _productBoothAppService;
+        public BoothController(IBoothAppService boothAppService, ISellerAppService sellerAppService, IProductAppService productAppService, IProductBoothAppService productBoothAppService)
         {
             _boothAppService = boothAppService;
             _sellerAppService = sellerAppService;
-            
+            _productAppService = productAppService;
+            _productBoothAppService = productBoothAppService;
+
         }
-        public async Task<IActionResult> Index(int id , CancellationToken cancellationToken)
+        public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
             var seller = await _sellerAppService.GetSellerById(id, cancellationToken);
-            var sellerview = new SellerViewModel
+            var booth = await _boothAppService.GetBoothBySeller(id, cancellationToken);
+            var sellerview = new BoothViewModel
             {
-                Id = seller.Id,
-                HaveBooth = seller.HaveBooth
-            }; 
+                Id = booth.Id,
+                HaveBooth = seller.HaveBooth,
+                SellerId = seller.Id,
+                Description = booth.Description,
+                Medalname = booth.Medalname,
+                Name = booth.Name,
+
+            };
             return View(sellerview);
         }
 
@@ -43,13 +53,72 @@ namespace OnlineStore.Areas.Seller.Controllers
             //var seller = await _sellerAppService.GetSellerById(boothView.SellerId, cancellationToken);
             var booth = new BoothDto
             {
-                SellerId = boothView.Id,
+                SellerId = boothView.SellerId,
                 Description = boothView.Description,
                 Name = boothView.Name,
 
             };
             await _boothAppService.Create(booth, cancellationToken);
-            return RedirectToAction("Index" , new { Id = boothView.Id });
+            return RedirectToAction("Index", new { Id = boothView.Id });
+        }
+
+        public async Task<IActionResult> AddProduct(int id, int SellerId, CancellationToken cancellationToken)
+        {
+            var products = await _productAppService.GetAll(cancellationToken);
+            var list = new ProductBoothViewModel()
+            {
+
+                BoothId = id,
+                SellerId = SellerId,
+                Products = products.Select(p => new Product()
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                }).ToList(),
+            };
+            return View(list);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(ProductBoothViewModel model, CancellationToken cancellationToken)
+        {
+            //var booth = await _boothAppService.Detail(model.BoothId,cancellationToken);
+            //var products = await _productAppService.GetAll(cancellationToken);
+            if (ModelState.IsValid)
+            {
+                var product = new ProductBoothDto()
+                {
+                    ProductName = model.ProductName,
+                    BoothId = model.BoothId,
+                    ProductId = model.ProductId,
+                    NewPrice = model.NewPrice,
+                    Count = model.Count,
+
+                };
+                await _productBoothAppService.Create(product, cancellationToken);
+                return RedirectToAction("Index", new { Id = model.SellerId });
+            }
+
+
+
+            return View(model);
+
+        }
+
+        public async Task<IActionResult> AddAuction(int id, int SellerId, CancellationToken cancellationToken)
+        {
+            var products = await _productAppService.GetAll(cancellationToken);
+            var list = new AuctionViewModel()
+            {
+
+                BoothId = id,
+                SellerId = SellerId,
+                //Products = products.Select(p => new Product()
+                //{
+                //    Id = p.Id,
+                //    Name = p.Name
+                //}).ToList(),
+            };
+            return View(list);
         }
     }
 }

@@ -93,10 +93,34 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Medalname = b.Medal.MedalType.Type,
                     SellerName = b.Seller.FirstName + " " + b.Seller.LastName,
                     IsDeleted = b.IsDeleted,
+                    //HaveBooth = b.Seller.HaveBooth
 
                 }
             ).ToListAsync(cancellationToken);
             return boothList;
+        }
+
+        public async Task<BoothDto> GetBoothBySeller(int sellerId, CancellationToken cancellationToken)
+        {
+            var booth = await _storeContext.Booths
+                 .Where(b => b.SellerId == sellerId)
+                 .Include(m => m.Medal)
+                 .ThenInclude(mt => mt.MedalType)
+                 .FirstOrDefaultAsync(cancellationToken);
+
+            var boothdto = new BoothDto()
+            {
+                Id = booth.Id,
+                Name = booth.Name,
+                CreatedAt = booth.CreatedAt,
+                Description = booth.Description,
+                Medalname = booth.Medal.MedalType.Type,
+                //TotalCount = booth.TotalCount,
+            };
+
+            return boothdto;
+
+            
         }
 
         public async Task HardDelete(int BoothId, CancellationToken cancellationToken)

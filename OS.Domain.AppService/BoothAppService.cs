@@ -32,6 +32,11 @@ namespace OS.Domain.AppService
             return await _boothService.GetAll(cancellationToken);
         }
 
+        public async Task<BoothDto> GetBoothBySeller(int sellerId, CancellationToken cancellationToken)
+        {
+            return await _boothService.GetBoothBySeller(sellerId, cancellationToken);
+        }
+
         public Task HardDelete(int BoothId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

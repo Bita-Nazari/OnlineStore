@@ -36,7 +36,7 @@ namespace OnlineStore.Areas.Admin.Controllers
             return View(product);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(ProductViewModel productViewModel , CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(ProductViewModel productViewModel ,IFormFile file, CancellationToken cancellationToken)
         {
             var subcategories = await _subCategoryAppService.GetAll(cancellationToken);
 
@@ -52,7 +52,7 @@ namespace OnlineStore.Areas.Admin.Controllers
 
             };
 
-            await _productAppService.Create(product, cancellationToken);
+            await _productAppService.Create(product, file, cancellationToken);
            return RedirectToAction("Product", "Product");
         }
     }

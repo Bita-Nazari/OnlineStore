@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
@@ -10,16 +12,18 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly OnlineStoreContext _storeContext;
-        public ProductRepository(OnlineStoreContext storeContext)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public ProductRepository(OnlineStoreContext storeContext, IWebHostEnvironment hostingEnvironment)
         {
             _storeContext = storeContext;
+            _hostingEnvironment = hostingEnvironment;
         }
-        public async Task Create(ProductDto productDto, CancellationToken cancellationToken)
+        public async Task Create(ProductDto productDto, IFormFile file,CancellationToken cancellationToken)
         {
 
             var product = new Product()
             {
-                Id = productDto.Id,
+                //Id = productDto.Id,
                 Name = productDto.Name,
                 Description = productDto.Description,
                 CreatedAt = DateTime.Now,
@@ -30,6 +34,45 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 IsAvailable = true
             };
             await _storeContext.Products.AddAsync(product);
+            await _storeContext.SaveChangesAsync();
+            if (file != null && file.Length > 0)
+            {
+                // Generate a unique file name
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+
+                var picture = new Picture
+                {
+                   
+                    Url = "/upload/" + uniqueFileName, // Adjust the path as needed
+                    IsDeleted = false,
+                    IsConfirmed = false,
+                    IsProfilePicture = false // You might need to set this based on your requirements
+
+
+                };
+                await _storeContext.Pictures.AddAsync(picture);
+                await _storeContext.SaveChangesAsync();
+                var productPicture = new ProductPicture
+                {
+                    ProductId = product.Id,
+                    PictureId = picture.Id
+                };
+                await _storeContext.ProductPictures.AddAsync(productPicture);
+                await _storeContext.SaveChangesAsync(cancellationToken);
+                var webRootPath = _hostingEnvironment.WebRootPath;
+
+                // Combine with the upload folder path
+                var uploadPath = Path.Combine(webRootPath, "upload");
+
+                // Save the file to the server with the unique name
+                var filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream, cancellationToken);
+                }
+
+            }
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
 

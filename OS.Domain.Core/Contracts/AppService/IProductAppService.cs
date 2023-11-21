@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace OS.Domain.Core.Contracts.AppService
 {
     public interface IProductAppService
     {
-        Task Create(ProductDto productDto, CancellationToken cancellationToken);
+        Task Create(ProductDto productDto,IFormFile file, CancellationToken cancellationToken);
         Task HardDelete(int ProductId, CancellationToken cancellationToken);
         Task SoftDelete(int ProductId, CancellationToken cancellationToken);
         Task Update(ProductDto productDto, CancellationToken cancellationToken);
