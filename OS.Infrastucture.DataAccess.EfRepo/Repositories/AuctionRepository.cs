@@ -17,7 +17,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var item = new Auction
             {
-               
+
                 StartPrice = auctionDto.StartPrice,
                 StartTime = auctionDto.StartTime,
                 EndTime = auctionDto.EndTime,
@@ -32,17 +32,31 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public Task<List<AuctionDto>> GetAll(CancellationToken cancellationToken)
         {
-            var auctionList = _storeContext.Auctions.AsNoTracking().Select(a => new AuctionDto
-            {
-                Id = a.Id,
-                StartPrice = a.StartPrice,
-                StartTime = a.StartTime,
-                EndTime = a.EndTime,
-                WinnerId = a.CustomerId,
-                ProductId = a.ProductId,
-                BoothId = a.BoothId
+            var auctionList = _storeContext.Auctions.AsNoTracking()
+                .Include(p => p.Product)
+                .ThenInclude(c => c.SubCategory)
+                .Include(pt => pt.Product)
+                .ThenInclude(pp => pp.ProductPictures)
+                .Include(pi => pi.Product)
+                .ThenInclude(b => b.ProductPictures)
+                .ThenInclude(pp => pp.Picture)
 
-            }
+                .Select(a => new AuctionDto
+                {
+                    Id = a.Id,
+                    StartPrice = a.StartPrice,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    WinnerId = a.CustomerId,
+                    ProductId = a.ProductId,
+                    BoothId = a.BoothId,
+                    Description = a.Product.Description,
+                    ProductName = a.Product.Name,
+                    SubcategoryName = a.Product.SubCategory.Name,
+                    Pictures = a.Product.ProductPictures.Select(p => p.Picture).ToList(),
+
+
+                }
 
                 ).ToListAsync(cancellationToken);
             return auctionList;
@@ -50,7 +64,35 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public Task<List<AuctionDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //var booth = _storeContext.Booths.Where(b=> b.Id == BoothId).FirstOrDefault();
+            var auctionList = _storeContext.Auctions.Where(a=> a.BoothId== BoothId).AsNoTracking()
+      .Include(p => p.Product)
+      .ThenInclude(c => c.SubCategory)
+      .Include(pt => pt.Product)
+      .ThenInclude(pp => pp.ProductPictures)
+      .Include(pi => pi.Product)
+      .ThenInclude(b => b.ProductPictures)
+      .ThenInclude(pp => pp.Picture)
+
+      .Select(a => new AuctionDto
+      {
+          Id = a.Id,
+          StartPrice = a.StartPrice,
+          StartTime = a.StartTime,
+          EndTime = a.EndTime,
+          WinnerId = a.CustomerId,
+          ProductId = a.ProductId,
+          BoothId = a.BoothId,
+          Description = a.Product.Description,
+          ProductName = a.Product.Name,
+          SubcategoryName = a.Product.SubCategory.Name,
+          Pictures = a.Product.ProductPictures.Select(p => p.Picture).ToList(),
+
+
+      }
+
+      ).ToListAsync(cancellationToken);
+            return auctionList;
         }
 
         public async Task<AuctionDto> GetDetail(int AuctionId, CancellationToken cancellationToken)
@@ -76,7 +118,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var item = await _storeContext.Auctions
                 .Where(a => a.Id == auctionDto.Id)
                 .FirstOrDefaultAsync(cancellationToken);
-            if(item != null)
+            if (item != null)
             {
                 item.StartPrice = auctionDto.StartPrice;
                 item.ProductId = auctionDto.ProductId;

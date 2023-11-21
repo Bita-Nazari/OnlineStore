@@ -14,7 +14,7 @@ namespace OnlineStore.Areas.Seller.Controllers
         private readonly IProductAppService _productAppService;
         private readonly IProductBoothAppService _productBoothAppService;
         private readonly IAuctionAppService _auctionAppService;
-        public BoothController(IBoothAppService boothAppService, ISellerAppService sellerAppService, IProductAppService productAppService, IProductBoothAppService productBoothAppService ,IAuctionAppService auctionAppService)
+        public BoothController(IBoothAppService boothAppService, ISellerAppService sellerAppService, IProductAppService productAppService, IProductBoothAppService productBoothAppService, IAuctionAppService auctionAppService)
         {
             _boothAppService = boothAppService;
             _sellerAppService = sellerAppService;
@@ -26,18 +26,36 @@ namespace OnlineStore.Areas.Seller.Controllers
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
         {
             var seller = await _sellerAppService.GetSellerById(id, cancellationToken);
-            var booth = await _boothAppService.GetBoothBySeller(id, cancellationToken);
-            var sellerview = new BoothViewModel
+            if (seller.HaveBooth == true)
             {
-                Id = booth.Id,
+                var booth = await _boothAppService.GetBoothBySeller(id, cancellationToken);
+                var sellerview = new BoothViewModel
+                {
+                    Id = booth.Id,
+                    HaveBooth = seller.HaveBooth,
+                    SellerId = seller.Id,
+                    Description = booth.Description,
+                    Medalname = booth.Medalname,
+                    Name = booth.Name,
+
+                };
+                return View(sellerview);
+            }
+            var sellern = new BoothViewModel
+            {
+                //Id = booth.Id,
                 HaveBooth = seller.HaveBooth,
                 SellerId = seller.Id,
-                Description = booth.Description,
-                Medalname = booth.Medalname,
-                Name = booth.Name,
+                //Description = booth.Description,
+                //Medalname = booth.Medalname,
+                //Name = booth.Name,
 
             };
-            return View(sellerview);
+            return View(sellern);
+
+
+
+
         }
 
         public IActionResult Create(int id)
@@ -125,17 +143,17 @@ namespace OnlineStore.Areas.Seller.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAuction(AuctionViewModel model, CancellationToken cancellationToken)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var auction = new AuctionDto()
                 {
-                    
+
                     StartPrice = model.StartPrice,
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
                     ProductName = model.ProductName,
                     ProductId = model.ProductId,
-                    BoothId=model.BoothId,
+                    BoothId = model.BoothId,
                 };
                 await _auctionAppService.Create(auction, cancellationToken);
                 return RedirectToAction("Index", new { Id = model.SellerId });
@@ -144,6 +162,22 @@ namespace OnlineStore.Areas.Seller.Controllers
             return View(model);
 
 
+        }
+        public async Task<IActionResult> AuctionList(int id, CancellationToken cancellationToken)
+        {
+            var auctions = await _auctionAppService.GetAllByBoothId(id, cancellationToken);
+            var list = auctions.Select(a => new AuctionViewModel()
+            {
+                ProductName = a.ProductName,
+                StartPrice = a.StartPrice,
+                StartTime = a.StartTime,
+                EndTime = a.EndTime,
+                SubCategoryName = a.SubcategoryName,
+                Description = a.Description,
+                pictures = a.Pictures
+
+            }).ToList();
+            return View(list);
         }
     }
 }

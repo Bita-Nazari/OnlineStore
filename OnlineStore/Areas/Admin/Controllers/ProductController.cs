@@ -43,6 +43,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Price = record.Price,
                 Description = record.Description,
                 SubcategoryName = record.SubcategoryName,
+                pictures = record.Pictures
             };
             return View(product);
 

@@ -23,10 +23,14 @@ namespace OS.Domain.Core.Dtos
 
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
+        public string? SubcategoryName { get; set; }
+        public string? Description { get; set; }
 
         public int BidCount { get; set; }
+        public TimeSpan Duration { get; set; }
 
         public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+        public List<Picture> Pictures { get; set; }
 
         public virtual Booth Booth { get; set; } = null!;
 

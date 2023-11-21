@@ -18,6 +18,9 @@ namespace OnlineStore.Areas.Seller.Models
         public DateTime EndTime { get; set; } = DateTime.Now;
 
         public int? WinnerId { get; set; }
+        public string? Description { get; set; }
+        public string? SubCategoryName { get; set; }
+
 
         [Display(Name ="محصولات")]
         public int ProductId { get; set; }
@@ -28,5 +31,6 @@ namespace OnlineStore.Areas.Seller.Models
 
         public virtual Customer? Winner { get; set; }
         public List<Product>? Products { get; set; }
+        public List<Picture>? pictures { get; set; }
     }
 }

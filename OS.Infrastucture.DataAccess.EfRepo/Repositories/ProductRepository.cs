@@ -37,16 +37,16 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             await _storeContext.SaveChangesAsync();
             if (file != null && file.Length > 0)
             {
-                // Generate a unique file name
+               
                 var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
                 var picture = new Picture
                 {
 
-                    Url = "/upload/" + uniqueFileName, // Adjust the path as needed
+                    Url = "/upload/" + uniqueFileName, 
                     IsDeleted = false,
                     IsConfirmed = false,
-                    IsProfilePicture = false // You might need to set this based on your requirements
+                    IsProfilePicture = false 
 
 
                 };
@@ -64,7 +64,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 // Combine with the upload folder path
                 var uploadPath = Path.Combine(webRootPath, "upload");
 
-                // Save the file to the server with the unique name
+                
                 var filePath = Path.Combine(uploadPath, uniqueFileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
@@ -161,6 +161,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var product = await _storeContext.Products
                 .Where(p => p.Id == id)
+                .Include(p=> p.ProductPictures)
+                .ThenInclude(pp=> pp.Picture)
                 .Include(c => c.SubCategory)
                 .Select(p => new ProductDto
                 {
@@ -169,7 +171,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Description = p.Description,
                     Price = p.BasePrice,
                     SubcategoryName = p.SubCategory.Name,
-                    SubCategoryId = p.SubCategoryId
+                    SubCategoryId = p.SubCategoryId,
+                    Pictures = p.ProductPictures.Select(p=>p.Picture).ToList(),
 
 
                 })

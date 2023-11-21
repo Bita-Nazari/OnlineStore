@@ -26,9 +26,9 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task<List<AuctionDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
+        public async Task<List<AuctionDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _auctionRepository.GetAllByBoothId(BoothId, cancellationToken);
         }
 
         public Task<AuctionDto> GetDetail(int AuctionId, CancellationToken cancellationToken)

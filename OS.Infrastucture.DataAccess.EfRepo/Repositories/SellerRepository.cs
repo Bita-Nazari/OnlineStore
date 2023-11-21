@@ -121,6 +121,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 LastName = seller.LastName,
                 Wallet = seller.Wallet,
                 CityName = seller.City?.Name,
+                HaveBooth = seller.HaveBooth,
                 
     
 

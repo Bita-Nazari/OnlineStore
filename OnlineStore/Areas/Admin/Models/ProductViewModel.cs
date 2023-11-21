@@ -41,8 +41,9 @@ namespace OnlineStore.Areas.Admin.Models
         public virtual ICollection<ProductPicture> ProductPictures { get; set; } = new List<ProductPicture>();
 
         public virtual SubCategory SubCategory { get; set; } = null!;
+        public List<Picture>? pictures { get; set; }
 
-        
-        public List<SubCategory> subCategories { get; set; }
+
+        public List<SubCategory>? subCategories { get; set; }
     }
 }
