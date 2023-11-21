@@ -20,7 +20,7 @@
             <legend>ثبت مزایده جدید در غرفه</legend>
 
 
- @*           <!-- Text input-->
+            <!-- Text input-->
             <div class="form-group">
 
                 @Html.LabelFor(x => Model.ProductId, htmlAttributes: new { @class = "col-md-4 control-label" })
@@ -30,21 +30,15 @@
                 </div>
 
 
-            </div>*@
-@*            <div class="form-group">
-                <label class="col-md-4 control-label" for="product_name">قیمت کالا</label>
+            </div>
+           <div class="form-group">
+                <label class="col-md-4 control-label" for="product_name">قیمت پایه کالا</label>
                 <div class="col-md-4">
-                    <input asp-for="NewPrice" placeholder="قیمت کالا" class="form-control input-md" required="" type="text">
+                    <input asp-for="StartPrice" placeholder="قیمت کالا" class="form-control input-md" required="" type="text">
 
                 </div>
-            </div>*@
- @*           <div class="form-group">
-                <label class="col-md-4 control-label" for="product_name">موجودی کالا</label>
-                <div class="col-md-4">
-                    <input asp-for="Count" placeholder="موجودی کالا" class="form-control input-md" required="" type="text">
+            </div>
 
-                </div>
-            </div>*@
             <div class="form-group">
                 <label class="col-md-4 control-label" asp-for="StartTime">انتخاب زمان شروع</label>
                 <div class="col-md-4">

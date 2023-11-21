@@ -41,9 +41,9 @@ namespace OS.Domain.AppService
             throw new NotImplementedException();
         }
 
-        public Task Confirm(int commentId, CancellationToken cancellationToken)
+        public async Task Confirm(int commentId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _commentService.Confirm(commentId, cancellationToken);
         }
 
         public Task Update(int commentId, CancellationToken cancellationToken)

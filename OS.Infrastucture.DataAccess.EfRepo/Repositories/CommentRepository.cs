@@ -62,9 +62,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task Confirm(int commentId, CancellationToken cancellationToken)
+        public async Task Confirm(int commentId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var comment = await _storeContext.Comments.Where(c => c.Id == commentId).FirstOrDefaultAsync();
+            comment.IsConfirmed = true;
+            await _storeContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

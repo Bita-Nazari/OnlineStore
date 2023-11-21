@@ -18,7 +18,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             _storeContext = storeContext;
             _hostingEnvironment = hostingEnvironment;
         }
-        public async Task Create(ProductDto productDto, IFormFile file,CancellationToken cancellationToken)
+        public async Task Create(ProductDto productDto, IFormFile file, CancellationToken cancellationToken)
         {
 
             var product = new Product()
@@ -42,7 +42,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
                 var picture = new Picture
                 {
-                   
+
                     Url = "/upload/" + uniqueFileName, // Adjust the path as needed
                     IsDeleted = false,
                     IsConfirmed = false,
@@ -184,10 +184,38 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task Confirm(int ProductId, CancellationToken cancellationToken)
         {
             var product = await _storeContext.Products
-.Where(p => p.Id == ProductId)
-.FirstOrDefaultAsync();
+          .Where(p => p.Id == ProductId)
+          .FirstOrDefaultAsync();
             product.IsConfirmed = true;
             await _storeContext.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<List<ProductDto>> GetAllConfirmedProduct(CancellationToken cancellationToken)
+        {
+            var productList = await _storeContext.Products
+                .Where(p => p.IsConfirmed )
+                .Include(s => s.SubCategory)
+                .Include(p => p.ProductPictures)
+                .ThenInclude(n => n.Picture)
+
+    .AsNoTracking()
+    .Select(m => new ProductDto()
+    {
+        Id = m.Id,
+        Name = m.Name,
+        Description = m.Description,
+        CreatedAt = m.CreatedAt,
+        Price = m.BasePrice,
+        SubcategoryName = m.SubCategory.Name,
+        Pictures = m.ProductPictures.Select(p => p.Picture).ToList()
+        ,
+        IsDeleted = m.IsDeleted,
+        IsConfirmed = true,
+
+
+
+    }).ToListAsync(cancellationToken);
+            return productList;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var item = new Auction
             {
-                Id = auctionDto.Id,
+               
                 StartPrice = auctionDto.StartPrice,
                 StartTime = auctionDto.StartTime,
                 EndTime = auctionDto.EndTime,

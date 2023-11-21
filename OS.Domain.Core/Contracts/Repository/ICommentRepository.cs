@@ -15,5 +15,6 @@ namespace OS.Domain.Core.Contracts.Repository
         Task<List<CommentDto>> GetAll(CancellationToken cancellationToken);
         Task<CommentDto> Detail(int commentId, CancellationToken cancellationToken);
         Task<List<CommentDto>> GetProductComments(int productId, CancellationToken cancellationToken);
+       
     }
 }

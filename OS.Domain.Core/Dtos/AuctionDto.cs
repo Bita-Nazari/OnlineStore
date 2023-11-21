@@ -22,6 +22,7 @@ namespace OS.Domain.Core.Dtos
         public int? WinnerId { get; set; }
 
         public int ProductId { get; set; }
+        public string? ProductName { get; set; }
 
         public int BidCount { get; set; }
 

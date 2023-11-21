@@ -40,7 +40,9 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
     )
 .AddEntityFrameworkStores<OnlineStoreContext>();
 
-//builder.Services.AddScoped<IAuctionAppService,AuctionAppService>();
+builder.Services.AddScoped<IAuctionAppService, AuctionAppService>();
+builder.Services.AddScoped<IAuctionService , AuctionService>();
+builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 //builder.Services.AddScoped<IBidAppService,BidAppService>();
 builder.Services.AddScoped<IBoothAppService, BoothAppService>();
 builder.Services.AddScoped<IBoothService , BoothService>();

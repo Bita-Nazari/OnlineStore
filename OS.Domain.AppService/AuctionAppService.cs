@@ -16,9 +16,9 @@ namespace OS.Domain.AppService
         {
             _auctionService = auctionservice;
         }
-        public Task Create(AuctionDto auctionDto, CancellationToken cancellationToken)
+        public async Task Create(AuctionDto auctionDto, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _auctionService.Create(auctionDto, cancellationToken);
         }
 
         public Task<List<AuctionDto>> GetAll(CancellationToken cancellationToken)

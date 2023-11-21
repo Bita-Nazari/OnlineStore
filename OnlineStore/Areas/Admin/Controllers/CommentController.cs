@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Areas.Admin.Models;
+using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using System.Threading;
 
@@ -27,5 +28,11 @@ namespace OnlineStore.Areas.Admin.Controllers
             }).ToList();
             return View(boothViewmodel);
         }
+        public async Task<IActionResult> Confirm(int id, CancellationToken cancellationToken)
+        {
+            await _commentAppService.Confirm(id, cancellationToken);
+            return RedirectToAction("Comment");
+        }
+
     }
 }

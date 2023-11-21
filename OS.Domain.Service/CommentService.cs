@@ -41,9 +41,9 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task Confirm(int commentId, CancellationToken cancellationToken)
+        public async Task Confirm(int commentId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _commentRepository.Confirm(commentId, cancellationToken);
         }
     }
 }

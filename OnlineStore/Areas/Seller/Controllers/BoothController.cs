@@ -13,12 +13,14 @@ namespace OnlineStore.Areas.Seller.Controllers
         private readonly ISellerAppService _sellerAppService;
         private readonly IProductAppService _productAppService;
         private readonly IProductBoothAppService _productBoothAppService;
-        public BoothController(IBoothAppService boothAppService, ISellerAppService sellerAppService, IProductAppService productAppService, IProductBoothAppService productBoothAppService)
+        private readonly IAuctionAppService _auctionAppService;
+        public BoothController(IBoothAppService boothAppService, ISellerAppService sellerAppService, IProductAppService productAppService, IProductBoothAppService productBoothAppService ,IAuctionAppService auctionAppService)
         {
             _boothAppService = boothAppService;
             _sellerAppService = sellerAppService;
             _productAppService = productAppService;
             _productBoothAppService = productBoothAppService;
+            _auctionAppService = auctionAppService;
 
         }
         public async Task<IActionResult> Index(int id, CancellationToken cancellationToken)
@@ -64,7 +66,7 @@ namespace OnlineStore.Areas.Seller.Controllers
 
         public async Task<IActionResult> AddProduct(int id, int SellerId, CancellationToken cancellationToken)
         {
-            var products = await _productAppService.GetAll(cancellationToken);
+            var products = await _productAppService.GetAllConfirmedProduct(cancellationToken);
             var list = new ProductBoothViewModel()
             {
 
@@ -106,19 +108,42 @@ namespace OnlineStore.Areas.Seller.Controllers
 
         public async Task<IActionResult> AddAuction(int id, int SellerId, CancellationToken cancellationToken)
         {
-            var products = await _productAppService.GetAll(cancellationToken);
+            var products = await _productAppService.GetAllConfirmedProduct(cancellationToken);
             var list = new AuctionViewModel()
             {
 
                 BoothId = id,
                 SellerId = SellerId,
-                //Products = products.Select(p => new Product()
-                //{
-                //    Id = p.Id,
-                //    Name = p.Name
-                //}).ToList(),
+                Products = products.Select(p => new Product()
+                {
+                    Id = p.Id,
+                    Name = p.Name
+                }).ToList(),
             };
             return View(list);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddAuction(AuctionViewModel model, CancellationToken cancellationToken)
+        {
+            if(ModelState.IsValid)
+            {
+                var auction = new AuctionDto()
+                {
+                    
+                    StartPrice = model.StartPrice,
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    ProductName = model.ProductName,
+                    ProductId = model.ProductId,
+                    BoothId=model.BoothId,
+                };
+                await _auctionAppService.Create(auction, cancellationToken);
+                return RedirectToAction("Index", new { Id = model.SellerId });
+            }
+
+            return View(model);
+
+
         }
     }
 }

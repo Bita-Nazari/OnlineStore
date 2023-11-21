@@ -1,15 +1,17 @@
 ﻿using OS.Domain.Core.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineStore.Areas.Seller.Models
 {
     public class AuctionViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public long StartPrice { get; set; }
 
         public int BoothId { get; set; }
         public int SellerId { get; set; }
+        public string? ProductName { get; set; }
 
         public DateTime StartTime { get; set; } = DateTime.Now;
 
@@ -17,16 +19,14 @@ namespace OnlineStore.Areas.Seller.Models
 
         public int? WinnerId { get; set; }
 
+        [Display(Name ="محصولات")]
         public int ProductId { get; set; }
 
-        public int BidCount { get; set; }
+        public int? BidCount { get; set; }
 
-        public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
-
-        public virtual Booth Booth { get; set; } = null!;
-
-        public virtual Product Product { get; set; } = null!;
+        //public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 
         public virtual Customer? Winner { get; set; }
+        public List<Product>? Products { get; set; }
     }
 }

@@ -44,6 +44,11 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
+        public async Task<List<ProductDto>> GetAllConfirmedProduct(CancellationToken cancellationToken)
+        {
+            return await _productRepository.GetAllConfirmedProduct(cancellationToken);
+        }
+
         public async Task<ProductDto> GetById(int id, CancellationToken cancellationToken)
         {
             return await _productRepository.GetById(id, cancellationToken);
