@@ -28,6 +28,7 @@ namespace OS.Domain.Core.Dtos
 
         public int BidCount { get; set; }
         public TimeSpan Duration { get; set; }
+        public DateTime persianstart { get; set; }
 
         public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
         public List<Picture> Pictures { get; set; }

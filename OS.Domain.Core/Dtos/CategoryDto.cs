@@ -12,9 +12,10 @@ namespace OS.Domain.Core.Dtos
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
+        public List<int> SubcategoryId { get; set; }
 
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
+        public virtual List<SubCategory> SubCategories { get; set; } = new List<SubCategory>();
     }
 }

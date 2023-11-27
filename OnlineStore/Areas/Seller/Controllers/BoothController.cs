@@ -3,6 +3,7 @@ using OnlineStore.Areas.Seller.Models;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
+using System.Threading;
 
 namespace OnlineStore.Areas.Seller.Controllers
 {
@@ -143,13 +144,17 @@ namespace OnlineStore.Areas.Seller.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAuction(AuctionViewModel model, CancellationToken cancellationToken)
         {
+            var cstZone = TimeZoneInfo.FindSystemTimeZoneById("Iran Standard Time");
+            //var cstTime = TimeZoneInfo.ConvertTimeFromUtc(timeUtc, cstZone);
             if (ModelState.IsValid)
             {
                 var auction = new AuctionDto()
                 {
+               
 
-                    StartPrice = model.StartPrice,
+                StartPrice = model.StartPrice,
                     StartTime = model.StartTime,
+                    //persianstart = TimeZoneInfo.ConvertTimeFromUtc(model.StartTime, cstZone),
                     EndTime = model.EndTime,
                     ProductName = model.ProductName,
                     ProductId = model.ProductId,

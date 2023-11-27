@@ -17,6 +17,12 @@ namespace OS.Domain.AppService
         {
             _orderService = orderService;   
         }
+
+        public Task Create(OrderDto orderDto)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Detail(int orderId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

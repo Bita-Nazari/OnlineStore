@@ -21,9 +21,9 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task<List<CategoryDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<CategoryDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.GetAll(cancellationToken);
         }
 
         public Task HardDelete(int categoryId, CancellationToken cancellationToken)

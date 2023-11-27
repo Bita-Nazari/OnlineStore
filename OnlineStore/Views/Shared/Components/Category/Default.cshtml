@@ -1,0 +1,32 @@
+﻿@using static OnlineStore.Controllers.CategoryViewComponent;
+
+@model List<CategoryVM>
+<li class="position-relative m-0"></li>
+<li class="nav-item main-menu-head">
+    <a href="#" class="nav-link border-animate fromCenter fw-bold">
+        <i class="bi bi-list"></i>
+        دسته بندی کالا ها
+    </a>
+    <ul class="main-menu">
+        @foreach(var category in Model)
+        {
+            <li class="main-menu-sub-active-li">
+                <a href="#">
+                    <i class="bi bi-phone"></i>
+                    @category.Name
+                </a>
+
+                <ul class="main-menu-sub back-menu" style="background: #fff no-repeat;">
+                    @foreach(var subcategory in category.SubCategories)
+                    {
+                        <li>
+                            <a class="title my-flex-baseline" asp-controller="Product" asp-action="GetAllByCategory" asp-route-id="@subcategory.Id">
+                                @subcategory.Name <i></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</li>

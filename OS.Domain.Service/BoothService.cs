@@ -50,5 +50,10 @@ namespace OS.Domain.Service
         {
             await _boothRepository.Update(boothdto, cancellationToken);
         }
+
+        public async Task UpdateMedal(int BoothId, CancellationToken cancellationToken)
+        {
+           await _boothRepository.UpdateMedal(BoothId, cancellationToken);
+        }
     }
 }

@@ -35,10 +35,13 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task<List<CategoryDto>> GetAll(CancellationToken cancellationToken)
         {
             var CategoryList =await _storeContext.Categories.AsNoTracking()
+                .Include(c=> c.SubCategories)
                 .Select(c => new CategoryDto()
                 {
                     Id = c.Id,
-                    Name = c.Name
+                    Name = c.Name,
+                    //SubcategoryId = c.SubCategories.Select(c=> c.Id),
+                    SubCategories = c.SubCategories.ToList()
                 }).ToListAsync(cancellationToken);
             return CategoryList;
         }

@@ -14,6 +14,7 @@ namespace OnlineStore.Areas.Seller.Models
         public string? ProductName { get; set; }
 
         public DateTime StartTime { get; set; } = DateTime.Now;
+        //public DateTime persianstart { get; set; }
 
         public DateTime EndTime { get; set; } = DateTime.Now;
 

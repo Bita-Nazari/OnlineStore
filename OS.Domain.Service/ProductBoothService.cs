@@ -1,6 +1,7 @@
 ﻿using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
+using OS.Domain.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +27,19 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           return await _productBoothRepository.GetAllByBoothId(BoothId, cancellationToken);
         }
 
-        public Task<ProductBoothDto> GetById(int id, CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAllBySubCategoryId(int SubCategoryId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _productBoothRepository.GetAllBySubCategoryId(SubCategoryId, cancellationToken);
+        }
+
+        public async Task<ProductBoothDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            return await _productBoothRepository.GetById(id, cancellationToken);
         }
 
         public Task SoftDelete(int ProductBoothId, CancellationToken cancellationToken)

@@ -26,14 +26,19 @@ namespace OS.Domain.AppService
             throw new NotImplementedException();
         }
 
-        public Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _productBoothService.GetAllByBoothId(BoothId, cancellationToken);
         }
 
-        public Task<ProductBoothDto> GetById(int id, CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAllBySubCategoryId(int SubCategoryId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _productBoothService.GetAllBySubCategoryId(SubCategoryId, cancellationToken);
+        }
+
+        public async Task<ProductBoothDto> GetById(int id, CancellationToken cancellationToken)
+        {
+            return await _productBoothService.GetById(id, cancellationToken);
         }
 
         public Task SoftDelete(int ProductBoothId, CancellationToken cancellationToken)

@@ -30,6 +30,7 @@ namespace OnlineStore.Controllers
             return View(productViewModelList);
         }
 
+
         public IActionResult Privacy()
         {
             return View();

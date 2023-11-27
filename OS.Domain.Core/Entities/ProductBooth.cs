@@ -23,6 +23,7 @@ namespace OS.Domain.Core.Entities
         public virtual Booth booth { get; set; } = null!;
 
         public virtual Product Product { get; set; } = null!;
+        public virtual ICollection<ProductOrder> ProductBoothOrders { get; set; } = new List<ProductOrder>();
 
         #endregion Navigation properties
 

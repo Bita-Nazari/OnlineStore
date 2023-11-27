@@ -3,6 +3,7 @@ using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
+using System.Globalization;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
@@ -13,13 +14,28 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             _storeContext = storeContext;
         }
+        public  DateTime ConvertToPersianTime(DateTime dateTime)
+        {
+            PersianCalendar persianCalendar = new PersianCalendar();
+            int year = persianCalendar.GetYear(dateTime);
+            int month = persianCalendar.GetMonth(dateTime);
+            int day = persianCalendar.GetDayOfMonth(dateTime);
+            int hour = dateTime.Hour;
+            int minute = dateTime.Minute;
+            int second = dateTime.Second;
+
+            DateTime persianDateTime = new DateTime(year, month, day, hour, minute, second, persianCalendar);
+            return persianDateTime;
+        }
         public async Task Create(AuctionDto auctionDto, CancellationToken cancellationToken)
         {
+            var persianStart = ConvertToPersianTime(auctionDto.StartTime);
+
             var item = new Auction
             {
 
                 StartPrice = auctionDto.StartPrice,
-                StartTime = auctionDto.StartTime,
+                StartTime = persianStart,
                 EndTime = auctionDto.EndTime,
                 CustomerId = auctionDto.WinnerId,
                 ProductId = auctionDto.ProductId,

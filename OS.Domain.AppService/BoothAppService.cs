@@ -51,5 +51,10 @@ namespace OS.Domain.AppService
         {
             await _boothService.Update(boothdto, cancellationToken);
         }
+
+        public async Task UpdateMedal(int BoothId, CancellationToken cancellationToken)
+        {
+            await _boothService.UpdateMedal(BoothId, cancellationToken);
+        }
     }
 }

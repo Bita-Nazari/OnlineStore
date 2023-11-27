@@ -9,6 +9,7 @@ namespace OS.Domain.Core.Contracts.Service
 {
     public interface IOrderService
     {
+        Task Create(OrderDto orderDto);
         Task HardDelete(int OrderId, CancellationToken cancellationToken);
         Task SoftDelete(int OrderId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetAll(CancellationToken cancellationToken);

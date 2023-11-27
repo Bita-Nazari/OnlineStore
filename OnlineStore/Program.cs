@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OS.Domain.AppService;
@@ -22,6 +23,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<OnlineStoreContext>(options
     => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddHangfire(configuration => configuration
+    .UseSqlServerStorage(@"Data Source=DESKTOP-2SMDACM\SQLEXPRESS;Initial Catalog=onlineStore;TrustServerCertificate=True;Integrated Security=True;")); builder.Services.AddHangfireServer();
 
 builder.Services.AddIdentity<User, IdentityRole<int>>(
     options =>
@@ -49,7 +53,9 @@ builder.Services.AddScoped<IBoothService , BoothService>();
 builder.Services.AddScoped<IBoothRepository, BoothRepository>();
 //builder.Services.AddScoped<ICartAppService,CartAppService>();
 //builder.Services.AddScoped<ICartProductAppService,CartProductAppService>();
-//builder.Services.AddScoped<ICategoryAppService,CategoryAppService>();
+builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICityAppService, CityAppService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
@@ -104,6 +110,12 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+app.UseHangfireDashboard();
+
+//app.UseHangfireDashboard("/hangfire", new DashboardOptions
+//{
+//    Authorization = new[] { new HangfireAuthorizationFilter() }
+//});
 
 app.MapAreaControllerRoute(
     name: "areas",

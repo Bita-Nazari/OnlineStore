@@ -119,7 +119,7 @@
                                     </a>
                                 </li>
                             }
-                            @if (User.IsInRole("Admin"))
+                            @if (User.IsInRole("Customer"))
                             {
                                 
                                 <li class="nav-item d-xl-block d-none">
@@ -151,40 +151,15 @@
                 <div class="col-lg-12 col-4 order-lg-4 order-1 ">
                     <div class="top-menu-menu d-lg-flex d-none">
                         <ul class="navbar-nav">
-                            <li class="position-relative m-0"></li>
-                            <li class="nav-item main-menu-head">
-                                <a href=""
-                                   class="nav-link border-animate fromCenter fw-bold">
-                                    <i class="bi bi-list"></i>
-                                    دسته بندی کالا ها
+                            @await Component.InvokeAsync("Category")
+                            <li class="nav-item">
+                                <a asp-controller="Auction" asp-action="AuctionList" class="nav-link border-animate fromCenter">
+                                    <i  class="bi bi-tag"></i>کالا های مزایده ای
                                 </a>
-                                <ul class="main-menu">
-                                    <li class="main-menu-sub-active-li">
-                                        <a href="">
-                                            <i class="bi bi-phone"></i>
-                                            موبایل
-                                        </a>
-                                        <ul class="main-menu-sub back-menu"
-                                            style=" background: #fff  no-repeat;">
-                                            <li>
-                                                <a class="title my-flex-baseline" href="">
-                                                    زیر منو شماره 1 <i class="bi bi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-                                            <li><a href="">زیر منو شماره 1</a></li>
-
-                                        </ul>
-                                    </li>
-
-                                </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link border-animate fromCenter">
-                                    <i class="bi bi-tag"></i>کالا های مزایده ای
+                                <a asp-controller="Booth" asp-action="GetAllBooth" class="nav-link border-animate fromCenter">
+                                    <i class="bi bi-tag"></i>غرفه ها
                                 </a>
                             </li>
                             <li class="nav-item">

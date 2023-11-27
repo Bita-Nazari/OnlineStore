@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OS.Infrastucture.Db.SqlServer.Configuration
 {
-    internal class ProductOrderConfiguration : IEntityTypeConfiguration<ProductOrder>
+    public class ProductOrderConfiguration : IEntityTypeConfiguration<ProductOrder>
     {
         public void Configure(EntityTypeBuilder<ProductOrder> builder)
         {
@@ -20,10 +20,10 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ProductOrder_Order");
 
-            builder .HasOne(d => d.Product).WithMany(p => p.ProductOrders)
-                .HasForeignKey(d => d.ProductId)
+            builder .HasOne(d => d.Product).WithMany(p => p.ProductBoothOrders)
+                .HasForeignKey(d => d.ProductBoothId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ProductOrder_Product");
+                .HasConstraintName("FK_ProductOrder_ProductBooth");
         }
     }
 }

@@ -14,6 +14,7 @@ namespace OS.Domain.Core.Contracts.Repository
         Task Update(ProductBoothDto product, CancellationToken cancellationToken);
         Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken);
         Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken);
+        Task<List<ProductBoothDto>> GetAllBySubCategoryId(int SubCategoryId, CancellationToken cancellationToken);
         public Task<ProductBoothDto> GetById(int id, CancellationToken cancellationToken);
     }
 }

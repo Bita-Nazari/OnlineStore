@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OS.Infrastucture.Db.SqlServer.Configuration
 {
-    internal class ProductPictureConfiguration : IEntityTypeConfiguration<ProductPicture>
+    public class ProductPictureConfiguration : IEntityTypeConfiguration<ProductPicture>
     {
         public void Configure(EntityTypeBuilder<ProductPicture> builder)
         {

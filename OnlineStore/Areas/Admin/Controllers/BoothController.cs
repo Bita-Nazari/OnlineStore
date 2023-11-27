@@ -27,6 +27,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 SellerName = x.SellerName,
                 IsDeleted = x.IsDeleted,
                 Products = x.Products,
+                TotalCount = x.TotalCount,
             }).ToList();
             return View(boothViewmodel);
         }
@@ -41,6 +42,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 SellerName = booth.SellerName,
                 Description = booth.Description,
                 Products = booth.Products,
+                TotalCount = booth.TotalCount,
             };
             return View(boothviewmodel);
         }

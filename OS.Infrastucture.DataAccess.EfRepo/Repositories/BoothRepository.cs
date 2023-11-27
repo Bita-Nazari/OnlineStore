@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OS.Domain.Core.Enums;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
@@ -66,6 +67,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Medalname = booth.Medal.MedalType.Type,
                     Products = booth.ProductBooths.Select(p => p.Product).ToList(),
                     HaveBooth = booth.Seller.HaveBooth,
+                    TotalCount = booth.TotalCount
                 };
                 return boothdto;
             }
@@ -93,6 +95,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     Medalname = b.Medal.MedalType.Type,
                     SellerName = b.Seller.FirstName + " " + b.Seller.LastName,
                     IsDeleted = b.IsDeleted,
+                    TotalCount =b.TotalCount,
                     //HaveBooth = b.Seller.HaveBooth
 
                 }
@@ -170,6 +173,30 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 throw;
             }
 
+        }
+
+        public async Task UpdateMedal(int BoothId, CancellationToken cancellationToken)
+        {
+            var booth = await _storeContext.Booths
+      .Where(b => b.Id == BoothId)
+           .Include(s => s.Seller)
+           .Include(m => m.Medal)
+           .ThenInclude(mt => mt.MedalType)
+      .FirstOrDefaultAsync();
+
+            if (booth.TotalCount >= 15)
+            {
+                booth.MedalId = (int)Domain.Core.Enums.MedalType.Gold;
+            }
+            else if (booth.TotalCount >= 10)
+            {
+                booth.MedalId = (int)Domain.Core.Enums.MedalType.Silver;
+            }
+           
+            else
+            {
+                booth.MedalId = (int)Domain.Core.Enums.MedalType.Bronze;
+            }
         }
     }
 }

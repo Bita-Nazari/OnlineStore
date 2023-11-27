@@ -15,7 +15,7 @@ namespace OS.Domain.Core.Dtos
 
         public int CustomerId { get; set; }
 
-        public int StatusId { get; set; }
+        public int  StatusId { get; set; }
 
         public int CartId { get; set; }
 
@@ -27,7 +27,10 @@ namespace OS.Domain.Core.Dtos
 
         public virtual Customer Customer { get; set; } = null!;
 
-        public virtual ICollection<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
+        public virtual List<ProductOrder>? ProductOrders { get; set; } = new List<ProductOrder>();
+        public List<ProductCart> ProductCarts { get; set; }
+        public List<ProductBooth>? Products { get; set; }
+        public List<Booth>? Booths { get; set; }
 
         public virtual Status Status { get; set; } = null!;
     }
