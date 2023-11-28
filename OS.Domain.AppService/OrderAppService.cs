@@ -38,9 +38,9 @@ namespace OS.Domain.AppService
             throw new NotImplementedException();
         }
 
-        public Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken)
+        public async Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _orderService.GetAllCustomerOrder(customerId, cancellationToken);
         }
 
         public Task HardDelete(int OrderId, CancellationToken cancellationToken)

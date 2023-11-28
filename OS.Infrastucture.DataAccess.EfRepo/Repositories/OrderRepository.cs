@@ -5,11 +5,6 @@ using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.Config;
 using OS.Infrastucture.Db.SqlServer.DataBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
@@ -17,14 +12,14 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
     {
         private readonly OnlineStoreContext _storeContext;
         private readonly IConfiguration _configuration;
-        public OrderRepository(OnlineStoreContext storeContext , IConfiguration configuration)
+        public OrderRepository(OnlineStoreContext storeContext, IConfiguration configuration)
         {
             _storeContext = storeContext;
-            _configuration = configuration; 
+            _configuration = configuration;
         }
-        public async Task Create(OrderDto orderDto  , CancellationToken cancellationToken)
+        public async Task Create(OrderDto orderDto, CancellationToken cancellationToken)
         {
-            var products  = await _storeContext.ProductCarts.Where(o=> o.CartId == orderDto.CartId).ToListAsync();
+            var products = await _storeContext.ProductCarts.Where(o => o.CartId == orderDto.CartId).ToListAsync();
             var order = new Order()
             {
                 Id = orderDto.Id,
@@ -35,7 +30,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 TotalPrice = orderDto.TotalPrice,
                 StatusId = orderDto.StatusId,
                 ProductOrders = orderDto.ProductOrders,
-                
+
 
             };
             await _storeContext.Orders.AddAsync(order);
@@ -52,9 +47,31 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken)
+        public async Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+          
+            var orders = await _storeContext.Orders.Where(o => o.CustomerId == customerId)
+                .Include(s=> s.Status)
+                .Include(p => p.ProductOrders)
+                .ThenInclude(pp => pp.Product)
+                .ThenInclude(p => p.Product)
+                .ThenInclude(pp => pp.ProductPictures)
+                .ThenInclude(p => p.Picture)
+                .Select(o => new OrderDto
+                {
+
+                    Id = o.Id,
+                    CustomerId = o.CustomerId,
+                    StatusName = o.Status.Text,
+                    ProductBooth = o.ProductOrders.Select(o=> o.Product).ToList(),
+                    Pictures = o.ProductOrders
+                .SelectMany(po => po.Product.Product.ProductPictures)
+                .Select(pp => pp.Picture)
+                .ToList(),
+                    TotalPrice = o.TotalPrice,
+                    
+                }).ToListAsync(cancellationToken);
+            return orders;
         }
 
         public int CalculateCommission(List<ProductCart> products)
@@ -64,11 +81,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
             foreach (var product in products)
             {
-                
+
                 var MedalId = product.ProductBooth.booth.MedalId;
                 var commissionRate = GetCommission(MedalId);
 
-               
+
                 var commission = (int)(product.ProductBooth.NewPrice * commissionRate);
 
                 totalCommission += commission;
@@ -78,7 +95,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         }
         private decimal GetCommission(int? MedalId)
         {
-           
+
             var commissionConfig = _configuration.GetSection("CommessionConfig").Get<CommissionConfig>();
 
             if (MedalId == 1)

@@ -12,7 +12,7 @@ namespace OS.Domain.Core.Contracts.AppService
         public Task<List<AlluserDto>> GetAllCustomers(CancellationToken cancellationToken);
 
         public Task<AlluserDto> GetCustomerById(int CustomerId, CancellationToken cancellationToken);
-
+        public Task<AlluserDto> GetCustomerByUserId(int Userid, CancellationToken cancellationToken);
         public Task EditCustomer(AlluserDto user, CancellationToken cancellationToken);
 
         public Task DeleteCustomer(int id, CancellationToken cancellationToken);

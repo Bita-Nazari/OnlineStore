@@ -31,9 +31,9 @@ namespace OS.Domain.Service
             return await _auctionRepository.GetAllByBoothId(BoothId, cancellationToken);
         }
 
-        public Task<AuctionDto> GetDetail(int AuctionId, CancellationToken cancellationToken)
+        public async Task<AuctionDto> GetDetail(int AuctionId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _auctionRepository.GetDetail(AuctionId, cancellationToken);
         }
 
         public Task Update(AuctionDto auctionDto, CancellationToken cancellationToken)

@@ -16,17 +16,37 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task Create(BidDto bid, CancellationToken cancellationToken)
         {
-            var item = new Bid()
+            var auction = await _storeContext.Auctions.Where(a=> a.Id == bid.AuctionId).FirstOrDefaultAsync();
+            if (auction == null)
             {
-                Id = bid.Id,
-                AuctionId = bid.AuctionId,
-                CreatedAt = DateTime.Now,
-                CustomerId = bid.CustomerId,
-                SuggestedPrice = bid.SuggestedPrice
+                throw new NullReferenceException();
+            }
+            else
+            {
+                if(auction.StartPrice < bid.SuggestedPrice)
+                {
+                    var item = new Bid()
+                    {
+                        Id = bid.Id,
+                        AuctionId = bid.AuctionId,
+                        CreatedAt = DateTime.Now,
+                        CustomerId = bid.CustomerId,
+                        SuggestedPrice = bid.SuggestedPrice
 
-            };
-            await _storeContext.Bids.AddAsync(item);
-            await _storeContext.SaveChangesAsync(cancellationToken);
+                    };
+                    auction.StartPrice = bid.SuggestedPrice;
+
+                    await _storeContext.Bids.AddAsync(item);
+                    await _storeContext.SaveChangesAsync(cancellationToken);
+                }
+                else
+                {
+                    throw new Exception("the suggested price is not enough");
+                }
+               
+
+            }
+
         }
 
         public async Task<List<BidDto>> GetAll(CancellationToken cancellationToken)

@@ -3,6 +3,31 @@
 }
 @model List<ProductViewModel>
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>فروشگاه مینی مارکت</title>
+    <link rel="shortcut icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/js/plugin/countdown/countdown.css">
+    <link rel="stylesheet" href="~/js/plugin/back-to-top/jquery-backToTop.min.css">
+    <link rel="stylesheet" href="~/js/plugin/hint-css/hint-css.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <link rel="icon" href="~/img/default-icon/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    <link rel="shortcut icon"
+          href="~/img/default-icon/favicon.ico"
+          type="image/x-icon" />
+</head>
 
 <body>
 
@@ -12,17 +37,33 @@
     <div class="home py-3">
         <div class="container-fluid">
             <div class="row">
+                <div>
+                    @if (User.IsInRole("Customer"))
+                    {
+
+                        <li class="nav-item d-xl-block d-none">
+
+                            <a asp-area="" asp-controller="Dashbord" asp-action="Index" asp-route-id="" class="auth-btn-index pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-person" viewBox="0 0 16 16">
+                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
+                                </svg>
+                                پنل کاربری
+                            </a>
+                        </li>
+                    }
+                </div>
                 <div class="col-lg-9 mt-lg-0 mt-3 order-lg-2 order-1">
                     <div class="swiper homeSlider sugget-Moment h-100">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide rounded-circle">
-                                <a href=""><img src="img/slider/slide1-2.jpg" class="img-fluid" alt=""></a>
+                                <a href=""><img src="~/img/slider/slide1-2.jpg" class="img-fluid" alt=""></a>
                             </div>
                             <div class="swiper-slide rounded-circle">
-                                <a href=""><img src="img/slider/slide2-2.jpg" class="img-fluid" alt=""></a>
+                                <a href=""><img src="~/img/slider/slide2-2.jpg" class="img-fluid" alt=""></a>
                             </div>
                             <div class="swiper-slide rounded-circle">
-                                <a href=""><img src="img/slider/slide3-1.jpg" class="img-fluid" alt=""></a>
+                                <a href=""><img src="~/img/slider/slide3-1.jpg" class="img-fluid" alt=""></a>
                             </div>
                         </div>
                         <div class="swiper-button-next d-none d-lg-flex"></div>
@@ -30,13 +71,14 @@
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
+
                 <div class="col-lg-3 mt-lg-0 mt-3 order-lg-1 order-2">
                     <div class="banner-slider h-100">
                         <div class="row h-100">
                             <div class="col-lg-12 col-6 h-50">
                                 <div class="banner-item m-0 mb-3 h-100">
                                     <a href="category.html" class="h-100">
-                                        <img src="img/banner/new/banner-1.jpg" alt=""
+                                        <img src="~/img/banner/new/banner-1.jpg" alt=""
                                             class="img-fluid m-0 h-100 shadow-md">
                                     </a>
                                 </div>
@@ -44,7 +86,7 @@
                             <div class="col-lg-12 col-6 h-50">
                                 <div class="banner-item mb-0 h-100">
                                     <a href="category.html" class="h-100">
-                                        <img src="img/banner/new/banner-2.jpg" alt=""
+                                        <img src="~/img/banner/new/banner-2.jpg" alt=""
                                             class="img-fluid m-0 h-100 shadow-md">
                                     </a>
                                 </div>
@@ -56,6 +98,7 @@
         </div>
     </div>
     <!-- end main slider -->
+ 
 
     <div class="banner p-0">
         <div class="container-fluid">
@@ -63,28 +106,28 @@
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-1.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-1.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-2.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-2.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-3.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-3.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-4.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-4.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
@@ -105,7 +148,7 @@
                             <a href="" class="btn btn-outline-light waves-effect waves-light">مشاهده و خرید</a>
                         </div>
                         <div class="banner-product-img ">
-                            <img src="img/banner-product/mobile-logo2.png" alt="" class="img-fluid">
+                            <img src="~/img/banner-product/mobile-logo2.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -118,7 +161,7 @@
                             <a href="" class="btn btn-outline-light waves-effect waves-light">مشاهده و خرید</a>
                         </div>
                         <div class="banner-product-img">
-                            <img src="img/banner-product/laptop.png" alt="" class="img-fluid">
+                            <img src="~/img/banner-product/laptop.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -131,7 +174,7 @@
                             <a href="" class="btn btn-outline-light waves-effect waves-light">مشاهده و خرید</a>
                         </div>
                         <div class="banner-product-img">
-                            <img src="img/banner-product/pooshak.png" alt="" class="img-fluid">
+                            <img src="~/img/banner-product/pooshak.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -152,7 +195,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/poshak.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/poshak.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>اکسسوری</h6>
@@ -165,7 +208,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/kalaye-degital.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/kalaye-degital.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>کالای دیجیتال</h6>
@@ -178,7 +221,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/ashpazkhane.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/ashpazkhane.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>خانه و آشپزخانه</h6>
@@ -191,7 +234,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/autr.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/autr.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>زیبایی و سلامت</h6>
@@ -204,7 +247,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/children.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/children.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>اسباب بازی کودک و نوزاد</h6>
@@ -217,7 +260,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/lavazem-tahrir.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/lavazem-tahrir.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>کتاب و لوازم تحریر</h6>
@@ -231,7 +274,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/poshak.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/poshak.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>پوشاک</h6>
@@ -244,7 +287,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/varzeshi.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/varzeshi.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>ورزش و سفر</h6>
@@ -257,7 +300,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/mobile.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/mobile.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>موبابل</h6>
@@ -270,7 +313,7 @@
                     <a href="category.html">
                         <div class="cart-small">
                             <div class="cart-small-icon">
-                                <img width="50" src="img/main-category/abzar-khodro.png" alt="" class="img-fluid">
+                                <img width="50" src="~/img/main-category/abzar-khodro.png" alt="" class="img-fluid">
                             </div>
                             <div class="cart-small-desc ms-lg-3 text-center">
                                 <h6>ابزارآلات و تجهیزات</h6>
@@ -290,14 +333,14 @@
                 <div class="col-md-7">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-1.jpg" alt="" class="img-fluid">
+                            <img src="~/img/banner/banner-1.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-33.jpg" alt="" class="img-fluid">
+                            <img src="~/img/banner/banner-33.jpg" alt="" class="img-fluid">
                         </a>
                     </div>
                 </div>
@@ -320,8 +363,8 @@
                                 <div class="product-box-item">
                                     <div class="product-box-item-img">
                                         <a href="">
-                                            <img src="img/product/wach2.jpg" alt="" class="img-fluid one-image">
-                                            <img src="img/product/wach3.jpg" alt="" class="img-fluid two-image">
+                                            <img src="~/img/product/wach2.jpg" alt="" class="img-fluid one-image">
+                                            <img src="~/img/product/wach3.jpg" alt="" class="img-fluid two-image">
                                         </a>
                                         <div class="product-box-item-hover">
                                             <div class="product-box-item-hover-btn">
@@ -377,28 +420,28 @@
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-1.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-1.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-2.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-2.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-3.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-3.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-four-4.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-four-4.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
@@ -426,8 +469,8 @@
                                 <div class="product-box-item">
                                     <div class="product-box-item-img">
                                         <a href="">
-                                            <img src="img/product/product-image1.jpg" alt="" class="img-fluid one-image">
-                                            <img src="img/product/product-image2.jpg" alt="" class="img-fluid two-image">
+                                            <img src="~/img/product/product-image1.jpg" alt="" class="img-fluid one-image">
+                                            <img src="~/img/product/product-image2.jpg" alt="" class="img-fluid two-image">
                                         </a>
                                         <div class="product-box-item-hover">
                                             <div class="product-box-item-hover-btn">
@@ -486,14 +529,14 @@
                 <div class="col-md-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-5.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-5.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="banner-item">
                         <a href="category.html">
-                            <img src="img/banner/banner-4.jpg" alt="" class="img-fluid shadow-md">
+                            <img src="~/img/banner/banner-4.jpg" alt="" class="img-fluid shadow-md">
                         </a>
                     </div>
                 </div>
@@ -555,16 +598,16 @@
                             <div class="swiper product-modal">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <img src="img/product/laptop(1).png" alt="" class="img-fluid">
+                                        <img src="~/img/product/laptop(1).png" alt="" class="img-fluid">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="img/product/watch.png" alt="" class="img-fluid">
+                                        <img src="~/img/product/watch.png" alt="" class="img-fluid">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="img/product/mobile.png" alt="" class="img-fluid">
+                                        <img src="~/img/product/mobile.png" alt="" class="img-fluid">
                                     </div>
                                     <div class="swiper-slide">
-                                        <img src="img/product/shirt1.jpg" alt="" class="img-fluid">
+                                        <img src="~/img/product/shirt1.jpg" alt="" class="img-fluid">
                                     </div>
                                 </div>
                                 <div class="swiper-button-next sb"></div>
@@ -747,16 +790,16 @@
     <!-- end cart slide -->
 
 
-<script src="js/jquery-3.6.1.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/swiper-bundle.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/plugin/countdown/countdown.js"></script>
-    <script src="js/plugin/back-to-top/jquery-backToTop.min.js"></script>
-    <script src="js/plugin/hint-css/hint-css.js"></script>
-    <script src="js/jquery-app.js"></script>
-    <script src="js/plugin/waves/waves.js"></script>
-    <script src="js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="~/js/"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/swiper-bundle.min.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/plugin/countdown/countdown.js"></script>
+    <script src="~/js/plugin/back-to-top/jquery-backToTop.min.js"></script>
+    <script src="~/js/plugin/hint-css/hint-css.js"></script>
+    <script src="~/js/jquery-app.js"></script>
+    <script src="~/js/plugin/waves/waves.js"></script>
+    <script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
 
 
 </body>

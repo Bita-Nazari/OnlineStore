@@ -1,13 +1,8 @@
 ﻿using OS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Dtos
+namespace OnlineStore.Models
 {
-    public class BidDto
+    public class BidViewModel
     {
         public int Id { get; set; }
 

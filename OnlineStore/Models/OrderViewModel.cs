@@ -1,13 +1,8 @@
 ﻿using OS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Dtos
+namespace OnlineStore.Models
 {
-    public class OrderDto
+    public class OrderViewModel
     {
         public int Id { get; set; }
 
@@ -15,7 +10,7 @@ namespace OS.Domain.Core.Dtos
 
         public int CustomerId { get; set; }
 
-        public int  StatusId { get; set; }
+        public int StatusId { get; set; }
         public string StatusName { get; set; }
 
         public int CartId { get; set; }

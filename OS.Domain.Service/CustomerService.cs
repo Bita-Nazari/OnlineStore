@@ -36,5 +36,10 @@ namespace OS.Domain.Service
         {
             return await _customerRepository. GetCustomerById(CustomerId, cancellationToken);        
         }
+
+        public async Task<AlluserDto> GetCustomerByUserId(int Userid, CancellationToken cancellationToken)
+        {
+            return await _customerRepository.GetCustomerByUserId(Userid, cancellationToken);
+        }
     }
 }

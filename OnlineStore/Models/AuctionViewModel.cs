@@ -11,8 +11,9 @@ namespace OnlineStore.Models
 
         public int BoothId { get; set; }
         public int SellerId { get; set; }
+        public int CustomerId { get; set; }
         public string? ProductName { get; set; }
-
+        public string BoothName { get; set; }
         public DateTime StartTime { get; set; } = DateTime.Now;
         //public DateTime persianstart { get; set; }
 

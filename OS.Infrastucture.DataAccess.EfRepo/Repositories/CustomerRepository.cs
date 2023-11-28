@@ -40,11 +40,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             User.FirstName = user.FirstName;
             User.LastName = user.LastName;
             User.CityId = user.CityId;
+            User.Address = user.Address;
             User.Wallet = user.Wallet;
             User.User.Email = user.Email;
             User.User.PhoneNumber = user.PhoneNumber;
             User.User.UserName = user.UserName;
-            User.User.PasswordHash = user.Password;
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
 
@@ -109,20 +109,30 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 Wallet = customer.Wallet,
-                CityName = customer.City.Name
-                ,
+                CityName = customer.City?.Name,
                 PictureId = customer.PictureId,
 
             };
             return userdto;
         }
 
+        public async Task<AlluserDto> GetCustomerByUserId(int Userid, CancellationToken cancellationToken)
+        {
+            var customer = await _storeContext.Customers.Where(c=> c.UserId == Userid).FirstOrDefaultAsync(cancellationToken);
+            if (customer == null)
+            {
+                throw new NullReferenceException("User did not found");
+            }
+            var userdto = new AlluserDto()
+            {
+                Id = customer.Id,
+
+            };
+            return userdto;
 
 
 
-
-
-
+        }
     }
 }
 

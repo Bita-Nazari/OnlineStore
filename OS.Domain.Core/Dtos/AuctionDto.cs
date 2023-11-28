@@ -14,7 +14,8 @@ namespace OS.Domain.Core.Dtos
         public long StartPrice { get; set; }
 
         public int BoothId { get; set; }
-
+        public int CustomerId { get; set; }
+        public string? BoothName { get; set; }
         public DateTime StartTime { get; set; }
 
         public DateTime EndTime { get; set; }

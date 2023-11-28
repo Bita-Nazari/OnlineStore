@@ -1,20 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
 using System.Globalization;
+using System.Security.Claims;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
     public class AuctionRepository : IAuctionRepository
     {
+        private readonly UserManager<User> _userManager;
         private readonly OnlineStoreContext _storeContext;
-        public AuctionRepository(OnlineStoreContext storeContext)
+        private readonly AuctionHangFire _auctionHangFire;
+        public AuctionRepository(OnlineStoreContext storeContext, AuctionHangFire auctionHangFire , UserManager<User> userManager)
         {
             _storeContext = storeContext;
+            _auctionHangFire = auctionHangFire;
+            _userManager = userManager;
+
         }
-        public  DateTime ConvertToPersianTime(DateTime dateTime)
+        public DateTime ConvertToPersianTime(DateTime dateTime)
         {
             PersianCalendar persianCalendar = new PersianCalendar();
             int year = persianCalendar.GetYear(dateTime);
@@ -35,7 +44,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
 
                 StartPrice = auctionDto.StartPrice,
-                StartTime = persianStart,
+                StartTime = auctionDto.StartTime,
                 EndTime = auctionDto.EndTime,
                 CustomerId = auctionDto.WinnerId,
                 ProductId = auctionDto.ProductId,
@@ -44,6 +53,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             };
             await _storeContext.Auctions.AddAsync(item);
             await _storeContext.SaveChangesAsync(cancellationToken);
+
+            BackgroundJob.Schedule(() => _auctionHangFire.StartAuction(item.Id), item.StartTime - DateTime.Now);
+            BackgroundJob.Schedule(() => _auctionHangFire.CloseAuction(item.Id), item.EndTime - DateTime.Now);
         }
 
         public Task<List<AuctionDto>> GetAll(CancellationToken cancellationToken)
@@ -81,7 +93,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public Task<List<AuctionDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)
         {
             //var booth = _storeContext.Booths.Where(b=> b.Id == BoothId).FirstOrDefault();
-            var auctionList = _storeContext.Auctions.Where(a=> a.BoothId== BoothId).AsNoTracking()
+            var auctionList = _storeContext.Auctions.Where(a => a.BoothId == BoothId).AsNoTracking()
       .Include(p => p.Product)
       .ThenInclude(c => c.SubCategory)
       .Include(pt => pt.Product)
@@ -113,8 +125,13 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<AuctionDto> GetDetail(int AuctionId, CancellationToken cancellationToken)
         {
+           
             var auction = await _storeContext.Auctions
                 .Where(a => a.Id == AuctionId)
+                      .Include(pt => pt.Product)
+      .ThenInclude(pp => pp.ProductPictures)
+      .ThenInclude(p=>p.Picture)
+                .Include(b=>b.Booth)
                 .FirstOrDefaultAsync(cancellationToken);
             var auctionDto = new AuctionDto()
             {
@@ -123,7 +140,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 StartTime = auction.StartTime,
                 EndTime = auction.EndTime,
                 BoothId = auction.BoothId,
-                WinnerId = auction.CustomerId
+                WinnerId = auction.CustomerId,
+                BoothName =auction.Booth.Name,
+                Description =auction.Product.Description,
+                Pictures = auction.Product.ProductPictures.Select(p => p.Picture).ToList(),
+
             };
             return auctionDto;
 

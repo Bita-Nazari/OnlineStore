@@ -16,9 +16,9 @@ namespace OS.Domain.AppService
         {
             _bidService = bidService;
         }
-        public Task Create(BidDto bid, CancellationToken cancellationToken)
+        public async Task Create(BidDto bid, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _bidService.Create(bid, cancellationToken);
         }
 
         public Task<List<BidDto>> GetAll(CancellationToken cancellationToken)

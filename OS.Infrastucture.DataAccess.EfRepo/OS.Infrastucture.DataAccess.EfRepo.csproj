@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire.Core" Version="1.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OS.Domain.Core\OS.Domain.Core.csproj" />
     <ProjectReference Include="..\OS.Infrastucture.DataAccess.Db.SqlServer\OS.Infrastucture.Db.SqlServer.csproj" />
   </ItemGroup>

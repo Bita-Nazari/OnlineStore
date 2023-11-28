@@ -1,6 +1,7 @@
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
 using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Contracts.Repository;
@@ -44,10 +45,13 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(
     )
 .AddEntityFrameworkStores<OnlineStoreContext>();
 
+
 builder.Services.AddScoped<IAuctionAppService, AuctionAppService>();
 builder.Services.AddScoped<IAuctionService , AuctionService>();
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
-//builder.Services.AddScoped<IBidAppService,BidAppService>();
+builder.Services.AddScoped<IBidAppService, BidAppService>();
+builder.Services.AddScoped<IBidRepository, BidRepository>();
+builder.Services.AddScoped<IBidService, BidService>();
 builder.Services.AddScoped<IBoothAppService, BoothAppService>();
 builder.Services.AddScoped<IBoothService , BoothService>();
 builder.Services.AddScoped<IBoothRepository, BoothRepository>();
@@ -71,7 +75,9 @@ builder.Services.AddScoped<IMedalService, MedalService>();
 builder.Services.AddScoped<ICommentAppService, CommentAppService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-//builder.Services.AddScoped<IOrderAppService,OrderAppService>();
+builder.Services.AddScoped<IOrderAppService, OrderAppService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 //builder.Services.AddScoped<IPictureAppService,PictureAppService>();
 builder.Services.AddScoped<IProductAppService, ProductAppService>();
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -89,7 +95,7 @@ builder.Services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+builder.Services.AddScoped<AuctionHangFire>();
 
 
 

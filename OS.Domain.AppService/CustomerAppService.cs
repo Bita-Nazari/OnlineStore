@@ -38,5 +38,10 @@ namespace OS.Domain.AppService
         {
             return await _customerService.GetCustomerById(CustomerId, cancellationToken);
         }
+
+        public async Task<AlluserDto> GetCustomerByUserId(int Userid, CancellationToken cancellationToken)
+        {
+            return await _customerService.GetCustomerByUserId(Userid, cancellationToken);
+        }
     }
 }
