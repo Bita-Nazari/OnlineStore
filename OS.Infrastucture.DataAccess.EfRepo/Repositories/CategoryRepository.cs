@@ -46,6 +46,20 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             return CategoryList;
         }
 
+        public  List<CategoryDto> GetAllCategory()
+        {
+            var CategoryList =  _storeContext.Categories.AsNoTracking()
+                .Include(c => c.SubCategories)
+                .Select(c => new CategoryDto()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    //SubcategoryId = c.SubCategories.Select(c=> c.Id),
+                    SubCategories = c.SubCategories.ToList()
+                }).ToList();
+            return CategoryList;
+        }
+
         public async Task HardDelete(int categoryId, CancellationToken cancellationToken)
         {
             var category = await _storeContext.Categories

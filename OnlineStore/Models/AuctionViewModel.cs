@@ -18,7 +18,8 @@ namespace OnlineStore.Models
         //public DateTime persianstart { get; set; }
 
         public DateTime EndTime { get; set; } = DateTime.Now;
-
+        public bool? IsDisabled { get; set; }
+        public bool? IsStarted { get; set; }
         public int? WinnerId { get; set; }
         public string? Description { get; set; }
         public string? SubCategoryName { get; set; }

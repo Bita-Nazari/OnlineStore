@@ -11,6 +11,7 @@ namespace OS.Domain.Core.Dtos
     {
 
         public int Id { get; set; }
+        public int? ActiveCartId { get; set; }
 
         public string? FirstName { get; set; } = null!;
 

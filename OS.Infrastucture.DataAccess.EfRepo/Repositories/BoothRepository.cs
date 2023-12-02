@@ -28,7 +28,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 CreatedAt = DateTime.Now,
                 Description = boothDto.Description,
                 IsDeleted = false,
-                MedalId = 1,
+                MedalId = 2,
                 SellerId = boothDto.SellerId,
 
 

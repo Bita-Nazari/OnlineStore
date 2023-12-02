@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineStore.Models;
+using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Entities;
+using System.Security.Claims;
 
 namespace OnlineStore.Controllers
 {
@@ -13,10 +16,17 @@ namespace OnlineStore.Controllers
             _customerAppService = customerAppService;
             _userAppService = userAppService;
         }
-        public  IViewComponentResult Invoke(int UserId,CancellationToken cancellationToken)
+        public   IViewComponentResult Invoke(CancellationToken cancellationToken)
         {
-            var customer = _userAppService.GetById(UserId , cancellationToken);
-            return View("Default", customer);
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            //var user = User.Identity.Name;
+
+            var User = Task.Run(() => _userAppService.GetById(userId, cancellationToken)).Result;
+            var UserView = new UserViewModel
+            {
+                Id = User.Id
+            };
+            return View("Default", UserView);
         }
     }
 }

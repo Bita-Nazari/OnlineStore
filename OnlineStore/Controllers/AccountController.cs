@@ -51,7 +51,7 @@ namespace OnlineStore.Controllers
                         }
                         if (role == "Customer")
                         {
-                            return RedirectToAction("Index", "Home", new { id = usern.Id });
+                            return RedirectToAction("Index", "Home"/*, new { id = usern.Id }*/);
                         }
                         if (role == "Seller")
                         {
@@ -98,18 +98,7 @@ namespace OnlineStore.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
-            foreach (var key in ModelState.Keys)
-            {
-                var modelStateEntry = ModelState[key];
-                if (modelStateEntry.Errors.Any())
-                {
-                    foreach (var error in modelStateEntry.Errors)
-                    {
-                        var errorMessage = error.ErrorMessage;
-                        // Log or inspect the error message as needed
-                    }
-                }
-            }
+          
 
             return View(user);
         }

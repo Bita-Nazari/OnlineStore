@@ -91,7 +91,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task<SignInResult> LogIn(UserDto userDto, CancellationToken cancellationtoken)
         {
 
-            return  await _signInManager.PasswordSignInAsync(userDto.UserName,userDto.Password,true,false);
+            return  await _signInManager.PasswordSignInAsync(userDto.UserName,userDto.Password,false,false);
 
             
         }
@@ -143,16 +143,34 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                         {
                             CreatedAt = DateTime.Now,
                             //CityId = 73
+                            Carts = new List<Cart>()
+                            {
+                              new Cart()
+                              {
+                                  CreatedAt = DateTime.Now,
+                                  
+                              }
+
+                            },
+                            
                             
                         }
+
                     };
                 }
 
                 var resault = await _userManager.CreateAsync(user, userDto.Password);
                 if (resault.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, userDto.Role);
+                
+                await _userManager.AddToRoleAsync(user, userDto.Role);
+                if(userDto.Role== "Customer")
+                {
+                    user.Customer.ActiveCartId = user.Customer.Carts.Last().Id;
                 }
+                
+                 _onlineStoreContext.SaveChanges();
+            }
 
                 return resault;
         }

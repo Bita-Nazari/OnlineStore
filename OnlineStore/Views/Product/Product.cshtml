@@ -65,11 +65,11 @@
                                     <br />
                                    
                                     <div class="col-sm-6">
-                                        <button class="shadow-sm fw-bold btn-add-to-cart mt-sm-0 mt-2 waves-effect waves-light">
+                                        <a asp-controller="Cart" asp-action="Create" asp-route-id="@Model.Id" class="shadow-sm fw-bold btn-add-to-cart mt-sm-0 mt-2 waves-effect waves-light">
                                             افزودن
                                             به سبد
                                             خرید
-                                        </button>
+                                        </a>
                                     </div>
                                     <br />
                                     <div class="se-alert">

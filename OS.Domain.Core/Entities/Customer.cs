@@ -25,8 +25,9 @@ public partial class Customer
     public long? Wallet { get; set; }
 
     public DateTime CreatedAt { get; set; }
-
-    public int? UserId { get; set; }
+    public int? ActiveCartId { get; set; }
+public int? UserId { get; set; }
+   
 
     #endregion Properties
 

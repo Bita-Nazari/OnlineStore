@@ -82,6 +82,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     ProductName = a.Product.Name,
                     SubcategoryName = a.Product.SubCategory.Name,
                     Pictures = a.Product.ProductPictures.Select(p => p.Picture).ToList(),
+                    IsStarted = a.IsStarted,
+                    IsDisabled = a.IsDisabled,
 
 
                 }
@@ -115,6 +117,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
           ProductName = a.Product.Name,
           SubcategoryName = a.Product.SubCategory.Name,
           Pictures = a.Product.ProductPictures.Select(p => p.Picture).ToList(),
+          IsStarted = a.IsStarted,
+          IsDisabled = a.IsDisabled,
+
 
 
       }

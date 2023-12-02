@@ -1,0 +1,74 @@
+﻿@model CartViewModel
+
+<div class="cart">
+    <div class="container-fluid">
+        <div class="cart-content shadow-box">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="cart-detail">
+                        <div class="table-responsive-lg">
+                            <table class="table table-hover main-table">
+                                <thead style="background: #f8f8f8;">
+                                    <tr class="py-3">
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col">محصول</th>
+                                        <th scope="col">قیمت</th>
+
+
+                                </thead>
+                                @foreach (var item in Model.Products)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            @foreach(var picture in item.Product.ProductPictures)
+                                            {
+                                                <td class="icon"><a href=""><i class="bi bi-x-circle-fill"></i></a></td>
+                                                <td class="position-relative">
+                                                    <img src=@picture.Picture.Url class=""
+                                                         alt="">
+                                                </td>
+                                            }
+                                          
+                                            <td class="title">@item.Product.Name</td>
+                                            <td class="price">
+                                                <span class="num">@item.NewPrice</span><span class="text-muted">تومان</span>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                }
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="cart-payment">
+                        <div class="title text-center">
+                            <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                        </div>
+                        <table class="table main-table">
+                            <tr>
+                                <td class="fw-bold">قیمت کل</td>
+                                <td class="txt">
+                                    <span class="fw-bold">42,000,000</span> <span class="text-muted">تومان</span>
+                                </td>
+                            </tr>
+
+
+                        </table>
+                        <form action="">
+                            <button class="btn-bank waves-effect waves-light">
+                                اقدام به پرداخت
+
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

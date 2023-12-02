@@ -19,7 +19,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         }
         public async Task Create(OrderDto orderDto, CancellationToken cancellationToken)
         {
-            var products = await _storeContext.ProductCarts.Where(o => o.CartId == orderDto.CartId).ToListAsync();
+            var products = await _storeContext.ProductCarts.Where(o => o.CartIds == orderDto.CartId).ToListAsync();
             var order = new Order()
             {
                 Id = orderDto.Id,
@@ -82,11 +82,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             foreach (var product in products)
             {
 
-                var MedalId = product.ProductBooth.booth.MedalId;
+                var MedalId = product.Products.booth.MedalId;
                 var commissionRate = GetCommission(MedalId);
 
 
-                var commission = (int)(product.ProductBooth.NewPrice * commissionRate);
+                var commission = (int)(product.Products.NewPrice * commissionRate);
 
                 totalCommission += commission;
             }

@@ -9,9 +9,10 @@ public partial class Cart
     #region Properties
     public int Id { get; set; }
 
-    public int CustomerId { get; set; }
+    public int? CustomerId { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
+
 
     #endregion Properties
 
@@ -21,7 +22,7 @@ public partial class Cart
     public virtual Customer Customer { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
+    public virtual ICollection<ProductCart> ProductCarts { get; set; } = new List<ProductCart>();
     #endregion Navigation properties
 
 

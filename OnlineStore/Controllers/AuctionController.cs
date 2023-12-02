@@ -36,7 +36,9 @@ namespace OnlineStore.Controllers
                     pictures = a.Pictures,
                     CustomerId = customer.Id
                     ,
-                    
+                    IsStarted = a.IsStarted,
+                    IsDisabled = a.IsDisabled,
+
 
                 }).ToList();
                 return View(list);
@@ -56,6 +58,9 @@ namespace OnlineStore.Controllers
                     SubCategoryName = a.SubcategoryName,
                     Description = a.Description,
                     pictures = a.Pictures,
+                    IsStarted = a.IsStarted,
+                    IsDisabled = a.IsDisabled,
+
 
                 }).ToList();
                 return View(list);

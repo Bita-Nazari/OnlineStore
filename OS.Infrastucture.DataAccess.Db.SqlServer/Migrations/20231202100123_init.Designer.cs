@@ -12,7 +12,7 @@ using OS.Infrastucture.Db.SqlServer.DataBase;
 namespace OS.Infrastucture.Db.SqlServer.Migrations
 {
     [DbContext(typeof(OnlineStoreContext))]
-    [Migration("20231105143739_init")]
+    [Migration("20231202100123_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -167,19 +167,17 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Wallet")
+                    b.Property<long?>("Wallet")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -210,6 +208,12 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime");
+
+                    b.Property<bool?>("IsDisabled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsStarted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -315,18 +319,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BoothId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BoothId");
 
                     b.HasIndex("CustomerId");
 
@@ -919,36 +919,36 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ActiveCartId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("PictureId")
+                    b.Property<int?>("PictureId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Wallet")
+                    b.Property<long?>("Wallet")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -1020,7 +1020,8 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<long>("TotalPrice")
@@ -1144,17 +1145,27 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CartId")
+                    b.Property<int?>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductBoothId")
+                    b.Property<int?>("CartIds")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductBoothId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductBoothIds")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
+                    b.HasIndex("CartIds");
+
                     b.HasIndex("ProductBoothId");
+
+                    b.HasIndex("ProductBoothIds");
 
                     b.ToTable("ProductCarts");
                 });
@@ -1170,14 +1181,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ProductBoothId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductBoothId");
 
                     b.ToTable("ProductOrder", (string)null);
                 });
@@ -1190,10 +1201,12 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("PictureId")
+                    b.Property<int?>("PictureId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int?>("ProductId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1388,38 +1401,39 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("IsDeleted")
+                    b.Property<bool?>("HaveBooth")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<long>("NationalCode")
+                    b.Property<long?>("NationalCode")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("PictureId")
+                    b.Property<int?>("PictureId")
                         .HasColumnType("int");
 
-                    b.Property<long>("ShabaNumber")
+                    b.Property<long?>("ShabaNumber")
                         .HasColumnType("bigint");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Wallet")
+                    b.Property<long?>("Wallet")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -1933,10 +1947,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Cart", b =>
                 {
-                    b.HasOne("OS.Domain.Core.Entities.Booth", null)
-                        .WithMany("Carts")
-                        .HasForeignKey("BoothId");
-
                     b.HasOne("OS.Domain.Core.Entities.Customer", "Customer")
                         .WithMany("Carts")
                         .HasForeignKey("CustomerId")
@@ -1991,13 +2001,11 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.City", "City")
                         .WithMany("Customers")
                         .HasForeignKey("CityId")
-                        .IsRequired()
                         .HasConstraintName("FK_Customer_City");
 
                     b.HasOne("OS.Domain.Core.Entities.Picture", "Picture")
                         .WithMany("Customers")
                         .HasForeignKey("PictureId")
-                        .IsRequired()
                         .HasConstraintName("FK_Customer_Picture");
 
                     b.HasOne("OS.Domain.Core.Entities.User", "User")
@@ -2086,22 +2094,28 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
             modelBuilder.Entity("OS.Domain.Core.Entities.ProductCart", b =>
                 {
+                    b.HasOne("OS.Domain.Core.Entities.Cart", null)
+                        .WithMany("ProductCarts")
+                        .HasForeignKey("CartId");
+
                     b.HasOne("OS.Domain.Core.Entities.Cart", "Cart")
                         .WithMany()
-                        .HasForeignKey("CartId")
-                        .IsRequired()
+                        .HasForeignKey("CartIds")
                         .HasConstraintName("FK_ProductCart_Cart");
 
-                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", "ProductBooth")
+                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", null)
+                        .WithMany("ProductCarts")
+                        .HasForeignKey("ProductBoothId");
+
+                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", "Products")
                         .WithMany()
-                        .HasForeignKey("ProductBoothId")
+                        .HasForeignKey("ProductBoothIds")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired()
                         .HasConstraintName("FK_ProductCart_Product");
 
                     b.Navigation("Cart");
 
-                    b.Navigation("ProductBooth");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.ProductOrder", b =>
@@ -2112,11 +2126,11 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_ProductOrder_Order");
 
-                    b.HasOne("OS.Domain.Core.Entities.Product", "Product")
-                        .WithMany("ProductOrders")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", "Product")
+                        .WithMany("ProductBoothOrders")
+                        .HasForeignKey("ProductBoothId")
                         .IsRequired()
-                        .HasConstraintName("FK_ProductOrder_Product");
+                        .HasConstraintName("FK_ProductOrder_ProductBooth");
 
                     b.Navigation("Order");
 
@@ -2148,13 +2162,11 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.HasOne("OS.Domain.Core.Entities.City", "City")
                         .WithMany("Sellers")
                         .HasForeignKey("CityId")
-                        .IsRequired()
                         .HasConstraintName("FK_Seller_City");
 
                     b.HasOne("OS.Domain.Core.Entities.Picture", "Picture")
                         .WithMany("Sellers")
                         .HasForeignKey("PictureId")
-                        .IsRequired()
                         .HasConstraintName("FK_Seller_Picture");
 
                     b.HasOne("OS.Domain.Core.Entities.User", "User")
@@ -2188,8 +2200,6 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 {
                     b.Navigation("Auctions");
 
-                    b.Navigation("Carts");
-
                     b.Navigation("Comments");
 
                     b.Navigation("ProductBooths");
@@ -2198,6 +2208,8 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
             modelBuilder.Entity("OS.Domain.Core.Entities.Cart", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("ProductCarts");
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Category", b =>
@@ -2257,9 +2269,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
                     b.Navigation("ProductBooths");
 
-                    b.Navigation("ProductOrders");
-
                     b.Navigation("ProductPictures");
+                });
+
+            modelBuilder.Entity("OS.Domain.Core.Entities.ProductBooth", b =>
+                {
+                    b.Navigation("ProductBoothOrders");
+
+                    b.Navigation("ProductCarts");
                 });
 
             modelBuilder.Entity("OS.Domain.Core.Entities.Province", b =>

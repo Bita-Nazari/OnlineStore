@@ -28,19 +28,32 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Id = CartDto.Id,
             };
             await _storeContext.Carts.AddAsync(Cart);
+           
             await _storeContext.SaveChangesAsync(cancellationToken);
             
         }
 
-        public async Task<CartDto> Detail(int CartId, CancellationToken cancellationToken)
+        public async Task<CartDto> Detail(int? CartId, CancellationToken cancellationToken)
         {
             var cart = await _storeContext.Carts
                 .Where(c=> c.Id == CartId)
+                .Include(c=>c.ProductCarts)
+                .ThenInclude(p=> p.Products)
+                .ThenInclude(p=>p.Product)
+                .ThenInclude(p=>p.ProductPictures)
+                .ThenInclude(p=>p.Picture)
                 .FirstOrDefaultAsync(cancellationToken);
             var cartDto = new CartDto()
             {
-                CustomerId = cart.CustomerId,
+                Id  = cart.Id,
+                //CustomerId = cart.CustomerId,
                 CreatedAt = cart.CreatedAt,
+                Products = cart.ProductCarts.Select(p => p.Products).ToList(),
+                Pictures = cart.ProductCarts.SelectMany(po => po.Products.Product.ProductPictures)
+                .Select(pp => pp.Picture)
+                .ToList(),
+                TotalPrice = cart.ProductCarts.Sum(p => p.Products.Product.BasePrice),
+                
 
             };
             return cartDto;
@@ -52,8 +65,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 .AsNoTracking()
                 .Select(c=> new CartDto()
             {
-                CustomerId = c.CustomerId,
-                CreatedAt= c.CreatedAt,
+                //CustomerId = c.CustomerId,
+                //CreatedAt= c.CreatedAt,
             }).ToListAsync(cancellationToken);
             return CartList;
         }

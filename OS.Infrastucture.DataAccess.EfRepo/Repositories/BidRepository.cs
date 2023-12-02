@@ -35,6 +35,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
                     };
                     auction.StartPrice = bid.SuggestedPrice;
+                    auction.BidCount ++;
 
                     await _storeContext.Bids.AddAsync(item);
                     await _storeContext.SaveChangesAsync(cancellationToken);

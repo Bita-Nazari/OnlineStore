@@ -29,8 +29,6 @@ public partial class Booth
     #region Navigation properties
     public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
-    public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
-
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual Medal Medal { get; set; } = null!;

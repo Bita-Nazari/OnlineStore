@@ -44,66 +44,70 @@
 
                                             @foreach (var item in Model)
                                             {
-                                                <div class="col-lg-9">
-                                                    <div class="category-item">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="product-row shadow-box rounded-3 mb-3">
-                                                                    <a href="product.html">
-                                                                        <div class="product-row-desc justify-content-start">
-                                                                            <div class="product-row-desc-item">
-                                                                                <div class="product-row-img">
-                                                                                    @if (item.pictures != null && item.pictures.Any())
-                                                                                    {
-                                                                                        var firstPicture = item.pictures.First();
-                                                                                        <img src="@Url.Content(firstPicture.Url)" width="150" alt="Auction Image">
-                                                                                    }
-                                                                                </div>
-                                                                                <div class="product-row-title">
-                                                                                    <div class="margin-bottom: 10px">
-                                                                                        <h6 style="color: red" class="font-16 ">
-                                                                                            @item.ProductName
-                                                                                        </h6>
+                                                @if( item.IsDisabled == false)
+                                                {
+                                                    <div class="col-lg-9">
+                                                        <div class="category-item">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <div class="product-row shadow-box rounded-3 mb-3">
+                                                                        <a href="product.html">
+                                                                            <div class="product-row-desc justify-content-start">
+                                                                                <div class="product-row-desc-item">
+                                                                                    <div class="product-row-img">
+                                                                                        @if (item.pictures != null && item.pictures.Any())
+                                                                                        {
+                                                                                            var firstPicture = item.pictures.First();
+                                                                                            <img src="@Url.Content(firstPicture.Url)" width="150" alt="Auction Image">
+                                                                                        }
                                                                                     </div>
-                                                                                    <div>
-                                                                                        <h6 class="font-16">
-                                                                                            @item.Description
-                                                                                        </h6>
-                                                                                    </div>
+                                                                                    <div class="product-row-title">
+                                                                                        <div class="margin-bottom: 10px">
+                                                                                            <h6 style="color: red" class="font-16 ">
+                                                                                                @item.ProductName
+                                                                                            </h6>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            <h6 class="font-16">
+                                                                                                @item.Description
+                                                                                            </h6>
+                                                                                        </div>
 
 
-                                                                                    <div class="product-price">
+                                                                                        <div class="product-price">
 
 
-                                                                                        <p>@item.StartPrice</p>
-                                                                                    </div>
-                                                                                    <div class="product-price">
+                                                                                            <p>@item.StartPrice</p>
+                                                                                        </div>
+                                                                                        <div class="product-price">
 
-                                                                                        <p>زمان شروع</p>
-                                                                                        <p>@item.StartTime </p>
-                                                                                    </div>
-                                                                                    <div class="product-price">
+                                                                                            <p>زمان شروع</p>
+                                                                                            <p>@item.StartTime </p>
+                                                                                        </div>
+                                                                                        <div class="product-price">
 
-                                                                                        <p>زمان پایان</p>
-                                                                                        <p>@item.EndTime </p>
-                                                                                    </div>
-                                                                                    <div class='countdown' data-start-time="@item.StartTime" data-end-time="@item.EndTime">
-                                                                                        <a class="btn btn-sm btn-primary" asp-controller="Auction" asp-action="Auction" asp-route-id="@item.Id" asp-route-CustomerId="@item.CustomerId">مشاهده مزایده</a>
+                                                                                            <p>زمان پایان</p>
+                                                                                            <p>@item.EndTime </p>
+                                                                                        </div>
+                                                                                        <div class='countdown' data-start-time="@item.StartTime" data-end-time="@item.EndTime">
+                                                                                            <a class="btn btn-sm btn-primary" asp-controller="Auction" asp-action="Auction" asp-route-id="@item.Id" asp-route-CustomerId="@item.CustomerId">مشاهده مزایده</a>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </a>
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
+
+
+
+
+
                                                             </div>
-
-
-
-
-
                                                         </div>
                                                     </div>
-                                                </div>
+                                                }
+                                             
 
 
 

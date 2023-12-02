@@ -21,9 +21,9 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
-        public Task<CartDto> Detail(int CartId, CancellationToken cancellationToken)
+        public async Task<CartDto> Detail(int? CartId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _cartRepository.Detail(CartId, cancellationToken);
         }
 
         public Task<List<CartDto>> GetAll(CancellationToken cancellationToken)

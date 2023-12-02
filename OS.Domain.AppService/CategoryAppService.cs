@@ -26,6 +26,11 @@ namespace OS.Domain.AppService
             return await _categoryService.GetAll(cancellationToken);
         }
 
+        public List<CategoryDto> GetAllCategory()
+        {
+            return _categoryService.GetAllCategory();
+        }
+
         public Task HardDelete(int categoryId, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

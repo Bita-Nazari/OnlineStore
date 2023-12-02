@@ -21,6 +21,8 @@ namespace OnlineStore.Areas.Seller.Models
         public int? WinnerId { get; set; }
         public string? Description { get; set; }
         public string? SubCategoryName { get; set; }
+        public bool? IsDisabled { get; set; }
+        public bool? IsStarted { get; set; }
 
 
         [Display(Name ="محصولات")]

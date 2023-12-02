@@ -111,6 +111,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Wallet = customer.Wallet,
                 CityName = customer.City?.Name,
                 PictureId = customer.PictureId,
+                ActiveCartId = customer.ActiveCartId,
 
             };
             return userdto;
@@ -126,6 +127,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var userdto = new AlluserDto()
             {
                 Id = customer.Id,
+                ActiveCartId = customer.ActiveCartId,
 
             };
             return userdto;

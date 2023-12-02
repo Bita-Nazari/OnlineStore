@@ -14,5 +14,6 @@ namespace OS.Domain.Core.Contracts.Repository
         Task SoftDelete(int categoryId, CancellationToken cancellationToken);
         Task Update(CategoryDto categoryDto, CancellationToken cancellationToken);
         Task<List<CategoryDto>> GetAll(CancellationToken cancellationToken);
+        List<CategoryDto> GetAllCategory();
     }
 }

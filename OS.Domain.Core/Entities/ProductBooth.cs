@@ -24,6 +24,7 @@ namespace OS.Domain.Core.Entities
 
         public virtual Product Product { get; set; } = null!;
         public virtual ICollection<ProductOrder> ProductBoothOrders { get; set; } = new List<ProductOrder>();
+        public virtual ICollection<ProductCart> ProductCarts { get; set; } = new List<ProductCart>();
 
         #endregion Navigation properties
 

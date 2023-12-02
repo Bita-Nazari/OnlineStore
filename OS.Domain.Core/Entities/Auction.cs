@@ -22,7 +22,8 @@ public partial class Auction
     public int ProductId { get; set; }
 
     public int BidCount { get; set; }
-    public  bool IsDisabled { get; set; }
+    public  bool? IsDisabled { get; set; }
+    public bool? IsStarted { get; set; }
 
     #endregion Properties
 

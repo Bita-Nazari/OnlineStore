@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
+using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace OnlineStore.Controllers
 {
@@ -9,14 +11,26 @@ namespace OnlineStore.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProductAppService _productAppService;
-        public HomeController(ILogger<HomeController> logger , IProductAppService productAppService)
+        private readonly IUserAppService _userAppService;
+        
+        public HomeController(ILogger<HomeController> logger , IProductAppService productAppService , IUserAppService user)
         {
             _logger = logger;
             _productAppService = productAppService;
+            _userAppService = user;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
+           
+
+            //if(id == 0)
+            //{
+            //   await _userAppService.LogOut(cancellationToken);
+
+            //}
+
+
             var productList = await _productAppService.GetAll(cancellationToken);
             var productViewModelList = productList.Select(x => new ProductViewModel
             {
