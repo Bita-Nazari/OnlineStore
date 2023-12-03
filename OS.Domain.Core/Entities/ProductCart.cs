@@ -9,9 +9,9 @@ public partial class ProductCart
     #region Properties
     public int Id { get; set; }
 
-    public int? ProductBoothIds { get; set; }
+    public int? ProductBoothId { get; set; }
 
-    public int? CartIds { get; set; }
+    public int? CartId { get; set; }
 
     #endregion Properties
 

@@ -17,6 +17,12 @@ namespace OS.Domain.AppService
         {
             _CartproductService = CartproductService;
         }
+
+        public async Task AddProduct(int CustomerId, int ProductId, CancellationToken cancellationToken)
+        {
+            await _CartproductService.AddProduct(CustomerId, ProductId, cancellationToken);
+        }
+
         public Task<List<CartProductDto>> GetAllProduct(CartProductDto cartDto, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

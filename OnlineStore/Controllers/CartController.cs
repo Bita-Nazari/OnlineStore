@@ -13,24 +13,21 @@ namespace OnlineStore.Controllers
         private readonly IUserAppService _userAppService;
         private readonly ICartAppService _cartAppService;
         private readonly ICustomerAppService _customerAppService;
-        public CartController(IUserAppService userAppService, ICartAppService cartAppService ,ICustomerAppService customerAppService)
+        private readonly ICartProductAppService _cartProductAppService;
+        public CartController(IUserAppService userAppService, ICartAppService cartAppService ,ICustomerAppService customerAppService,ICartProductAppService cartProductAppService)
         {
             _userAppService = userAppService;
             _cartAppService = cartAppService;
             _customerAppService = customerAppService;
-
+            _cartProductAppService = cartProductAppService;
         }
-        public IActionResult AddProduct(ProductViewModel product, CancellationToken cancellationToken)
+       
+        public async Task<IActionResult> AddProduct(int id, CancellationToken cancellationToken)
         {
             var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var productDto = new ProductBoothDto
-            {
-                Id = product.Id,
-                BoothId = product.BoothId,
-                NewPrice = product.Price,
-
-
-            };
+            await _cartProductAppService.AddProduct(userId, id, cancellationToken);
+            return RedirectToAction("Product" , "Product" , new {id = id });
+           
 
         }
         public async Task< IActionResult> Cart(CancellationToken cancellationToken)
@@ -44,6 +41,7 @@ namespace OnlineStore.Controllers
                 Products = cart.Products,
                 TotalPrice = cart.TotalPrice,
                 Pictures = cart.Pictures,
+                Wallet = cart.Wallet,
 
             };
             return View(CartView);

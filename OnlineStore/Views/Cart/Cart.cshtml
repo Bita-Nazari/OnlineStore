@@ -46,28 +46,52 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
+                    <div class="row">
+                        <div class="cart-payment">
+                            <div class="title text-center">
+                                <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                            </div>
+                            <table class="table main-table">
+                                <tr>
+                                    <td class="fw-bold">قیمت کل</td>
+                                    <td class="txt">
+                                        <span class="fw-bold">@Model.TotalPrice</span> <span class="text-muted">تومان</span>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                            <form action="">
+                                <a class="btn-bank waves-effect waves-light">
+                                    اقدام به پرداخت
+
+                                </a>
+                            </form>
+                        </div>
+                    </div>
                     <div class="cart-payment">
                         <div class="title text-center">
-                            <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                            <h4 class="fw-bold"> کیف پول</h4>
                         </div>
                         <table class="table main-table">
                             <tr>
-                                <td class="fw-bold">قیمت کل</td>
+                                <td class="fw-bold">موجودی کیف پول</td>
                                 <td class="txt">
-                                    <span class="fw-bold">42,000,000</span> <span class="text-muted">تومان</span>
+                                    <span class="fw-bold">@Model.Wallet</span> <span class="text-muted">تومان</span>
                                 </td>
                             </tr>
 
 
                         </table>
                         <form action="">
-                            <button class="btn-bank waves-effect waves-light">
-                                اقدام به پرداخت
+                            <a  class="btn-bank waves-effect waves-light btn-warning">
+                                شارژکیف پول
 
-                            </button>
+                            </a>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

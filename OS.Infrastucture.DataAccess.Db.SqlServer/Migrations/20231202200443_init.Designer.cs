@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OS.Infrastucture.Db.SqlServer.DataBase;
 
@@ -11,9 +12,11 @@ using OS.Infrastucture.Db.SqlServer.DataBase;
 namespace OS.Infrastucture.Db.SqlServer.Migrations
 {
     [DbContext(typeof(OnlineStoreContext))]
-    partial class OnlineStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20231202200443_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1145,14 +1148,24 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.Property<int?>("CartId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CartId1")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ProductBoothId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductBoothId1")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
+                    b.HasIndex("CartId1");
+
                     b.HasIndex("ProductBoothId");
+
+                    b.HasIndex("ProductBoothId1");
 
                     b.ToTable("ProductCarts");
                 });
@@ -2082,12 +2095,23 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
             modelBuilder.Entity("OS.Domain.Core.Entities.ProductCart", b =>
                 {
                     b.HasOne("OS.Domain.Core.Entities.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .HasConstraintName("FK_ProductCart_Cart");
+
+                    b.HasOne("OS.Domain.Core.Entities.Cart", null)
                         .WithMany("ProductCarts")
-                        .HasForeignKey("CartId");
+                        .HasForeignKey("CartId1");
 
                     b.HasOne("OS.Domain.Core.Entities.ProductBooth", "Products")
+                        .WithMany()
+                        .HasForeignKey("ProductBoothId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("FK_ProductCart_Product");
+
+                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", null)
                         .WithMany("ProductCarts")
-                        .HasForeignKey("ProductBoothId");
+                        .HasForeignKey("ProductBoothId1");
 
                     b.Navigation("Cart");
 

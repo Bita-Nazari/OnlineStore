@@ -17,6 +17,7 @@ namespace OS.Domain.Core.Dtos
         public string? ProductName { get; set; }
         public long? ProductPrice { get; set; }
         public long? TotalPrice { get; set; }
+        public long? Wallet { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

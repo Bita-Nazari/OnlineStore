@@ -58,9 +58,9 @@ builder.Services.AddScoped<IBoothRepository, BoothRepository>();
 builder.Services.AddScoped<ICartAppService, CartAppService>();
 builder.Services.AddScoped<ICartService , CartService>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
-//builder.Services.AddScoped<ICartProductAppService, CartProductAppService>();
-
-
+builder.Services.AddScoped<ICartProductAppService, CartProductAppService>();
+builder.Services.AddScoped<ICartProductService , CartProductService>();
+builder.Services.AddScoped<ICartProductRepository, CartProductRepository>();
 builder.Services.AddScoped<ICategoryAppService, CategoryAppService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

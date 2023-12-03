@@ -17,15 +17,15 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
 
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
-            builder.HasOne(d => d.Cart).WithMany()
-                .HasForeignKey(d => d.CartIds)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ProductCart_Cart");
+            //builder.HasOne(d => d.Cart).WithMany()
+            //    .HasForeignKey(d => d.CartId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_ProductCart_Cart");
 
-            builder.HasOne(d => d.Products).WithMany()
-                .HasForeignKey(d => d.ProductBoothIds)
-                .OnDelete(DeleteBehavior.NoAction)
-                .HasConstraintName("FK_ProductCart_Product");
+            //builder.HasOne(d => d.Products).WithMany()
+            //    .HasForeignKey(d => d.ProductBoothId)
+            //    .OnDelete(DeleteBehavior.NoAction)
+            //    .HasConstraintName("FK_ProductCart_Product");
         }
 
     }

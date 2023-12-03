@@ -10,5 +10,6 @@ namespace OS.Domain.Core.Contracts.Repository
     public interface ICartProductRepository
     {
         Task<List<CartProductDto>> GetAllProduct(CartProductDto cartDto, CancellationToken cancellationToken);
+        Task AddProduct(int CustomerId, int ProductId, CancellationToken cancellationToken);
     }
 }

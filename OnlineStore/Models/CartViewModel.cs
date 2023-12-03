@@ -7,6 +7,7 @@ namespace OnlineStore.Models
         public int Id { get; set; }
 
         public int CustomerId { get; set; }
+        public long? Wallet { get; set; }
 
         public int ProductId { get; set; }
         public List<Picture>? Pictures { get; set; }

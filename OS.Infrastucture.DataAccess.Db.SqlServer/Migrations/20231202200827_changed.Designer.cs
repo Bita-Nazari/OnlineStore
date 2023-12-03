@@ -12,8 +12,8 @@ using OS.Infrastucture.Db.SqlServer.DataBase;
 namespace OS.Infrastucture.Db.SqlServer.Migrations
 {
     [DbContext(typeof(OnlineStoreContext))]
-    [Migration("20231202100123_init")]
-    partial class init
+    [Migration("20231202200827_changed")]
+    partial class changed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1148,24 +1148,14 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                     b.Property<int?>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CartIds")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProductBoothId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductBoothIds")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("CartIds");
-
                     b.HasIndex("ProductBoothId");
-
-                    b.HasIndex("ProductBoothIds");
 
                     b.ToTable("ProductCarts");
                 });
@@ -2094,24 +2084,13 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
 
             modelBuilder.Entity("OS.Domain.Core.Entities.ProductCart", b =>
                 {
-                    b.HasOne("OS.Domain.Core.Entities.Cart", null)
+                    b.HasOne("OS.Domain.Core.Entities.Cart", "Cart")
                         .WithMany("ProductCarts")
                         .HasForeignKey("CartId");
 
-                    b.HasOne("OS.Domain.Core.Entities.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartIds")
-                        .HasConstraintName("FK_ProductCart_Cart");
-
-                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", null)
+                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", "Products")
                         .WithMany("ProductCarts")
                         .HasForeignKey("ProductBoothId");
-
-                    b.HasOne("OS.Domain.Core.Entities.ProductBooth", "Products")
-                        .WithMany()
-                        .HasForeignKey("ProductBoothIds")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("FK_ProductCart_Product");
 
                     b.Navigation("Cart");
 

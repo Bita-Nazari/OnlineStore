@@ -647,32 +647,32 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductBoothIds = table.Column<int>(type: "int", nullable: true),
-                    CartIds = table.Column<int>(type: "int", nullable: true),
+                    ProductBoothId = table.Column<int>(type: "int", nullable: true),
                     CartId = table.Column<int>(type: "int", nullable: true),
-                    ProductBoothId = table.Column<int>(type: "int", nullable: true)
+                    CartId1 = table.Column<int>(type: "int", nullable: true),
+                    ProductBoothId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductCarts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ProductCart_Cart",
-                        column: x => x.CartIds,
-                        principalTable: "Cart",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductCart_Product",
-                        column: x => x.ProductBoothIds,
-                        principalTable: "ProductBooth",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductCarts_Cart_CartId",
                         column: x => x.CartId,
                         principalTable: "Cart",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductCarts_ProductBooth_ProductBoothId",
+                        name: "FK_ProductCart_Product",
                         column: x => x.ProductBoothId,
+                        principalTable: "ProductBooth",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductCarts_Cart_CartId1",
+                        column: x => x.CartId1,
+                        principalTable: "Cart",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductCarts_ProductBooth_ProductBoothId1",
+                        column: x => x.ProductBoothId1,
                         principalTable: "ProductBooth",
                         principalColumn: "Id");
                 });
@@ -1041,9 +1041,9 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductCarts_CartIds",
+                name: "IX_ProductCarts_CartId1",
                 table: "ProductCarts",
-                column: "CartIds");
+                column: "CartId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductCarts_ProductBoothId",
@@ -1051,9 +1051,9 @@ namespace OS.Infrastucture.Db.SqlServer.Migrations
                 column: "ProductBoothId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductCarts_ProductBoothIds",
+                name: "IX_ProductCarts_ProductBoothId1",
                 table: "ProductCarts",
-                column: "ProductBoothIds");
+                column: "ProductBoothId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductOrder_OrderId",

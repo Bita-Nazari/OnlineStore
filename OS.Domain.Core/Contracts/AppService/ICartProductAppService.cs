@@ -10,5 +10,6 @@ namespace OS.Domain.Core.Contracts.AppService
     public interface ICartProductAppService
     {
         Task<List<CartProductDto>> GetAllProduct(CartProductDto cartDto, CancellationToken cancellationToken);
+        Task AddProduct(int CustomerId, int ProductId ,CancellationToken cancellationToken);
     }
 }

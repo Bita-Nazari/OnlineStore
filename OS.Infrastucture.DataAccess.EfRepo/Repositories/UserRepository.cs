@@ -18,7 +18,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             _userManager = userManager;
             _signInManager = signInManager;
         }
-       
+
 
         public async Task<UserDto> FindUserByName(string userName, CancellationToken cancellationToken)
         {
@@ -50,11 +50,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<UserDto> GetById(int id, CancellationToken cancellationToken)
         {
-            var user = await _onlineStoreContext.Users.Where(e=> e.Id== id)
-                .Include(s=>s.Seller)
-                .Include(c=>c.Customer)
+            var user = await _onlineStoreContext.Users.Where(e => e.Id == id)
+                .Include(s => s.Seller)
+                .Include(c => c.Customer)
                 .FirstOrDefaultAsync(cancellationToken);
-            if(user == null)
+            if (user == null)
             {
                 throw new NullReferenceException();
 
@@ -64,36 +64,36 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
-                PhoneNumber= user.PhoneNumber,
-                SellerId= user.Seller?.Id,
+                PhoneNumber = user.PhoneNumber,
+                SellerId = user.Seller?.Id,
                 CustomerId = user.Customer?.Id,
                 //MedalName = user.Seller.Booths.
-                
+
             };
             return userdto;
         }
 
 
-      
+
         public async Task<List<string>> GetRole(int userId, CancellationToken cancellationtoken)
         {
             var user = await _onlineStoreContext.Users.FindAsync(userId);
             if (user == null)
             {
-                throw new NullReferenceException ("user did not found");
+                throw new NullReferenceException("user did not found");
             }
             var role = await _userManager.GetRolesAsync(user);
             return role.ToList();
         }
 
-      
+
 
         public async Task<SignInResult> LogIn(UserDto userDto, CancellationToken cancellationtoken)
         {
 
-            return  await _signInManager.PasswordSignInAsync(userDto.UserName,userDto.Password,false,false);
+            return await _signInManager.PasswordSignInAsync(userDto.UserName, userDto.Password, false, false);
 
-            
+
         }
 
         public async Task LogOut(CancellationToken cancellationtoken)
@@ -104,10 +104,10 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task<IdentityResult> SignUp(UserDto userDto, CancellationToken cancellationtoken)
         {
 
-                var user = new User();
-                if (userDto.IsSeller == true)
-                {
-                    userDto.Role = "Seller";
+            var user = new User();
+            if (userDto.IsSeller == true)
+            {
+                userDto.Role = "Seller";
                 user = new User()
                 {
 
@@ -117,62 +117,64 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     PhoneNumber = userDto.PhoneNumber,
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
-                
-                        Seller = new Seller()
-                        {
-                            CreatedAt = DateTime.Now,
-                            HaveBooth = false
-                            //CityId = 73
-                        }
 
-                    };
-
-                }
-                if (userDto.IsSeller == false)
-                {
-                    userDto.Role = "Customer";
-                    user = new User()
+                    Seller = new Seller()
                     {
-                        Id = userDto.Id,
-                        UserName = userDto.UserName,
-                        Email = userDto.Email,
-                        PhoneNumber = userDto.PhoneNumber,
-                        EmailConfirmed = true,
-                        PhoneNumberConfirmed = true,
-                        Customer = new Customer()
-                        {
-                            CreatedAt = DateTime.Now,
-                            //CityId = 73
-                            Carts = new List<Cart>()
+                        CreatedAt = DateTime.Now,
+                        HaveBooth = false,
+                        Wallet = 0
+
+                    }
+
+                };
+
+            }
+            if (userDto.IsSeller == false)
+            {
+                userDto.Role = "Customer";
+                user = new User()
+                {
+                    Id = userDto.Id,
+                    UserName = userDto.UserName,
+                    Email = userDto.Email,
+                    PhoneNumber = userDto.PhoneNumber,
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    Customer = new Customer()
+                    {
+                        Wallet = 0,
+                        CreatedAt = DateTime.Now,
+                        //CityId = 73
+                        Carts = new List<Cart>()
                             {
                               new Cart()
                               {
                                   CreatedAt = DateTime.Now,
-                                  
+
                               }
 
                             },
-                            
-                            
-                        }
 
-                    };
-                }
 
-                var resault = await _userManager.CreateAsync(user, userDto.Password);
-                if (resault.Succeeded)
-                {
-                
+                    }
+
+                };
+            }
+
+            var resault = await _userManager.CreateAsync(user, userDto.Password);
+            if (resault.Succeeded)
+            {
+
                 await _userManager.AddToRoleAsync(user, userDto.Role);
-                if(userDto.Role== "Customer")
+                if (userDto.Role == "Customer")
                 {
                     user.Customer.ActiveCartId = user.Customer.Carts.Last().Id;
                 }
-                
-                 _onlineStoreContext.SaveChanges();
+
+                _onlineStoreContext.SaveChanges();
             }
 
-                return resault;
+            return resault;
         }
     }
 }

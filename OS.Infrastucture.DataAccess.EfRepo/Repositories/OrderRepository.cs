@@ -19,7 +19,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         }
         public async Task Create(OrderDto orderDto, CancellationToken cancellationToken)
         {
-            var products = await _storeContext.ProductCarts.Where(o => o.CartIds == orderDto.CartId).ToListAsync();
+            var products = await _storeContext.ProductCarts.Where(o => o.CartId == orderDto.CartId).ToListAsync();
             var order = new Order()
             {
                 Id = orderDto.Id,
