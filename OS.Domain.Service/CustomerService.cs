@@ -17,6 +17,11 @@ namespace OS.Domain.Service
             _customerRepository = customerRepository;
         }
 
+        public async Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken)
+        {
+           await _customerRepository.ChargeWallet(Customerid, customerdto, cancellationToken);
+        }
+
         public  async Task DeleteCustomer(int id, CancellationToken cancellationToken)
         {
            await  _customerRepository.DeleteCustomer(id, cancellationToken);

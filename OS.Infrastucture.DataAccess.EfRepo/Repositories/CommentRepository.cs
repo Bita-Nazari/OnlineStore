@@ -18,7 +18,12 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var comment = new Comment()
             {
                 Text = commentDto.Text,
-                Id = commentDto.Id,
+                BoothId = commentDto.BoothId,
+                CustomerId = commentDto.CustomerId,
+                IsDeleted = false,
+                OrderId = commentDto.OrderId,
+                CreatedAt = DateTime.Now,
+                IsConfirmed = false
 
             }; 
            await _storeContext.Comments.AddAsync(comment);

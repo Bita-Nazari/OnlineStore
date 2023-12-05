@@ -10,9 +10,9 @@ public partial class ProductOrder
 
     public int Id { get; set; }
 
-    public int ProductBoothId { get; set; }
+    public int? ProductBoothId { get; set; }
 
-    public int OrderId { get; set; }
+    public int? OrderId { get; set; }
     #endregion Properties
 
     #region Navigation properties

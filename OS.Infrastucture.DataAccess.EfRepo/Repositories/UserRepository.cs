@@ -117,12 +117,13 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     PhoneNumber = userDto.PhoneNumber,
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
-
+                    IsSeller = true,
                     Seller = new Seller()
                     {
                         CreatedAt = DateTime.Now,
                         HaveBooth = false,
-                        Wallet = 0
+                        Wallet = 0,
+
 
                     }
 
@@ -140,6 +141,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     PhoneNumber = userDto.PhoneNumber,
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true,
+                    IsSeller = false,
                     Customer = new Customer()
                     {
                         Wallet = 0,

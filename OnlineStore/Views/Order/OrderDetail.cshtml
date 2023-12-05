@@ -1,0 +1,148 @@
+﻿@model OrderDetailViewModel
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>مینی شاپ</title>
+    <link rel="shortcut icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/js/plugin/countdown/countdown.css">
+    <link rel="stylesheet" href="~/js/plugin/back-to-top/jquery-backToTop.min.css">
+    <link rel="stylesheet" href="~/js/plugin/hint-css/hint-css.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+</head>
+<body>
+    <div class="col-lg-9">
+        <div class="content-box" style="padding:40px 20px;">
+
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="ui-boxs">
+                        <div class="ui-box">
+                            <div class="ui-box-item ui-box-white">
+                                <div class="ui-box-item-title" style="padding: 15px;">
+                                    <h4 class="fw-bold">
+                                        جزییات سفارش
+                                    </h4>
+                                </div>
+                                <div class="ui-box-item-desc p-0">
+                                    <div class="orders">
+                                        <div class="order-item">
+
+                                            <div class="order-item-detail" style="padding-top: 20px;">
+                                                <ul class="nav">
+                                                    <li class="nav-item">
+                                                        <span class="text-mute">تحویل گیرنده</span>
+                                                        <strong>@Model.FirstName @Model.LastName</strong>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <span class="text-mute">شماره موبایل </span>
+                                                        <strong>@Model.PhoneNumber</strong>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <span class="text-mute">آدرس</span>
+                                                        <strong>
+                                                            @Model.Address
+                                                        </strong>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="order-item-detail" style="padding-top: 20px;">
+                                                <ul class="nav">
+                                                    <li class="nav-item">
+                                                        <span class="text-mute">مبلغ</span>
+                                                        <strong>@Model.TotalPrice</strong>
+                                                    </li>
+
+
+
+                                                </ul>
+                                            </div>
+                                            <div class="order-item-detail" style="padding-top: 20px;">
+                                                <ul class="nav">
+
+                                                    <li class="nav-item">
+                                                        <strong class="text-danger">ارسال عادی</strong>
+                                                    </li>
+                                                    <li class="nav-item w-100">
+                                                    </li>
+
+                                                </ul>
+                                                <div class="order-progress py-3">
+                                                    <h6 class="fw-bold mb-2">
+                                                      @Model.StatusName <i class="bi bi-check"></i>
+                                                    </h6>
+
+                                                </div>
+                                            </div>
+                                            <div class="product-list-row product-list-row-lg">
+                                                <div class="product-row">
+                                                    @foreach(var product in Model.ProductBooth)
+                                                    {
+                                                        <a href="product.html">
+                                                        <div class="product-row-desc">
+                                                            <div class="product-row-desc-item">
+                                                                    @foreach(var picture in product.Product.ProductPictures)
+                                                                    {
+                                                                        <div class="product-row-img">
+                                                                            <img src="@picture.Picture.Url"
+                                                                                 alt="" class="" width="100">
+                                                                        </div>
+                                                                    }
+                                                             
+                                                                <div class="product-row-title">
+                                                                    <h6>
+                                                                       @product.Product.Name
+                                                                    </h6>
+                                                                    <div class="product-price">
+                                                                        <p>@product.NewPrice</p>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="order-item-comment">
+                                                            <a asp-action="Create" asp-controller="Comment" asp-route-orderid="@Model.Id" asp-route-boothid="@product.booth.Id">
+                                                            <i  class="bi bi-chat-dots me-2"></i>ثبت
+                                                            دیدگاه
+                                                        </a>
+                                                     </div>
+                                                    }
+
+                                                   
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-3.6.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/swiper-bundle.min.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/plugin/countdown/countdown.js"></script>
+    <script src="~/js/plugin/back-to-top/jquery-backToTop.min.js"></script>
+    <script src="~/js/plugin/hint-css/hint-css.js"></script>
+    <script src="~/js/jquery-app.js"></script>
+    <script src="~/js/plugin/waves/waves.js"></script>
+    <script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+</body>
+</html>

@@ -17,6 +17,11 @@ namespace OS.Domain.AppService
             _customerService = customerService;
         }
 
+        public async Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken)
+        {
+            await _customerService.ChargeWallet(Customerid, customerdto, cancellationToken);
+        }
+
         public async Task DeleteCustomer(int id, CancellationToken cancellationToken)
         {
             await  _customerService.DeleteCustomer(id, cancellationToken);

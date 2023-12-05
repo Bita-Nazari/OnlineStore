@@ -128,7 +128,7 @@
                                                                         @foreach(var picture in order.Pictures)
                                                                         {
                                                                             <div class="order-item-product-list-item">
-                                                                                <img src=@picture.Url alt=""
+                                                                                <img  src=@picture.Url alt=""
                                                                                      class="img-thumbnail" width="70"
                                                                                      height="70">
                                                                             </div>
@@ -137,7 +137,7 @@
                                                                       
                                                                     </div>
                                                                     <div class="order-item-show">
-                                                                        <p><i class="bi bi-card-list"></i> مشاهده جزییات</p>
+                                                                    <a asp-action="OrderDetail" asp-controller="Order" asp-route-id="@order.Id"><i asp class="bi bi-card-list"></i> مشاهده جزییات</a>
                                                                     </div>
                                                                 </a>
 

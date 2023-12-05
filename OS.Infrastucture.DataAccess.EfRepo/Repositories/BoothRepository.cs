@@ -175,28 +175,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         }
 
-        public async Task UpdateMedal(int BoothId, CancellationToken cancellationToken)
+        public Task UpdateMedal(int BoothId, CancellationToken cancellationToken)
         {
-            var booth = await _storeContext.Booths
-      .Where(b => b.Id == BoothId)
-           .Include(s => s.Seller)
-           .Include(m => m.Medal)
-           .ThenInclude(mt => mt.MedalType)
-      .FirstOrDefaultAsync();
-
-            if (booth.TotalCount >= 15)
-            {
-                booth.MedalId = (int)Domain.Core.Enums.MedalType.Gold;
-            }
-            else if (booth.TotalCount >= 10)
-            {
-                booth.MedalId = (int)Domain.Core.Enums.MedalType.Silver;
-            }
-           
-            else
-            {
-                booth.MedalId = (int)Domain.Core.Enums.MedalType.Bronze;
-            }
+            throw new NotImplementedException();
         }
     }
 }

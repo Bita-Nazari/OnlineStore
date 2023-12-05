@@ -1,15 +1,10 @@
 ﻿using OS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Dtos
+namespace OnlineStore.Models
 {
-    public class CommentDto
+    public class CommentViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public string? Text { get; set; } = null!;
 

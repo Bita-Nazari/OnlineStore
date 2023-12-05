@@ -18,5 +18,6 @@ namespace OS.Domain.Core.Contracts.Repository
         public Task EditCustomer(AlluserDto user, CancellationToken cancellationToken);
 
         public Task DeleteCustomer(int id, CancellationToken cancellationToken);
+        public Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken);
     }
 }

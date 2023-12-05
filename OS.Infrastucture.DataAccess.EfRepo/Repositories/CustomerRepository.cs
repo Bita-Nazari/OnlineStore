@@ -12,7 +12,19 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             _storeContext = storeContext;
         }
-        public async Task DeleteCustomer(int id, CancellationToken cancellationToken)
+
+        public async Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken)
+        {
+            var customer = await _storeContext.Customers.Where(c=> c.Id == Customerid).FirstOrDefaultAsync();
+            if (customer == null)
+            {
+                throw new NullReferenceException("User did not found");
+            }
+            customer.Wallet += customerdto.Wallet;
+            await _storeContext.SaveChangesAsync(); 
+        }
+
+        public async Task DeleteCustomer(int id , CancellationToken cancellationToken)
         {
                 var customer = await _storeContext.Customers
                .Where(p => p.Id == id)
@@ -41,7 +53,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             User.LastName = user.LastName;
             User.CityId = user.CityId;
             User.Address = user.Address;
-            User.Wallet = user.Wallet;
             User.User.Email = user.Email;
             User.User.PhoneNumber = user.PhoneNumber;
             User.User.UserName = user.UserName;
@@ -119,7 +130,10 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
         public async Task<AlluserDto> GetCustomerByUserId(int Userid, CancellationToken cancellationToken)
         {
-            var customer = await _storeContext.Customers.Where(c=> c.UserId == Userid).FirstOrDefaultAsync(cancellationToken);
+            var customer = await _storeContext.Customers.Where(c=> c.UserId == Userid)
+                .Include(u => u.User)
+                .Include(c => c.City)
+                .FirstOrDefaultAsync(cancellationToken);
             if (customer == null)
             {
                 throw new NullReferenceException("User did not found");
@@ -127,6 +141,16 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var userdto = new AlluserDto()
             {
                 Id = customer.Id,
+                UserName = customer.User.UserName,
+                PhoneNumber = customer.User.PhoneNumber,
+                Email = customer.User.Email,
+                Address = customer.Address,
+                CreatedAt = customer.CreatedAt,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Wallet = customer.Wallet,
+                CityName = customer.City?.Name,
+                PictureId = customer.PictureId,
                 ActiveCartId = customer.ActiveCartId,
 
             };

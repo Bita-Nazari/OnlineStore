@@ -16,9 +16,9 @@ namespace OS.Domain.Service
         {
             _commentRepository = commentRepository;
         }
-        public Task Create(CommentDto commentDto, CancellationToken cancellationToken)
+        public async Task Create(CommentDto commentDto, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _commentRepository.Create(commentDto, cancellationToken);
         }
 
         public Task<CommentDto> Detail(int commentId, CancellationToken cancellationToken)

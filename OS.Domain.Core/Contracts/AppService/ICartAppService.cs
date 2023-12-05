@@ -9,7 +9,7 @@ namespace OS.Domain.Core.Contracts.AppService
 {
     public interface ICartAppService
     {
-        Task Create(CartDto CartDto, CancellationToken cancellationToken);
+        Task Create(int CustomerId, CancellationToken cancellationToken);
         Task HardDelete(int CartId, CancellationToken cancellationToken);
         Task Update(int CartId, CancellationToken cancellationToken);
         Task<CartDto> Detail(int? CartId, CancellationToken cancellationToken);

@@ -5,6 +5,7 @@ using OnlineStore.Models;
 using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
+using System.Security.Claims;
 using System.Threading;
 
 namespace OnlineStore.Controllers
@@ -20,12 +21,13 @@ namespace OnlineStore.Controllers
 
         }
 
-        public async Task< IActionResult >Profile(int id , CancellationToken cancellationToken)
+        public async Task< IActionResult >Profile( CancellationToken cancellationToken)
         {
-            var customer = await _customerAppService.GetCustomerById(id, cancellationToken);
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
             var customerView = new CustomerViewModel()
             {
-                Id = id,
+                Id = customer.Id,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 UserName = customer.UserName,
@@ -40,10 +42,11 @@ namespace OnlineStore.Controllers
             };
             return View(customerView);
         }
-        public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit( CancellationToken cancellationToken)
         {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
             var cities = await _cityAppService.GetAll(cancellationToken);
-            var customer = await _customerAppService.GetCustomerById(id, cancellationToken);
             var userviewmodel = new AllUserViewModel
             {
                 Id = customer.Id,

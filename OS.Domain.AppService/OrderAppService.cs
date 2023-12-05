@@ -18,14 +18,14 @@ namespace OS.Domain.AppService
             _orderService = orderService;   
         }
 
-        public Task Create(OrderDto orderDto)
+        public async Task Create(int? CartId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _orderService.Create(CartId, cancellationToken);
         }
 
-        public Task Detail(int orderId, CancellationToken cancellationToken)
+        public async Task<OrderDto> Detail(int orderId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _orderService.Detail(orderId, cancellationToken);
         }
 
         public Task<List<OrderDto>> GetAll(CancellationToken cancellationToken)

@@ -14,17 +14,19 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             _storeContext = storeContext;
         }
-        public async Task Create(CartDto CartDto, CancellationToken cancellationToken)
+        public async Task Create(int CustomerId, CancellationToken cancellationToken)
         {
+            var customer = await _storeContext.Customers.Where(c=> c.Id == CustomerId).FirstOrDefaultAsync();
             var Cart = new Cart()
             {
-                CustomerId = CartDto.CustomerId,
-                CreatedAt = DateTime.Now,
-                Id = CartDto.Id,
+                CustomerId = customer.Id,
+                CreatedAt = DateTime.Now
             };
             await _storeContext.Carts.AddAsync(Cart);
 
             await _storeContext.SaveChangesAsync(cancellationToken);
+            customer.ActiveCartId = Cart.Id;
+            await _storeContext.SaveChangesAsync();
 
         }
 

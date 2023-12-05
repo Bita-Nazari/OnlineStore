@@ -9,15 +9,14 @@ public partial class Order
     #region Properties
     public int Id { get; set; }
 
-    public long TotalPrice { get; set; }
+    public long? TotalPrice { get; set; }
 
-    public int CustomerId { get; set; }
+    public int? CustomerId { get; set; }
 
     public int? StatusId { get; set; }
 
-    public int CartId { get; set; }
+    public int? CartId { get; set; }
 
-    public int Commession { get; set; }
 
 
     #endregion Properties

@@ -16,9 +16,9 @@ namespace OS.Domain.Service
         {
             _cartRepository = cartRepository;
         }
-        public Task Create(CartDto CartDto, CancellationToken cancellationToken)
+        public async Task Create(int CustomerId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           await _cartRepository.Create(CustomerId, cancellationToken);
         }
 
         public async Task<CartDto> Detail(int? CartId, CancellationToken cancellationToken)

@@ -17,14 +17,14 @@ namespace OS.Domain.Service
             _orderRepository = orderRepository;
         }
 
-        public Task Create(OrderDto orderDto)
+        public async Task Create(int? CartId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _orderRepository.Create(CartId, cancellationToken);
         }
 
-        public Task Detail(int orderId, CancellationToken cancellationToken)
+        public async Task<OrderDto> Detail(int orderId, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _orderRepository.Detail(orderId, cancellationToken);
         }
 
         public Task<List<OrderDto>> GetAll(CancellationToken cancellationToken)

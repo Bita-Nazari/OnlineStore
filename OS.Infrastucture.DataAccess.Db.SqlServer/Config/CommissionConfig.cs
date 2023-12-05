@@ -8,8 +8,8 @@ namespace OS.Infrastucture.Db.SqlServer.Config
 {
     public class CommissionConfig
     {
-        public int Bronze { get; set; }
-        public int Silver { get; set; }
-        public int Gold { get; set; }
+        public decimal Bronze { get; set; }
+        public decimal Silver { get; set; }
+        public decimal Gold { get; set; }
     }
 }

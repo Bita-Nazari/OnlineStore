@@ -1,98 +1,131 @@
 ﻿@model CartViewModel
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>مینی شاپ</title>
+    <link rel="shortcut icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/js/plugin/countdown/countdown.css">
+    <link rel="stylesheet" href="~/js/plugin/back-to-top/jquery-backToTop.min.css">
+    <link rel="stylesheet" href="~/js/plugin/hint-css/hint-css.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+</head>
+<body>
+    <div class="cart">
+        <div class="container-fluid">
+            <div class="cart-content shadow-box">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="cart-detail">
+                            <div class="table-responsive-lg">
+                                <table class="table table-hover main-table">
+                                    <thead style="background: #f8f8f8;">
+                                        <tr class="py-3">
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col">محصول</th>
+                                            <th scope="col">قیمت</th>
 
-<div class="cart">
-    <div class="container-fluid">
-        <div class="cart-content shadow-box">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="cart-detail">
-                        <div class="table-responsive-lg">
-                            <table class="table table-hover main-table">
-                                <thead style="background: #f8f8f8;">
-                                    <tr class="py-3">
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                        <th scope="col">محصول</th>
-                                        <th scope="col">قیمت</th>
 
+                                    </thead>
+                                    @foreach (var item in Model.Products)
+                                    {
+                                        <tbody>
+                                            <tr>
+                                                @foreach (var picture in item.Product.ProductPictures)
+                                                {
+                                                    <td class="icon"><a href=""><i class="bi bi-x-circle-fill"></i></a></td>
+                                                    <td class="position-relative">
+                                                        <img src=@picture.Picture.Url class=""
+                                                             alt="">
+                                                    </td>
+                                                }
 
-                                </thead>
-                                @foreach (var item in Model.Products)
-                                {
-                                    <tbody>
-                                        <tr>
-                                            @foreach(var picture in item.Product.ProductPictures)
-                                            {
-                                                <td class="icon"><a href=""><i class="bi bi-x-circle-fill"></i></a></td>
-                                                <td class="position-relative">
-                                                    <img src=@picture.Picture.Url class=""
-                                                         alt="">
+                                                <td class="title">@item.Product.Name</td>
+                                                <td class="price">
+                                                    <span class="num">@item.NewPrice</span><span class="text-muted">تومان</span>
                                                 </td>
-                                            }
-                                          
-                                            <td class="title">@item.Product.Name</td>
-                                            <td class="price">
-                                                <span class="num">@item.NewPrice</span><span class="text-muted">تومان</span>
-                                            </td>
 
-                                        </tr>
-                                    </tbody>
+                                            </tr>
+                                        </tbody>
 
-                                }
+                                    }
 
-                            </table>
+                                </table>
+                            </div>
+
                         </div>
-
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="row">
+                    <div class="col-lg-4">
+                        <div class="row">
+                            <div class="cart-payment">
+                                <div class="title text-center">
+                                    <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                                </div>
+                                <table class="table main-table">
+                                    <tr>
+                                        <td class="fw-bold">قیمت کل</td>
+                                        <td class="txt">
+                                            <span class="fw-bold">@Model.TotalPrice</span> <span class="text-muted">تومان</span>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                                <form action="">
+                                    <button asp-action="NewOrder" asp-controller="Order" asp-route-id="@Model.Id" class="btn-bank waves-effect waves-light">
+                                        اقدام به پرداخت
+
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                         <div class="cart-payment">
                             <div class="title text-center">
-                                <h4 class="fw-bold">مجموع کل سبد خرید</h4>
+                                <h4 class="fw-bold"> کیف پول</h4>
                             </div>
                             <table class="table main-table">
                                 <tr>
-                                    <td class="fw-bold">قیمت کل</td>
+                                    <td class="fw-bold">موجودی کیف پول</td>
                                     <td class="txt">
-                                        <span class="fw-bold">@Model.TotalPrice</span> <span class="text-muted">تومان</span>
+                                        <span class="fw-bold">@Model.Wallet</span> <span class="text-muted">تومان</span>
                                     </td>
                                 </tr>
 
 
                             </table>
                             <form action="">
-                                <a class="btn-bank waves-effect waves-light">
-                                    اقدام به پرداخت
+                                <button asp-action="ChargeWallet" asp-controller="Cart" class="btn-bank waves-effect waves-light">
+                                    شارژکیف پول
 
-                                </a>
+                                </button>
                             </form>
                         </div>
                     </div>
-                    <div class="cart-payment">
-                        <div class="title text-center">
-                            <h4 class="fw-bold"> کیف پول</h4>
-                        </div>
-                        <table class="table main-table">
-                            <tr>
-                                <td class="fw-bold">موجودی کیف پول</td>
-                                <td class="txt">
-                                    <span class="fw-bold">@Model.Wallet</span> <span class="text-muted">تومان</span>
-                                </td>
-                            </tr>
 
-
-                        </table>
-                        <form action="">
-                            <a  class="btn-bank waves-effect waves-light btn-warning">
-                                شارژکیف پول
-
-                            </a>
-                        </form>
-                    </div>
                 </div>
-
             </div>
         </div>
     </div>
-</div>
+    <script src="~/js/jquery-3.6.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/swiper-bundle.min.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/plugin/countdown/countdown.js"></script>
+    <script src="~/js/plugin/back-to-top/jquery-backToTop.min.js"></script>
+    <script src="~/js/plugin/hint-css/hint-css.js"></script>
+    <script src="~/js/jquery-app.js"></script>
+    <script src="~/js/plugin/waves/waves.js"></script>
+    <script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    
+</body>
+
+
+</html>

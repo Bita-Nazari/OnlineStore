@@ -1,16 +1,10 @@
 ﻿using OS.Domain.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OS.Domain.Core.Dtos
+namespace OnlineStore.Models
 {
-    public class OrderDto
+    public class OrderDetailViewModel
     {
         public int Id { get; set; }
-
         public long? TotalPrice { get; set; }
 
         public int? CustomerId { get; set; }
@@ -19,7 +13,6 @@ namespace OS.Domain.Core.Dtos
         public string? StatusName { get; set; }
 
         public int? CartId { get; set; }
-        public int? BoothId { get; set; }
 
         public int? Commession { get; set; }
         public string? FirstName { get; set; }
@@ -43,7 +36,6 @@ namespace OS.Domain.Core.Dtos
         public DateTime CreatedAt { get; set; }
 
         public int? UserId { get; set; }
-
         public virtual Cart Cart { get; set; } = null!;
 
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
@@ -53,10 +45,11 @@ namespace OS.Domain.Core.Dtos
         public virtual List<ProductOrder>? ProductOrders { get; set; } = new List<ProductOrder>();
         public List<Product> Products { get; set; }
         public List<ProductCart> ProductCarts { get; set; }
-        public List<ProductBooth>? ProductBooths { get; set; }
+        public List<ProductBooth>? ProductBooth { get; set; }
         public List<Booth>? Booths { get; set; }
         public List<Picture> Pictures { get; set; }
 
         public virtual Status Status { get; set; } = null!;
+
     }
 }
