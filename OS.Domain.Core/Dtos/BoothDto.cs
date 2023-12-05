@@ -16,6 +16,7 @@ namespace OS.Domain.Core.Dtos
         public bool? HaveBooth { get; set; }
 
         public string? SellerName { get; set; }
+        public string? CustomerName { get; set; }
         public int SellerId { get; set; }
 
         public int? TotalCount { get; set; }

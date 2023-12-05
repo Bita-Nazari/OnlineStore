@@ -32,6 +32,7 @@ public partial class Auction
     public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
 
     public virtual Booth Booth { get; set; } = null!;
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual Product Product { get; set; } = null!;
 

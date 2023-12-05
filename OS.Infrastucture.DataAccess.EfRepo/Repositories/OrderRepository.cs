@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire.Server;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
@@ -96,6 +97,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
 
             var orders = await _storeContext.Orders.Where(o => o.CustomerId == customerId)
+                 .Where(o => o.CartId != null)
                 .Include(s => s.Status)
                 .Include(p => p.ProductOrders)
                 .ThenInclude(pp => pp.Product)
@@ -114,6 +116,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 .Select(pp => pp.Picture)
                 .ToList(),
                     TotalPrice = o.TotalPrice,
+                    CartId = o.CartId,
+                    
 
                 }).ToListAsync(cancellationToken);
             return orders;
@@ -138,7 +142,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
             return totalCommission;
         }
-        private decimal GetCommission(int? MedalId)
+        public decimal GetCommission(int? MedalId)
         {
 
             var commissionConfig = _configuration.GetSection("CommissionConfig").Get<CommissionConfig>();
@@ -194,30 +198,102 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 .ThenInclude(p => p.ProductPictures)
                 .ThenInclude(pp => pp.Picture)
                 .Include(o => o.Cart)
-                .Include(o=> o.Status)
+                .Include(o => o.Status)
                 .FirstOrDefaultAsync();
-            var customer = await _storeContext.Customers.Where(c => c.Id == order.Cart.CustomerId)
-                .Include(c => c.User)
-                .FirstOrDefaultAsync();
+
+
+
             if (order == null)
             {
                 throw new NullReferenceException("order did not found");
             }
+                var customer = await _storeContext.Customers.Where(c => c.Id == order.Cart.CustomerId)
+    .Include(c => c.User)
+    .FirstOrDefaultAsync();
+                var orderdto = new OrderDto
+                {
+                    Id = order.Id,
+                    PhoneNumber = customer.User.PhoneNumber,
+                    Email = customer.User.Email,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    Address = customer.Address,
+                    ProductBooths = order.ProductOrders.Select(po => po.Product).ToList(),
+                    Pictures = order.ProductOrders
+                   .SelectMany(po => po.Product.Product.ProductPictures)
+                   .Select(pp => pp.Picture)
+                   .ToList(),
+                    TotalPrice = order.TotalPrice,
+                    StatusName = order.Status.Text,
+                    BoothId = order.Auction.BoothId
+
+                };
+
+                return orderdto;
+           
+ 
+
+
+        }
+
+        public async Task<List<OrderDto>> GetAllAuctionOrder(int customerId ,CancellationToken cancellationToken)
+        {
+            
+            var orders = await _storeContext.Orders.Where(o => o.CustomerId == customerId)
+                .Where(o=> o.AuctionId!= null)
+    .Include(s => s.Status)
+    .Include(o => o.Auction)
+    .ThenInclude(a => a.Product)
+    .ThenInclude(pp => pp.ProductPictures)
+    .ThenInclude(p => p.Picture)
+    .Select(o => new OrderDto
+    {
+
+        Id = o.Id,
+        CustomerId = o.CustomerId,
+        StatusName = o.Status.Text,
+        ProductName = o.Auction.Product.Name,
+        ProductPrice = o.Auction.StartPrice,
+        Pictures = o.Auction.Product.ProductPictures.Select(p=> p.Picture).ToList(),
+        TotalPrice = o.TotalPrice,
+        AuctionId = o.Auction.Id,   
+
+
+    }).ToListAsync(cancellationToken);
+            return orders;
+        }
+       
+
+        public async Task<OrderDto> DetailAuction(int orderId, CancellationToken cancellationToken)
+        {
+           
+            var orderAuction = await _storeContext.Orders.Where(o => o.Id == orderId)
+     .Include(o => o.Auction)
+     .ThenInclude(a => a.Product)
+     .ThenInclude(p => p.ProductPictures)
+     .ThenInclude(pp => pp.Picture)
+     .Include(o => o.Status)
+     .FirstOrDefaultAsync();
+           
+            var customerAuction = await _storeContext.Customers.Where(c => c.Id == orderAuction.Auction.CustomerId)
+                .Include(c => c.User)
+                .FirstOrDefaultAsync();
             var orderdto = new OrderDto
             {
-                Id = order.Id,
-                PhoneNumber = customer.User.PhoneNumber,
-                Email = customer.User.Email,
-                FirstName = customer.FirstName,
-                LastName = customer.LastName,
-                Address = customer.Address,
-                ProductBooths = order.ProductOrders.Select(po => po.Product).ToList(),
-                Pictures = order.ProductOrders
-                .SelectMany(po => po.Product.Product.ProductPictures)
-                .Select(pp => pp.Picture)
-                .ToList(),
-                TotalPrice = order.TotalPrice,
-                StatusName=order.Status.Text
+
+                Id = orderAuction.Id,
+                PhoneNumber = customerAuction.User.PhoneNumber,
+                Email = customerAuction.User.Email,
+                FirstName = customerAuction.FirstName,
+                LastName = customerAuction.LastName,
+                Address = customerAuction.Address,
+                Pictures = orderAuction.Auction.Product.ProductPictures.Select(p => p.Picture).ToList(),
+                TotalPrice = orderAuction.TotalPrice,
+                StatusName = orderAuction.Status.Text,
+                ProductName = orderAuction.Auction.Product.Name,
+                ProductPrice = orderAuction.Auction.StartPrice,
+                BoothId = orderAuction.Auction.BoothId
+
             };
             return orderdto;
         }

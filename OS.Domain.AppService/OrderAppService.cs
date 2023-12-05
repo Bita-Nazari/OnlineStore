@@ -28,9 +28,19 @@ namespace OS.Domain.AppService
             return await _orderService.Detail(orderId, cancellationToken);
         }
 
+        public async Task<OrderDto> DetailAuction(int orderId, CancellationToken cancellationToken)
+        {
+            return await _orderService.DetailAuction(orderId, cancellationToken);
+        }
+
         public Task<List<OrderDto>> GetAll(CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<OrderDto>> GetAllAuctionOrder(int customerId, CancellationToken cancellationToken)
+        {
+         return  await _orderService.GetAllAuctionOrder(customerId, cancellationToken);
         }
 
         public Task<List<OrderDto>> GetAllBoothOrders(int BoothId, CancellationToken cancellationToken)

@@ -11,7 +11,7 @@ namespace OS.Domain.Core.Dtos
     {
         public int Id { get; set; }
 
-        public string? Text { get; set; } = null!;
+        public string? Text { get; set; } 
 
         public int CustomerId { get; set; }
 

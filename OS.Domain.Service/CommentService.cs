@@ -45,5 +45,10 @@ namespace OS.Domain.Service
         {
             await _commentRepository.Confirm(commentId, cancellationToken);
         }
+
+        public async Task<BoothDto> GetAllBoothComment(int boothid, CancellationToken cancellationToken)
+        {
+           return await _commentRepository.GetAllBoothComment(boothid, cancellationToken);
+        }
     }
 }

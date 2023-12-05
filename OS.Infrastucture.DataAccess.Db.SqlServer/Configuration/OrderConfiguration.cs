@@ -20,6 +20,11 @@ namespace OS.Infrastucture.Db.SqlServer.Configuration
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Order_Cart");
 
+            builder.HasOne(d => d.Auction).WithMany(p => p.Orders)
+    .HasForeignKey(d => d.AuctionId)
+    .OnDelete(DeleteBehavior.ClientSetNull)
+    .HasConstraintName("FK_Order_Auction");
+
             builder.HasOne(d => d.Customer).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.CustomerId)
                 .OnDelete(DeleteBehavior.NoAction)

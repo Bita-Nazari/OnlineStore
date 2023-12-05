@@ -23,6 +23,9 @@ namespace OnlineStore.Models
         public int MedalId { get; set; }
         public string? Medalname { get; set; }
         public long NewPrice { get; set; }
+        public string? Text { get; set; }
+
+        public string? CustomerName { get; set; }
         public int Count
         {
             get; set;

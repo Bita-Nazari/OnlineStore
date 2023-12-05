@@ -17,6 +17,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task Create(BidDto bid, CancellationToken cancellationToken)
         {
             var auction = await _storeContext.Auctions.Where(a=> a.Id == bid.AuctionId).FirstOrDefaultAsync();
+            var customer = await _storeContext.Customers.Where(c=> c.Id == bid.CustomerId).FirstOrDefaultAsync();
+            var admin = _storeContext.Admins.Where(a => a.Id == 2).FirstOrDefault();
             if (auction == null)
             {
                 throw new NullReferenceException();
@@ -25,6 +27,10 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 if(auction.StartPrice < bid.SuggestedPrice)
                 {
+                    if(customer.Wallet < bid.SuggestedPrice)
+                    {
+                        throw new Exception("your wallet is less than your suggested price please charge your wallet");
+                    }
                     var item = new Bid()
                     {
                         Id = bid.Id,
@@ -36,6 +42,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     };
                     auction.StartPrice = bid.SuggestedPrice;
                     auction.BidCount ++;
+                    customer.Wallet = customer.Wallet - bid.SuggestedPrice;
+                    admin.Wallet = admin.Wallet + bid.SuggestedPrice;
 
                     await _storeContext.Bids.AddAsync(item);
                     await _storeContext.SaveChangesAsync(cancellationToken);

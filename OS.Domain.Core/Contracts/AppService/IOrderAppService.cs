@@ -8,6 +8,8 @@ namespace OS.Domain.Core.Contracts.AppService
         Task HardDelete(int OrderId, CancellationToken cancellationToken);
         Task SoftDelete(int OrderId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetAll(CancellationToken cancellationToken);
+        Task<List<OrderDto>> GetAllAuctionOrder(int customerId, CancellationToken cancellationToken);
+        Task<OrderDto> DetailAuction(int orderId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetAllBoothOrders(int BoothId, CancellationToken cancellationToken);
         Task<OrderDto> Detail(int orderId, CancellationToken cancellationToken);

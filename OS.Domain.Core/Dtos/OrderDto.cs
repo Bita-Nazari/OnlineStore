@@ -23,7 +23,7 @@ namespace OS.Domain.Core.Dtos
 
         public int? Commession { get; set; }
         public string? FirstName { get; set; }
-
+        public int? AuctionId { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
@@ -43,8 +43,11 @@ namespace OS.Domain.Core.Dtos
         public DateTime CreatedAt { get; set; }
 
         public int? UserId { get; set; }
+        public string ProductName { get; set; }
+        public long ProductPrice { get; set; }
 
         public virtual Cart Cart { get; set; } = null!;
+        public Auction auction { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

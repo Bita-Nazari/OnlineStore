@@ -35,6 +35,24 @@ namespace OnlineStore.Controllers
             return View(orderView);
 
         }
+        public async Task<IActionResult> OrderAuctionList(CancellationToken cancellationToken)
+        {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
+
+            var orders = await _orderAppService.GetAllAuctionOrder(customer.Id, cancellationToken);
+            var orderView = orders.Select(o => new OrderViewModel
+            {
+                Id = o.Id,
+                CustomerId = o.CustomerId,
+                Pictures = o.Pictures,
+                TotalPrice = o.TotalPrice,
+                StatusName = o.StatusName,
+
+            }).ToList();
+            return View(orderView);
+
+        }
         public async Task<IActionResult> NewOrder(CancellationToken cancellationToken)
         {
             var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -75,6 +93,29 @@ namespace OnlineStore.Controllers
                 Pictures = order.Pictures,
                 StatusName = order.StatusName,
                 TotalPrice = order.TotalPrice,
+
+            };
+            return View(orderview);
+
+        }
+        public async Task<IActionResult> OrderAuctionDetail(int id, CancellationToken cancellationToken)
+        {
+            var order = await _orderAppService.DetailAuction(id, cancellationToken);
+            var orderview = new OrderDetailViewModel
+            {
+                Id = order.Id,
+                CustomerId = order.CustomerId,
+                Address = order.Address,
+                Email = order.Email,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                PhoneNumber = order.PhoneNumber,
+                Pictures = order.Pictures,
+                StatusName = order.StatusName,
+                TotalPrice = order.TotalPrice,
+                ProductPrice = order.ProductPrice,
+                ProductName = order.ProductName,
+                BoothId = order.BoothId,
 
             };
             return View(orderview);

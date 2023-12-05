@@ -73,5 +73,19 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             comment.IsConfirmed = true;
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
+
+        public async Task<BoothDto> GetAllBoothComment(int boothid, CancellationToken cancellationToken)
+        {
+            var booth = await _storeContext.Booths.Where(b=> b.Id == boothid)
+                .Include(b=> b.Comments)
+                .ThenInclude(c=> c.Customer)
+                .FirstOrDefaultAsync();
+            var comments = new BoothDto
+            {
+                Comments = booth.Comments.ToList(),
+
+            };
+            return comments;
+        }
     }
 }

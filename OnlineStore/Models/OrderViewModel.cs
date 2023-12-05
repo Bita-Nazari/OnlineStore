@@ -7,9 +7,10 @@ namespace OnlineStore.Models
         public int Id { get; set; }
 
         public long? TotalPrice { get; set; }
-
+        public int? AuctionId { get; set; }
         public int? CustomerId { get; set; }
-
+        public string ProductName { get; set; }
+        public long ProductPrice { get; set; }
         public int? StatusId { get; set; }
         public string? StatusName { get; set; }
 

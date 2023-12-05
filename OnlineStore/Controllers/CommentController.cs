@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
-using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
 using System.Security.Claims;
@@ -13,10 +12,10 @@ namespace OnlineStore.Controllers
         private readonly ICustomerAppService _customerAppService;
         public CommentController(ICommentAppService commentAppService, ICustomerAppService customerAppService)
         {
-            _commentAppService = commentAppService;   
+            _commentAppService = commentAppService;
             _customerAppService = customerAppService;
         }
-        public IActionResult Create(int orderid,int boothid)
+        public IActionResult Create(int orderid, int boothid)
         {
             var comment = new CommentViewModel
             {
@@ -26,7 +25,7 @@ namespace OnlineStore.Controllers
             return View(comment);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CommentViewModel commentView , CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(CommentViewModel commentView, CancellationToken cancellationToken)
         {
             var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
@@ -36,11 +35,22 @@ namespace OnlineStore.Controllers
                 BoothId = commentView.BoothId,
                 CustomerId = customer.Id,
                 OrderId = commentView.OrderId,
-             
+
 
             };
             await _commentAppService.Create(commentdto, cancellationToken);
             return RedirectToAction("OrderList", "Order");
+        }
+
+        public async Task<IActionResult> GetAllCommentBooth(int id, CancellationToken cancellationToken)
+        {
+            var booth =await _commentAppService.GetAllBoothComment(id, cancellationToken);
+            var commentview = new BoothViewModel
+            {
+                Comments = booth.Comments
+
+            };
+            return View(commentview);
         }
     }
 }

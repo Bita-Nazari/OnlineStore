@@ -16,13 +16,15 @@ public partial class Order
     public int? StatusId { get; set; }
 
     public int? CartId { get; set; }
+    public int? AuctionId { get; set; }
 
 
 
     #endregion Properties
 
     #region Navigation properties
-    public virtual Cart Cart { get; set; } = null!;
+    public virtual Cart? Cart { get; set; }
+    public virtual Auction?  Auction{ get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 

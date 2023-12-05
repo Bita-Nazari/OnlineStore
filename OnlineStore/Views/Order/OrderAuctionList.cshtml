@@ -1,0 +1,176 @@
+﻿@using OnlineStore.Models;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<OrderViewModel>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>مینی شاپ</title>
+    <link rel="shortcut icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/default-icon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="~/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/js/plugin/countdown/countdown.css">
+    <link rel="stylesheet" href="~/js/plugin/back-to-top/jquery-backToTop.min.css">
+    <link rel="stylesheet" href="~/js/plugin/hint-css/hint-css.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+</head>
+<body>
+    <div class="content">
+        <div class="dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="ui-boxs">
+                            <div class="ui-box">
+                                <div class="ui-box-item">
+                                    <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
+                                        <div class="dashboard-user-img-profile">
+                                            <img src="~/img/default-icon/user-profile.png" width="80" height="80"
+                                                 class="img-fluid rounded-circle" alt="">
+                                        </div>
+                                        @* <div class="dashboard-user-info">
+                                        <h6 class="user-name">@Model.UserName</h6>
+                                        <h6 class="text-muted user-number">@Model.PhoneNumber</h6>
+                                        </div>*@
+                                        <div class="dashboard-user-btn">
+                                            <div>
+                                                <i class="bi bi-arrow-left-circle"></i>
+                                                <a asp-area="" asp-controller="Account" asp-action="LogOut" class="text-muted">خروج از حساب</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @* <div class="ui-box">
+                            <div class="ui-box-item">
+                            <div class="ui-box-item-title" style="padding: 15px;">
+                            <h4 class="fw-bold">
+                            حساب کاربری شما
+                            </h4>
+                            </div>
+                            <div class="ui-box-item-desc p-0">
+                            <ul class="nav flex-column sidebar-menu">
+                            <li class="nav-item">
+                            <a asp-controller="Profile" asp-action="Profile" asp-route-id="@Model.CustomerId" class="nav-link text-muted">
+                            <i class="bi bi-person-circle"></i>
+                            <span>نمایه کاربری</span>
+                            </a>
+                            </li>
+                            <li class="nav-item">
+                            <a asp-controller="Booth" asp-action="Index" asp-route-id="@Model.CustomerId" class="nav-link text-muted">
+                            <i class="bi bi-house"></i>
+                            <span>لیست سفارشات </span>
+                            </a>
+                            </li>
+
+
+                            </ul>
+                            </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="content-box" style="padding:40px 20px;">
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <div class="ui-boxs">
+                                    <div class="ui-box">
+                                        <div class="ui-box-item ui-box-white">
+                                            <div class="ui-box-item-title" style="padding: 15px;">
+                                                <h4 class="fw-bold">
+                                                    آخرین سفارش ها
+                                                </h4>
+                                            </div>
+                                            @foreach (var order in Model)
+                                            {
+                                                <div class="ui-box-item-desc p-0">
+                                                    <div class="orders">
+                                                        <div class="order-item">
+                                                            <a href="order-detail.html">
+                                                                <div class="order-item-status">
+                                                                    <div class="order-item-status-item">
+                                                                        <p>
+                                                                            <i class="bi bi-bag-check-fill"></i>
+                                                                            <span>@order.StatusName</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="order-item-status-item">
+                                                                        <p>
+                                                                            <i class="bi bi-arrow-left pointer text-dark"></i>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="order-item-detail">
+                                                                    <ul class="nav">
+                                                                        @*<li class="nav-item text-muted">
+                                                                    29 خرداد 1399
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                    <span class="text-mute">کد سفارش</span>
+                                                                    <strong>17745651</strong>
+                                                                    </li>*@
+                                                                        <li class="nav-item">
+                                                                            <span class="text-mute">مبلغ</span>
+                                                                            <strong>@order.TotalPrice</strong>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="order-item-product-list">
+                                                                    @foreach (var picture in order.Pictures)
+                                                                    {
+                                                                        <div class="order-item-product-list-item">
+                                                                            <img src=@picture.Url alt=""
+                                                                                 class="img-thumbnail" width="70"
+                                                                                 height="70">
+                                                                        </div>
+                                                                    }
+
+
+                                                                </div>
+                                                                <div class="order-item-show">
+                                                                    <a asp-action="OrderAuctionDetail" asp-controller="Order" asp-route-id="@order.Id"><i asp class="bi bi-card-list"></i> مشاهده جزییات</a>
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <script src="~/js/jquery-3.6.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/swiper-bundle.min.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/plugin/countdown/countdown.js"></script>
+    <script src="~/js/plugin/back-to-top/jquery-backToTop.min.js"></script>
+    <script src="~/js/plugin/hint-css/hint-css.js"></script>
+    <script src="~/js/jquery-app.js"></script>
+    <script src="~/js/plugin/waves/waves.js"></script>
+    <script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+</body>
+</html>

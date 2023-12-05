@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
+using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
+using OS.Domain.Core.Entities;
+using System.Security.Claims;
+using System.Threading;
 
 namespace OnlineStore.Controllers
 {
@@ -11,12 +15,21 @@ namespace OnlineStore.Controllers
     {
 
         private readonly IBidAppService _bidAppService;
-        public BidController(IBidAppService bidAppService)
+        private readonly ICustomerAppService _customerAppService;
+        public BidController(IBidAppService bidAppService, ICustomerAppService customerAppService)
         {
             _bidAppService = bidAppService;
+            _customerAppService = customerAppService;
+
         }
-        public IActionResult Bid(int id, int CustomerId)
+        public async Task<IActionResult> Bid(int id, int CustomerId , CancellationToken cancellationToken)
         {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
+            if (customer.Address == null && customer.CityId == null && customer.FirstName == null && customer.FirstName == null)
+            {
+                return RedirectToAction("Edit", "Profile", new { id = customer.Id });
+            }
             var bid = new BidViewModel
             {
                 AuctionId = id,

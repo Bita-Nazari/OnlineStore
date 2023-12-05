@@ -44,7 +44,7 @@
 
                                             @foreach (var item in Model)
                                             {
-                                                @if( item.IsDisabled == false)
+                                                @if( item.IsDisabled != false && item.IsStarted != false)
                                                 {
                                                     <div class="col-lg-9">
                                                         <div class="category-item">

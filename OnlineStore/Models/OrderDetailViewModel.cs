@@ -8,10 +8,11 @@ namespace OnlineStore.Models
         public long? TotalPrice { get; set; }
 
         public int? CustomerId { get; set; }
-
+        public int? AuctionId { get; set; }
         public int? StatusId { get; set; }
         public string? StatusName { get; set; }
-
+        public string ProductName { get; set; }
+        public long ProductPrice { get; set; }
         public int? CartId { get; set; }
 
         public int? Commession { get; set; }
@@ -41,6 +42,8 @@ namespace OnlineStore.Models
         public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
         public virtual Customer Customer { get; set; } = null!;
+        public virtual Auction  auction { get; set; } = null!;
+        public int? BoothId { get; set; }
 
         public virtual List<ProductOrder>? ProductOrders { get; set; } = new List<ProductOrder>();
         public List<Product> Products { get; set; }

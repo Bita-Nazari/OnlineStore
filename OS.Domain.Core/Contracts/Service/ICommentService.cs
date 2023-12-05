@@ -14,6 +14,7 @@ namespace OS.Domain.Core.Contracts.Service
         Task Confirm(int commentId, CancellationToken cancellationToken);
         Task<List<CommentDto>> GetAll(CancellationToken cancellationToken);
         Task<CommentDto> Detail(int commentId, CancellationToken cancellationToken);
+        Task<BoothDto> GetAllBoothComment(int boothid, CancellationToken cancellationToken);
         Task<List<CommentDto>> GetProductComments(int productId, CancellationToken cancellationToken);
         
     }

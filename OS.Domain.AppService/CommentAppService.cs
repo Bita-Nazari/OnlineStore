@@ -50,5 +50,10 @@ namespace OS.Domain.AppService
         {
             throw new NotImplementedException();
         }
+
+        public async Task<BoothDto> GetAllBoothComment(int boothid, CancellationToken cancellationToken)
+        {
+          return await _commentService.GetAllBoothComment(boothid, cancellationToken);
+        }
     }
 }

@@ -43,7 +43,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             User.CityId = user.CityId;
             User.NationalCode = user.NationalCode;
             User.ShabaNumber = user.ShabaNumber;
-            User.Wallet = user.Wallet;
             User.User.Email = user.Email;
             User.User.PhoneNumber = user.PhoneNumber;
             User.User.UserName = user.UserName;
