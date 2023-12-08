@@ -1,4 +1,5 @@
-﻿@model AuctionViewModel
+﻿@using OS.Infrastucture.DataAccess.EfRepo.Repositories;
+@model AuctionViewModel
 <div class="content" style="padding: 10px 0;">
     <!-- start product meta -->
     <div class="product-meta">
@@ -67,11 +68,11 @@
                                     </div>
                                     <div class="se-cart-price">
 
-                                        <span class="se-cart-price-new"> @Model.StartTime</span>
+                                        <span class="se-cart-price-new"> @Model.StartTime.ToPersianString("yyyy/MM/dd HH:mm") </span>
                                     </div>
                                     <div class="se-cart-price">
 
-                                        <span class="se-cart-price-new"> @Model.EndTime</span>
+                                        <span class="se-cart-price-new"> @Model.EndTime.ToPersianString("yyyy/MM/dd HH:mm") </span>
                                     </div>
                                     <div class="se-cart-price">
                                         <a>اخرین قیمت ثبت شده</a>

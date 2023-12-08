@@ -21,8 +21,8 @@ namespace OnlineStore.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-                var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
+                //var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                //var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
                 var auctions = await _auctionAppService.GetAll(cancellationToken);
                 var list = auctions.Select(a => new AuctionViewModel()
                 {
@@ -34,8 +34,8 @@ namespace OnlineStore.Controllers
                     SubCategoryName = a.SubcategoryName,
                     Description = a.Description,
                     pictures = a.Pictures,
-                    CustomerId = customer.Id
-                    ,
+                    ////CustomerId = customer.Id
+                    //,
                     IsStarted = a.IsStarted,
                     IsDisabled = a.IsDisabled,
 

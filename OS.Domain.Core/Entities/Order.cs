@@ -17,6 +17,7 @@ public partial class Order
 
     public int? CartId { get; set; }
     public int? AuctionId { get; set; }
+    public int? Commession { get; set; }
 
 
 

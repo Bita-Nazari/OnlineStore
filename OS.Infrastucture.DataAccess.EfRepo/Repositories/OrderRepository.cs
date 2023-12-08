@@ -225,7 +225,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                    .ToList(),
                     TotalPrice = order.TotalPrice,
                     StatusName = order.Status.Text,
-                    BoothId = order.Auction.BoothId
+                    //BoothId = order.Auction.BoothId
 
                 };
 

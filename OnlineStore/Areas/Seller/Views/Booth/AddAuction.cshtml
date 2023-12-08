@@ -1,12 +1,16 @@
 ﻿@using OnlineStore.Areas.Seller.Models;
 @model AuctionViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, MvcControlsToolkit.AspNetCore.Input
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/ha-datetimepicker.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap-persian-datepicker@1.0.0/dist/css/persian-datepicker.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mdbootstrap-persian-datepicker@1.0.0/dist/js/persian-datepicker.min.js"></script>
 </head>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -42,15 +46,24 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" asp-for="StartTime">انتخاب زمان شروع</label>
                 <div class="col-md-4">
-                    <input asp-for="StartTime" type="datetime-local" step="60" />
+                  
+                    <input asp-for="StartTime" type="datetime-local" id="datetime-local"  />
                 </div>
                 
 
             </div>
+@*            <div class="form-group">
+                <label class="col-md-4 control-label" asp-for="StartTime">انتخاب زمان شروع</label>
+                <div class="col-md-4">
+                    <input asp-for="StartTime" type="text" id="persian-datetime" />
+                </div>
+            </div>*@
+
             <div class="form-group">
                 <label class="col-md-4 control-label" asp-for="EndTime">انتخاب زمان پایان</label>
                 <div class="col-md-4">
                     <input asp-for="EndTime" type="datetime-local" step="60" />
+                  
                 </div>
 
 
@@ -80,6 +93,35 @@
     <script src="~/js/jquery-app.js"></script>
     <script src="~/js/plugin/waves/waves.js"></script>
     <script src="~/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script type="text/javascript" src="~/ha-solardate.min.js"></script>
+    <script type="text/javascript" src="~/ha-lunardate.min.js"></script> 
+    <script type="text/javascript" src="~/ha-datetimepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mdbootstrap-persian-datepicker@1.0.0/dist/js/persian-datepicker.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize Persian Datepicker
+            var picker = new MdPersianDateTimePicker('#persian-datetime', {
+                // You can customize the options here
+                // For example:
+                targetTextSelector: '#persian-datetime',
+                dateFormat: 'yyyy-MM-dd HH:mm',
+                enableTimePicker: true,
+                isGregorian: false, // Set to true if you want to use the Gregorian calendar
+                showGregorianDate: false, // Set to false to hide the Gregorian date
+                setToNow: true, // Set to true to initialize with the current date and time
+                keyboard: true, // Set to true to allow keyboard input
+                initialValue: true, // Set to true to show the initial value when the picker opens
+            });
+
+            // Show the picker when the input is focused
+            document.getElementById('persian-datetime').addEventListener('focus', function () {
+                picker.show();
+            });
+        });
+    </script>
+
+
 </body>
 </html>
 

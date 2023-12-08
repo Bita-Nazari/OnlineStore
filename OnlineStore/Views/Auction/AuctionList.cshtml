@@ -1,4 +1,5 @@
-﻿@using OnlineStore.Models;
+﻿@using OS.Infrastucture.DataAccess.EfRepo.Repositories;
+@using OnlineStore.Models;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model List<AuctionViewModel>
 <!DOCTYPE html>
@@ -44,7 +45,7 @@
 
                                             @foreach (var item in Model)
                                             {
-                                                @if( item.IsDisabled != false && item.IsStarted != false)
+                                                @if( item.IsDisabled != true && item.IsStarted != false)
                                                 {
                                                     <div class="col-lg-9">
                                                         <div class="category-item">
@@ -82,12 +83,12 @@
                                                                                         <div class="product-price">
 
                                                                                             <p>زمان شروع</p>
-                                                                                            <p>@item.StartTime </p>
+                                                                                            <p>@item.StartTime.ToPersianString("yyyy/MM/dd HH:mm")  </p>
                                                                                         </div>
                                                                                         <div class="product-price">
 
                                                                                             <p>زمان پایان</p>
-                                                                                            <p>@item.EndTime </p>
+                                                                                            <p>@item.EndTime.ToPersianString("yyyy/MM/dd HH:mm")  </p>
                                                                                         </div>
                                                                                         <div class='countdown' data-start-time="@item.StartTime" data-end-time="@item.EndTime">
                                                                                             <a class="btn btn-sm btn-primary" asp-controller="Auction" asp-action="Auction" asp-route-id="@item.Id" asp-route-CustomerId="@item.CustomerId">مشاهده مزایده</a>
