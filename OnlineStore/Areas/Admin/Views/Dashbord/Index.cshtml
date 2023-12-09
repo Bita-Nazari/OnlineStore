@@ -57,17 +57,12 @@
                                     <div class="ui-box-item-desc p-0">
                                         <ul class="nav flex-column sidebar-menu">
                                             <li class="nav-item">
-                                                <a href="profile.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Profile" asp-action="Profile" class="nav-link text-muted">
                                                     <i class="bi bi-person-circle"></i>
                                                     <span>نمایه کاربری</span>
                                                 </a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a href="order.html" class="nav-link text-muted">
-                                                    <i class="bi bi-basket-fill"></i>
-                                                    <span>سفارش های ثبت شده</span>
-                                                </a>
-                                            </li>
+                                         
                                             <li class="nav-item">
                                                 <a asp-area="Admin" asp-controller="Booth" asp-action="Booth" class="nav-link text-muted">
                                                     <i class="bi bi-house"></i>
@@ -86,12 +81,7 @@
                                                     <span>لیست مشتریان</span>
                                                 </a>
                                             </li>
-                                 @*           <li class="nav-item">
-                                                <a asp-area="Admin" asp-controller="Customer" asp-action="Customer" class="nav-link text-muted">
-                                                    <i class="bi bi-pin-map"></i>
-                                                    <span>لیست مشتریان</span>
-                                                </a>
-                                            </li>*@
+                             
 
 
                                             <li class="nav-item">
@@ -113,6 +103,12 @@
                                                 <a asp-area="Admin" asp-controller="Comment" asp-action="Comment" class="nav-link text-muted">
                                                     <i class="bi bi-chat-dots"></i>
                                                     <span> کامنت ها</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="Order" asp-action="GetCommession" class="nav-link text-muted">
+                                                    <i class="bi bi-chat-dots"></i>
+                                                    <span> کارمزدها</span>
                                                 </a>
                                             </li>
 

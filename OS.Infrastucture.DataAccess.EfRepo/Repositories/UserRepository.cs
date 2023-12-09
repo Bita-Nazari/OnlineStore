@@ -146,7 +146,6 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     {
                         Wallet = 0,
                         CreatedAt = DateTime.Now,
-                        //CityId = 73
                         Carts = new List<Cart>()
                             {
                               new Cart()

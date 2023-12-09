@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Models;
 using OS.Domain.Core.Contracts.AppService;
+using System.Security.Claims;
 
 namespace OnlineStore.Areas.Admin.Controllers
 {
@@ -19,10 +20,11 @@ namespace OnlineStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int id , CancellationToken cancellationToken)
         {
-            var user = await _userAppService.GetById(id , cancellationToken);
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var user = await _userAppService.GetById(userId, cancellationToken);
             var usermodel = new UserViewModel()
             {
-                Id = id,
+                Id = userId,
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 

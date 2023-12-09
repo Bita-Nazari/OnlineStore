@@ -21,8 +21,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         }
         public async Task Create(int? CartId, CancellationToken cancellationToken)
         {
-            using (var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
+            
                 var products = await _storeContext.ProductCarts.Where(o => o.CartId == CartId).ToListAsync();
                 var admin = await _storeContext.Admins.Where(a => a.Id == 2).FirstOrDefaultAsync();
                 var cart = await _storeContext.Carts.Where(c => c.Id == CartId)
@@ -41,11 +40,13 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     CustomerId = cart.CustomerId,
                     TotalPrice = cart.ProductCarts.Sum(p => p.Products.NewPrice),
                     StatusId = 1,
+                    Commession = 0
                 };
                 await _storeContext.Orders.AddAsync(order);
                 await _storeContext.SaveChangesAsync(cancellationToken);
 
                 cart.Customer.Wallet -= order.TotalPrice;
+            
 
 
                 foreach (var product in products)
@@ -55,6 +56,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     var commission = (int)(product.Products.NewPrice * commissionRate);
 
                     var finalPrice = product.Products.NewPrice - commission;
+                    order.Commession += commission;
                     admin.Wallet += commission;
                     product.Products.booth.Seller.Wallet += finalPrice;
                     product.Products.booth.TotalCount += 1;
@@ -77,8 +79,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     await _storeContext.SaveChangesAsync(cancellationToken);
 
                 }
-                transactionScope.Complete();
-            }
+                
+            
 
 
         }
@@ -296,6 +298,19 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
             };
             return orderdto;
+        }
+
+        public async Task<List<OrderDto>> GetAllCommessionOrders(CancellationToken cancellationToken)
+        {
+            var orders = await _storeContext.Orders
+                .Include(o=>o.Customer)
+                .ThenInclude(c=>c.User)
+                .Select(o=> new OrderDto
+                {
+                    Commession = o.Commession,
+                    CustomerUsername = o.Customer.User.UserName
+                }).ToListAsync(cancellationToken);
+            return orders;
         }
     }
 }

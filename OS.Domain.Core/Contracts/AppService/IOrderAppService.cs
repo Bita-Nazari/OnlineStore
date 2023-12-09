@@ -13,6 +13,7 @@ namespace OS.Domain.Core.Contracts.AppService
         Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetAllBoothOrders(int BoothId, CancellationToken cancellationToken);
         Task<OrderDto> Detail(int orderId, CancellationToken cancellationToken);
+        Task<List<OrderDto>> GetAllCommessionOrders(CancellationToken cancellationToken);
 
 
 

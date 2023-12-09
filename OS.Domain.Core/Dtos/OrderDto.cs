@@ -23,6 +23,7 @@ namespace OS.Domain.Core.Dtos
 
         public int? Commession { get; set; }
         public string? FirstName { get; set; }
+        public string CustomerUsername { get; set; }
         public int? AuctionId { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }

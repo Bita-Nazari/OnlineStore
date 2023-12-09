@@ -47,6 +47,11 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
+        public async Task<List<OrderDto>> GetAllCommessionOrders(CancellationToken cancellationToken)
+        {
+            return await _orderRepository.GetAllCommessionOrders(cancellationToken);
+        }
+
         public async Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken)
         {
            return await _orderRepository.GetAllCustomerOrder(customerId, cancellationToken);    

@@ -38,6 +38,7 @@ namespace OnlineStore.Controllers
                 Name = x.Name,
                 Price = x.Price,
                 Description = x.Description,
+                ProductPictures = x.Pictures,
 
             }).ToList();
 

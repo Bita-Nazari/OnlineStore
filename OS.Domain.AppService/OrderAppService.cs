@@ -48,6 +48,11 @@ namespace OS.Domain.AppService
             throw new NotImplementedException();
         }
 
+        public async Task<List<OrderDto>> GetAllCommessionOrders(CancellationToken cancellationToken)
+        {
+            return await _orderService.GetAllCommessionOrders(cancellationToken);
+        }
+
         public async Task<List<OrderDto>> GetAllCustomerOrder(int customerId, CancellationToken cancellationToken)
         {
             return await _orderService.GetAllCustomerOrder(customerId, cancellationToken);

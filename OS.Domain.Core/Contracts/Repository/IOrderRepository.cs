@@ -16,6 +16,7 @@ namespace OS.Domain.Core.Contracts.Repository
         Task<OrderDto> Detail(int orderId, CancellationToken cancellationToken);
         Task<List<OrderDto>> GetAllAuctionOrder(int customerId, CancellationToken cancellationToken);
         Task<OrderDto> DetailAuction(int orderId, CancellationToken cancellationToken);
+        Task<List<OrderDto>> GetAllCommessionOrders(CancellationToken cancellationToken);
 
     }
 }

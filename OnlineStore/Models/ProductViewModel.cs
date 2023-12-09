@@ -31,6 +31,7 @@ namespace OnlineStore.Models
         public virtual ICollection<ProductOrder> ProductOrders { get; set; } = new List<ProductOrder>();
 
         public virtual ICollection<ProductPicture> ProductPictures { get; set; } = new List<ProductPicture>();
+        public List<Picture> pictures { get; set; }
 
         public virtual SubCategory SubCategory { get; set; } = null!;
     }

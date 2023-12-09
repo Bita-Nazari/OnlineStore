@@ -5,6 +5,7 @@ using System.Security.Claims;
 
 namespace OnlineStore.Controllers
 {
+    
     public class DashbordController : Controller
     {
         private readonly IUserAppService _userAppService;
@@ -19,7 +20,7 @@ namespace OnlineStore.Controllers
             var user = await _userAppService.GetById(userId, cancellationToken);
             var usermodel = new UserViewModel()
             {
-                Id = id,
+                Id = userId,
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 CustomerId = user.CustomerId,
