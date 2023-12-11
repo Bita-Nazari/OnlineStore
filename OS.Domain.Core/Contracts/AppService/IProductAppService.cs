@@ -20,6 +20,7 @@ namespace OS.Domain.Core.Contracts.AppService
         Task<List<ProductDto>> GetAllBySubCategoryId(int SubCategoryId,CancellationToken cancellationToken);
         public  Task<ProductDto> GetById(int id, CancellationToken cancellationToken);
         Task Confirm(int ProductId, CancellationToken cancellationToken);
+        public Task IsRestored(int id, CancellationToken cancellationToken);
 
 
 

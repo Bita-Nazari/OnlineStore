@@ -42,6 +42,11 @@ namespace OS.Domain.AppService
             throw new NotImplementedException();
         }
 
+        public async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+           await _boothService.IsRestored(id, cancellationToken);
+        }
+
         public async Task SoftDelete(int BoothId, CancellationToken cancellationToken)
         {
             await _boothService.SoftDelete(BoothId, cancellationToken);

@@ -81,5 +81,11 @@ namespace OnlineStore.Areas.Admin.Controllers
             await _boothAppService.SoftDelete(id, cancellationToken);
             return RedirectToAction("Booth");
         }
+
+        public async Task<IActionResult> Restore(int id, CancellationToken cancellationToken)
+        {
+            await _boothAppService.IsRestored(id, cancellationToken);
+            return RedirectToAction("Booth");
+        }
     }
 }

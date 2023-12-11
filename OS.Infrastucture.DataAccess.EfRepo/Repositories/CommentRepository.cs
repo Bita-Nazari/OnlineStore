@@ -87,5 +87,10 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             };
             return comments;
         }
+
+        public Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

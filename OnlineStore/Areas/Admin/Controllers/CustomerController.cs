@@ -107,6 +107,10 @@ namespace OnlineStore.Areas.Admin.Controllers
             return RedirectToAction("Customer");
         }
 
-
+        public async Task<IActionResult> Restore(int id, CancellationToken cancellationToken)
+        {
+            await _customerAppService.IsRestored(id, cancellationToken);
+            return RedirectToAction("Customer");
+        }
     }
 }

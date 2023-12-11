@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Areas.Admin.Models;
+using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
 
@@ -104,6 +105,11 @@ namespace OnlineStore.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
         {
             await _sellerAppService.DeleteSeller(id, cancellationToken);
+            return RedirectToAction("Seller");
+        }
+        public async Task<IActionResult> Restore(int id, CancellationToken cancellationToken)
+        {
+            await _sellerAppService.IsRestored(id, cancellationToken);
             return RedirectToAction("Seller");
         }
     }

@@ -55,5 +55,10 @@ namespace OS.Domain.AppService
         {
           return await _commentService.GetAllBoothComment(boothid, cancellationToken);
         }
+
+        public Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

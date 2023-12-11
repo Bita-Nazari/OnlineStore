@@ -25,6 +25,7 @@
     <div class="content">
         <div class="dashboard">
             <div class="container-fluid">
+                <div>
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="ui-boxs">
@@ -35,10 +36,10 @@
                                             <img src="~/img/default-icon/user-profile.png" width="80" height="80"
                                                  class="img-fluid rounded-circle" alt="">
                                         </div>
-                                        @*                                        <div class="dashboard-user-info">
-                                        <h6 class="user-name">@Model.UserName</h6>
-                                        <h6 class="text-muted user-number">@Model.PhoneNumber</h6>
-                                        </div>*@
+                                        <div class="dashboard-user-info">
+                                            <h6 class="user-name">@Model.UserName</h6>
+                                            <h6 class="text-muted user-number">@Model.PhoneNumber</h6>
+                                        </div>
                                         <div class="dashboard-user-btn">
                                             <div>
                                                 <i class="bi bi-arrow-left-circle"></i>
@@ -58,21 +59,58 @@
                                     <div class="ui-box-item-desc p-0">
                                         <ul class="nav flex-column sidebar-menu">
                                             <li class="nav-item">
-                                                <a href="profile.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Profile" asp-action="Profile" class="nav-link text-muted">
                                                     <i class="bi bi-person-circle"></i>
                                                     <span>نمایه کاربری</span>
                                                 </a>
                                             </li>
+
                                             <li class="nav-item">
-                                                <a asp-area="Seller" asp-controller="Booth" asp-action="Index" asp-route-id="@Model.Id" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Booth" asp-action="Booth" class="nav-link text-muted">
                                                     <i class="bi bi-house"></i>
-                                                    <span>غرفه </span>
+                                                    <span>غرفه ها</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a asp-area="Seller" asp-controller="CreateProduct" asp-action="Create" asp-route-id="@Model.Id" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Seller" asp-action="Seller" class="nav-link text-muted">
+                                                    <i class="bi bi-pin-map"></i>
+                                                    <span>لیست فروشندگان</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="Customer" asp-action="Customer" class="nav-link text-muted">
+                                                    <i class="bi bi-pin-map"></i>
+                                                    <span>لیست مشتریان</span>
+                                                </a>
+                                            </li>
+
+
+
+                                            <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="Product" asp-action="Product" class="nav-link text-muted">
+                                                    <i class="bi bi-basket-fill"></i>
+                                                    <span>  محصولات</span>
+                                                </a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="NewProduct" asp-action="Create" class="nav-link text-muted">
                                                     <i class="bi bi-pencil"></i>
                                                     <span>اضافه کردن محصول جدید</span>
+                                                </a>
+                                            </li>
+
+
+                                            <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="Comment" asp-action="Comment" class="nav-link text-muted">
+                                                    <i class="bi bi-chat-dots"></i>
+                                                    <span> کامنت ها</span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a asp-area="Admin" asp-controller="Order" asp-action="GetCommession" class="nav-link text-muted">
+                                                    <i class="bi bi-chat-dots"></i>
+                                                    <span> کارمزدها</span>
                                                 </a>
                                             </li>
 
@@ -82,6 +120,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     <div class="col-lg-9">
                         <div class="content-box" style="padding:40px 20px;">
                             <div class="row">

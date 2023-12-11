@@ -220,5 +220,14 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
     }).ToListAsync(cancellationToken);
             return productList;
         }
+
+        public async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+           var record = await _storeContext.Products
+                .Where(p=> p.Id == id).FirstOrDefaultAsync(cancellationToken);
+            record.IsDeleted = false;
+
+            await _storeContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }

@@ -19,5 +19,6 @@ namespace OS.Domain.Core.Contracts.Repository
 
         public Task DeleteCustomer(int id, CancellationToken cancellationToken);
         public Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken);
+        public Task IsRestored(int id, CancellationToken cancellationToken);
     }
 }

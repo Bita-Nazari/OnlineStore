@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineStore.Areas.Admin.Models;
+using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;
@@ -99,5 +100,10 @@ namespace OnlineStore.Areas.Admin.Controllers
             return RedirectToAction("Product");
         }
 
+        public async Task<IActionResult> Restore(int id, CancellationToken cancellationToken)
+        {
+            await _productAppService.IsRestored(id, cancellationToken);
+            return RedirectToAction("Product");
+        }
     }
 }

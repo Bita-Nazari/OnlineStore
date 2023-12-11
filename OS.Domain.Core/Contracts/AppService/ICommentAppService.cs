@@ -17,5 +17,6 @@ namespace OS.Domain.Core.Contracts.AppService
         Task<CommentDto> Detail(int commentId, CancellationToken cancellationToken);
         Task<List<CommentDto>>GetProductComments(int productId ,CancellationToken cancellationToken);
         Task Confirm(int CommentId, CancellationToken cancellationToken);
+        public Task IsRestored(int id, CancellationToken cancellationToken);
     }
 }

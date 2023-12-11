@@ -128,7 +128,14 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             return userdto;
         }
 
+        public async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+            var record = await _storeContext.Sellers
+     .Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+            record.IsDeleted = false;
 
+            await _storeContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }
 

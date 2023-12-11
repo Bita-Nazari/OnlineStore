@@ -21,9 +21,9 @@ namespace OS.Domain.AppService
             await _productBoothService.Create(product, cancellationToken);
         }
 
-        public Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+          return await _productBoothService.GetAll(cancellationToken);
         }
 
         public async Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)

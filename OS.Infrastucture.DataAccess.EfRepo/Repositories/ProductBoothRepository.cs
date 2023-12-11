@@ -31,9 +31,31 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
 
-        public Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var products = await _storeContext.ProductBooths
+        .Include(p => p.Product)
+        .ThenInclude(n => n.ProductPictures)
+        .ThenInclude(s => s.Picture)
+        .Include(p => p.Product)
+        .ThenInclude(s => s.SubCategory)
+        .Include(b => b.booth)
+        .Select(m => new ProductBoothDto()
+        {
+            Id = m.Id,
+            ProductName = m.Product.Name,
+            Description = m.Product.Description,
+            Pictures = m.Product.ProductPictures.Select(p => p.Picture).ToList(),
+            SubcategoryName = m.Product.SubCategory.Name,
+            SubcategoryId = m.Product.SubCategory.Id,
+            NewPrice = m.NewPrice,
+            BoothName = m.booth.Name,
+            BoothId = m.booth.Id,
+            Count = m.Count,
+            ProductId = m.Product.Id,
+
+        }).ToListAsync();
+            return products;
         }
 
         public async Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)

@@ -68,27 +68,25 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="ui-boxs">
-                            @*                            <div class="ui-box">
+                      <div class="ui-boxs">
+                        <div class="ui-box">
                             <div class="ui-box-item">
-                            <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
-                            <div class="dashboard-user-img-profile">
-                            <img src="img/default-icon/user-profile.png" width="80" height="80"
-                            class="img-fluid rounded-circle" alt="">
+                                <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
+                                    <div class="dashboard-user-img-profile">
+                                        <img src="~/img/default-icon/user-profile.png" width="80" height="80"
+                                             class="img-fluid rounded-circle" alt="">
+                                    </div>
+
+                                    <div class="dashboard-user-btn">
+                                        <div>
+                                            <i class="bi bi-arrow-left-circle"></i>
+                                            <a asp-area="" asp-controller="Account" asp-action="LogOut" class="text-muted">خروج از حساب</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="dashboard-user-info">
-                            <h6 class="user-name">amir rezaie</h6>
-                            <h6 class="text-muted user-number">09338492205</h6>
-                            </div>
-                            <div class="dashboard-user-btn">
-                            <div>
-                            <i class="bi bi-arrow-left-circle"></i>
-                            <a href="index.html" class="text-muted">خروج از حساب</a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>*@
+                        </div>
+           
                             <div class="ui-box">
                                 <div class="ui-box-item">
                                     <div class="ui-box-item-title" style="padding: 15px;">
@@ -161,6 +159,7 @@
                                 </div>
                             </div>
                         </div>
+                      
                     </div>
 
 
@@ -223,7 +222,7 @@
                                                                         }
                                                                         @if (item.IsDeleted == true)
                                                                         {
-                                                                            <a class="btn btn-sm btn-danger">حذف شد</a>
+                                                                            <a class="btn btn-sm  btn-success" asp-action="Restore" asp-route-id="@item.Id">بازگردانی</a>
                                                                         }
 
                                                                     </div>

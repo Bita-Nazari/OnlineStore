@@ -41,6 +41,11 @@ namespace OS.Domain.Service
             throw new NotImplementedException();
         }
 
+        public async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+            await _boothRepository.IsRestored(id, cancellationToken);
+        }
+
         public async Task SoftDelete(int BoothId, CancellationToken cancellationToken)
         {
             await _boothRepository.SoftDelete(BoothId, cancellationToken);

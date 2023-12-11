@@ -17,5 +17,6 @@ namespace OS.Domain.Core.Contracts.Service
         Task<BoothDto> Detail(int BoothId, CancellationToken cancellationToken);
         Task<List<BoothDto>> GetAll(CancellationToken cancellationToken);
         Task<BoothDto> GetBoothBySeller(int sellerId,CancellationToken cancellationToken);
+        public Task IsRestored(int id, CancellationToken cancellationToken);
     }
 }

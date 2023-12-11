@@ -36,5 +36,10 @@ namespace OS.Domain.AppService
         {
            return await _sellerservice.GetSellerById(SellerId, cancellationToken);
         }
+
+        public async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+           await _sellerservice.IsRestored(id, cancellationToken);
+        }
     }
 }

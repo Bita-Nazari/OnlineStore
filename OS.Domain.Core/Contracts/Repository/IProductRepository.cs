@@ -20,5 +20,6 @@ namespace OS.Domain.Core.Contracts.Repository
         Task<List<ProductDto>> GetAllBySubCategoryId(int SubCategoryId, CancellationToken cancellationToken);
          Task<ProductDto> GetById(int id, CancellationToken cancellationToken);
         Task Confirm(int ProductId, CancellationToken cancellationToken);
+        public Task IsRestored(int id, CancellationToken cancellationToken);
     }
 }

@@ -29,6 +29,7 @@ namespace OS.Domain.Core.Dtos
         public bool? IsDisabled { get; set; }
         public bool? IsStarted { get; set; }
         public int BidCount { get; set; }
+        public string CustomerName { get; set; }
         public TimeSpan Duration { get; set; }
         public DateTime persianstart { get; set; }
 

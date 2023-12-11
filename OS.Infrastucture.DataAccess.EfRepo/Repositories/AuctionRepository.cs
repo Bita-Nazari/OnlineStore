@@ -96,6 +96,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             //var booth = _storeContext.Booths.Where(b=> b.Id == BoothId).FirstOrDefault();
             var auctionList = _storeContext.Auctions.Where(a => a.BoothId == BoothId).AsNoTracking()
+                .Include(a=> a.Winner)
+                .ThenInclude(w=> w.User)
       .Include(p => p.Product)
       .ThenInclude(c => c.SubCategory)
       .Include(pt => pt.Product)
@@ -119,7 +121,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
           Pictures = a.Product.ProductPictures.Select(p => p.Picture).ToList(),
           IsStarted = a.IsStarted,
           IsDisabled = a.IsDisabled,
-
+          CustomerName = a.Winner.User.UserName
 
 
       }

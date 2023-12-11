@@ -159,6 +159,15 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
 
         }
+
+        public  async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+            var record = await _storeContext.Customers
+      .Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+            record.IsDeleted = false;
+
+            await _storeContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }
 

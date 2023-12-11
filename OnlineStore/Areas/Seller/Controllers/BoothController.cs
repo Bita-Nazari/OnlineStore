@@ -159,6 +159,7 @@ namespace OnlineStore.Areas.Seller.Controllers
                     ProductName = model.ProductName,
                     ProductId = model.ProductId,
                     BoothId = model.BoothId,
+
                 };
                 await _auctionAppService.Create(auction, cancellationToken);
                 return RedirectToAction("Index", new { Id = model.SellerId });
@@ -179,7 +180,9 @@ namespace OnlineStore.Areas.Seller.Controllers
                 EndTime = a.EndTime,
                 SubCategoryName = a.SubcategoryName,
                 Description = a.Description,
-                pictures = a.Pictures
+                pictures = a.Pictures,
+                CustomerId = a.CustomerId,
+                CustomerName = a.CustomerName,
 
             }).ToList();
             return View(list);

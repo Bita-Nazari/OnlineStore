@@ -22,9 +22,9 @@ namespace OS.Domain.Service
             await _productBoothRepository.Create(product, cancellationToken);
         }
 
-        public Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<ProductBoothDto>> GetAll(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+           return await _productBoothRepository.GetAll(cancellationToken);
         }
 
         public async Task<List<ProductBoothDto>> GetAllByBoothId(int BoothId, CancellationToken cancellationToken)

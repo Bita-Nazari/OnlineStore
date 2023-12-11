@@ -17,5 +17,7 @@ namespace OS.Domain.Core.Contracts.AppService
         public Task EditSeller(AlluserDto user, CancellationToken cancellationToken);
        
         public Task DeleteSeller(int id, CancellationToken cancellationToken);
+        public Task IsRestored(int id, CancellationToken cancellationToken);
+
     }
 }

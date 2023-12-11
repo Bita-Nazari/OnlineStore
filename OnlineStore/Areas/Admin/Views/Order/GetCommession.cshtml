@@ -69,26 +69,23 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="ui-boxs">
-                            @*                            <div class="ui-box">
-                            <div class="ui-box-item">
-                            <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
-                            <div class="dashboard-user-img-profile">
-                            <img src="img/default-icon/user-profile.png" width="80" height="80"
-                            class="img-fluid rounded-circle" alt="">
+                            <div class="ui-box">
+                                <div class="ui-box-item">
+                                    <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
+                                        <div class="dashboard-user-img-profile">
+                                            <img src="~/img/default-icon/user-profile.png" width="80" height="80"
+                                                 class="img-fluid rounded-circle" alt="">
+                                        </div>
+                                   
+                                        <div class="dashboard-user-btn">
+                                            <div>
+                                                <i class="bi bi-arrow-left-circle"></i>
+                                                <a asp-area="" asp-controller="Account" asp-action="LogOut" class="text-muted">خروج از حساب</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="dashboard-user-info">
-                            <h6 class="user-name">amir rezaie</h6>
-                            <h6 class="text-muted user-number">09338492205</h6>
-                            </div>
-                            <div class="dashboard-user-btn">
-                            <div>
-                            <i class="bi bi-arrow-left-circle"></i>
-                            <a href="index.html" class="text-muted">خروج از حساب</a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>*@
                             <div class="ui-box">
                                 <div class="ui-box-item">
                                     <div class="ui-box-item-title" style="padding: 15px;">
@@ -99,19 +96,14 @@
                                     <div class="ui-box-item-desc p-0">
                                         <ul class="nav flex-column sidebar-menu">
                                             <li class="nav-item">
-                                                <a href="profile.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Profile" asp-action="Profile" class="nav-link text-muted">
                                                     <i class="bi bi-person-circle"></i>
                                                     <span>نمایه کاربری</span>
                                                 </a>
                                             </li>
+
                                             <li class="nav-item">
-                                                <a href="order.html" class="nav-link text-muted">
-                                                    <i class="bi bi-basket-fill"></i>
-                                                    <span>سفارش های ثبت شده</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="favorite.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Booth" asp-action="Booth" class="nav-link text-muted">
                                                     <i class="bi bi-house"></i>
                                                     <span>غرفه ها</span>
                                                 </a>
@@ -129,30 +121,33 @@
                                                 </a>
                                             </li>
 
+
+
                                             <li class="nav-item">
-                                                <a href="favorite.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Product" asp-action="Product" class="nav-link text-muted">
                                                     <i class="bi bi-basket-fill"></i>
                                                     <span>  محصولات</span>
                                                 </a>
                                             </li>
 
                                             <li class="nav-item">
-                                                <a href="address.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="NewProduct" asp-action="Create" class="nav-link text-muted">
                                                     <i class="bi bi-pencil"></i>
                                                     <span>اضافه کردن محصول جدید</span>
                                                 </a>
                                             </li>
 
+
                                             <li class="nav-item">
-                                                <a href="notification.html" class="nav-link text-muted">
-                                                    <i class="bi bi-pencil"></i>
-                                                    <span>تایید محصولات ها</span>
+                                                <a asp-area="Admin" asp-controller="Comment" asp-action="Comment" class="nav-link text-muted">
+                                                    <i class="bi bi-chat-dots"></i>
+                                                    <span> کامنت ها</span>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="notification.html" class="nav-link text-muted">
+                                                <a asp-area="Admin" asp-controller="Order" asp-action="GetCommession" class="nav-link text-muted">
                                                     <i class="bi bi-chat-dots"></i>
-                                                    <span>تایید کامنت ها</span>
+                                                    <span> کارمزدها</span>
                                                 </a>
                                             </li>
 
@@ -161,6 +156,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
 
 

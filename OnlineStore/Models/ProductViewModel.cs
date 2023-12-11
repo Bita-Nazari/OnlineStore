@@ -23,7 +23,10 @@ namespace OnlineStore.Models
         public int SubCategoryId { get; set; }
 
         public bool IsAvailable { get; set; }
+        public long StartPrice { get; set; }
+        public string? ProductName { get; set; }
 
+        public int Count { get; set; }
         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
 
         public virtual Booth Booth { get; set; } = null!;

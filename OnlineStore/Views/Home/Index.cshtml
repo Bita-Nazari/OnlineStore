@@ -327,7 +327,7 @@
     </div>
     <!-- end main main-category -->
 
-    <div class="banner">
+  @*  <div class="banner">
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-md-7">
@@ -346,10 +346,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     <!-- end banner -->
 
-    <div class="product-box">
+@*    <div class="product-box">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -360,36 +360,49 @@
                     <div class="swiper product-box-items pt-md-0 pt-4 prodcut-box-one-slider">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <div class="product-box-item">
-                                    <div class="product-box-item-img">
-                                        <a href="">
-                                            <img src="~/img/product/wach2.jpg" alt="" class="img-fluid one-image">
-                                            <img src="~/img/product/wach3.jpg" alt="" class="img-fluid two-image">
-                                        </a>
-                                        <div class="product-box-item-hover">
-                                            <div class="product-box-item-hover-btn">
-                                                <span class="see-more hint--right" data-hint="مشاهده سریع"
-                                                    data-bs-toggle="modal" data-bs-target="#productModal"><i
-                                                        class="bi bi-eye"></i></span>
-                                                <span class="add-cart hint--right" data-hint="افزودن به سبد خرید"><i
-                                                        class="bi bi-cart-plus"></i></span>
+                               
+                                        @foreach (var item in Model)
+                                        {
+                                            <div class="swiper-slide">
+                                                <div class="product-box-item">
+                                                    <div class="product-box-item-img">
+                                                        <div class="product-row-img">
+                                                            @if (item.pictures != null && item.pictures.Any())
+                                                            {
+                                                                var firstPicture = item.pictures.First();
+                                                                <img src="@Url.Content(firstPicture.Url)" width="150" alt="Auction Image">
+                                                            }
+                                                        </div>
+                                                        <div class="product-box-item-hover">
+                                                            <div class="product-box-item-hover-btn">
+                                                                <span class="see-more hint--right" data-hint="مشاهده محصول"
+                                                                      data-bs-toggle="modal" data-bs-target="#productModal">
+                                                                    <i class="bi bi-eye"></i>
+                                                                </span>
+                                                                <span class="add-cart hint--right" data-hint="افزودن به سبد خرید">
+                                                                    <i class="bi bi-cart-plus"></i>
+                                                                </span>
+                                                             
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <a href="product.html">
+                                                        <div class="product-box-item-desc">
+                                                            <div class="product-box-item-title">
+                                                                <h6>
+                                                                    @item.ProductName
+                                                                </h6>
+                                                            </div>
+                                                            <div class="product-box-price default">
+                                                                <span class="new-price">@item.StartPrice</span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <a href="product.html">
-                                        <div class="product-box-item-desc">
-                                            <div class="product-box-item-title">
-                                                <h6>
-                                                    گوشی موبایل اپل مدل iPhone 13 Pro Max A2644 دو سیم‌ کارت ظرفیت 256
-                                                    گیگابایت و رم 6 گیگابایت
-                                                </h6>
-                                            </div>
-                                            <div class="product-box-price default">
-                                                <span class="new-price">590,000 تومان</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+
+                                        }
+
                             </div>
 
                             
@@ -410,7 +423,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>*@
     <!-- end product box -->
 
 
@@ -465,42 +478,49 @@
 
                         @foreach(var item in Model)
                         {
-                            <div class="swiper-slide">
-                                <div class="product-box-item">
-                                    <div class="product-box-item-img">
-                                        <a href="">
-                                            <img src="~/img/product/product-image1.jpg" alt="" class="img-fluid one-image">
-                                            <img src="~/img/product/product-image2.jpg" alt="" class="img-fluid two-image">
+                            if (item.Count != 0)
+                            {
+                                <div class="swiper-slide">
+                                    <div class="product-box-item">
+                                        <div class="product-box-item-img">
+                                            <div class="product-row-img">
+                                                @if (item.pictures != null && item.pictures.Any())
+                                                {
+                                                    var firstPicture = item.pictures.First();
+                                                    <img src="@Url.Content(firstPicture.Url)" width="150" alt="Auction Image">
+                                                }
+                                            </div>
+                                            <div class="product-box-item-hover">
+                                                <div class="product-box-item-hover-btn">
+                                                    <a asp-controller="Product" asp-action="Product" asp-route-id="@item.Id">
+                                                        <i class="bi bi-eye"></i>
+                                                    </a>
+                                                    <a asp-controller="Cart" asp-action="AddProduct" asp-route-id="@item.Id" class="add-cart hint--right" data-hint="افزودن به سبد خرید">
+                                                        <i class="bi bi-cart-plus"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="product.html">
+                                            <div class="product-box-item-desc">
+                                                <div class="product-box-item-title">
+                                                    <h6>
+                                                        @item.Name
+                                                    </h6>
+                                                </div>
+                                                <div class="product-box-price default">
+                                                    <span class="new-price">@item.Price</span>
+                                                </div>
+                                            </div>
                                         </a>
-                                        <div class="product-box-item-hover">
-                                            <div class="product-box-item-hover-btn">
-                                                <span class="see-more hint--right" data-hint="مشاهده محصول"
-                                                      data-bs-toggle="modal" data-bs-target="#productModal">
-                                                    <i class="bi bi-eye"></i>
-                                                </span>
-                                                <span class="add-cart hint--right" data-hint="افزودن به سبد خرید">
-                                                    <i class="bi bi-cart-plus"></i>
-                                                </span>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <a href="product.html">
-                                        <div class="product-box-item-desc">
-                                            <div class="product-box-item-title">
-                                                <h6>
-@item.Name
-                                                </h6>
-                                            </div>
-                                            <div class="product-box-price default">
-                                                <span class="new-price">@item.Price</span>
-                                            </div>
-                                        </div>
-                                    </a>
                                 </div>
-                            </div>
+
+                            }
 
                         }
-                        
+
+                           
 
                         
                         <div class="swiper-slide">

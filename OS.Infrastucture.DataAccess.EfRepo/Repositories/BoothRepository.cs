@@ -135,6 +135,15 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             await _storeContext.SaveChangesAsync(cancellationToken);
         }
 
+        public async Task IsRestored(int id, CancellationToken cancellationToken)
+        {
+            var record = await _storeContext.Booths
+      .Where(p => p.Id == id).FirstOrDefaultAsync(cancellationToken);
+            record.IsDeleted = false;
+
+            await _storeContext.SaveChangesAsync(cancellationToken);
+        }
+
         public async Task SoftDelete(int BoothId, CancellationToken cancellationToken)
         {
             var booth = await _storeContext.Booths
