@@ -140,7 +140,7 @@
 
                                                                     </div>
                                                                     <div class="product-row-icon">
-                                                                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@Model.Id">ویرایش</a>
+                                                                        <a class="btn btn-sm btn-primary" asp-controller="Booth" asp-action="Edit" asp-route-id="@Model.Id">ویرایش</a>
                                                                         <a class="btn btn-sm btn-outline-warning" asp-action="AddProduct" asp-route-id="@Model.Id" asp-route-SellerId="@Model.SellerId">اضافه کردن کالا</a>
                                                                         <a class="btn btn-sm btn-outline-success" asp-action="AddAuction" asp-route-id="@Model.Id" asp-route-SellerId="@Model.SellerId">اضافه کردن مزایده</a>
                                                                         <a class="btn btn-sm btn-success" asp-action="AuctionList" asp-route-id="@Model.Id" asp-route-SellerId="@Model.SellerId">لیست کالاهای مزایده ای</a>
