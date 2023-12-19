@@ -2,11 +2,6 @@
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
 using OS.Infrastucture.Db.SqlServer.DataBase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
@@ -44,7 +39,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         public async Task<AlluserDto> GetAdminByUserId(int Userid, CancellationToken cancellationToken)
         {
             var admin = await _storeContext.Admins.Where(a => a.UserId == Userid)
-                .Include(a=> a.User)
+                .Include(a => a.User)
                 .FirstOrDefaultAsync();
             var admindto = new AlluserDto
             {
@@ -57,6 +52,24 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Wallet = admin.Wallet
             };
             return admindto;
+        }
+
+        public async Task<DashbordDto> Info(CancellationToken cancellationToken)
+        {
+            var Costomers = await _storeContext.Customers.CountAsync();
+            var Booths = await _storeContext.Booths.CountAsync();
+            var Orders = await _storeContext.Orders.CountAsync();
+            var Comments = await _storeContext.Comments.CountAsync();
+
+            var dashbord = new DashbordDto
+            {
+
+                CommentCount = Comments,
+                BoothCount = Booths,
+                CustomerCount = Costomers,
+                OrderCount = Orders,
+            };
+            return dashbord;
         }
     }
 }

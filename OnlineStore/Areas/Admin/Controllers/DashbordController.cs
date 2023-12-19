@@ -9,10 +9,12 @@ namespace OnlineStore.Areas.Admin.Controllers
     public class DashbordController : Controller
     {
         private readonly IUserAppService _userAppService;
+        private readonly IAdminAppService _adminAppService;
 
-        public DashbordController(IUserAppService userAppService)
+        public DashbordController(IUserAppService userAppService , IAdminAppService adminAppService)
         {
             _userAppService = userAppService;
+            _adminAppService = adminAppService;
         }
        
         [Area("Admin")]
@@ -22,11 +24,16 @@ namespace OnlineStore.Areas.Admin.Controllers
         {
             var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
             var user = await _userAppService.GetById(userId, cancellationToken);
+            var info = await _adminAppService.Info(cancellationToken);
             var usermodel = new UserViewModel()
             {
                 Id = userId,
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
+                CommentCount = info.CommentCount,
+                CustomerCount = info.CustomerCount,
+                BoothCount = info.BoothCount,
+                OrderCount = info.OrderCount,
                 
 
             };

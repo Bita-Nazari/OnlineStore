@@ -60,5 +60,10 @@ namespace OS.Domain.AppService
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<CommentDto>> GetAllCustomerComment(int id, CancellationToken cancellationToken)
+        {
+            return await _commentService.GetAllCustomerComment(id, cancellationToken);
+        }
     }
 }

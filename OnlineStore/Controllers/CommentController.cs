@@ -52,5 +52,21 @@ namespace OnlineStore.Controllers
             };
             return View(commentview);
         }
+        public async Task<IActionResult> GetAllCommentCustomer( CancellationToken cancellationToken)
+        {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
+            var comments = await _commentAppService.GetAllCustomerComment(customer.Id, cancellationToken);
+            var commentview = comments.Select(c => new CommentViewModel
+            {
+                IsConfirmed = c.IsConfirmed,
+                IsDeleted = c.IsDeleted,
+                Text= c.Text,
+                BoothName = c.BoothName
+
+            }).ToList();
+           
+            return View(commentview);
+        }
     }
 }

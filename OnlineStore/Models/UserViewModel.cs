@@ -13,5 +13,9 @@
         public string? Role { get; set; }
         public bool IsSeller { get; set; }
         public List<string>? Roles { get; set; }
+        public int? CustomerCount { get; set; }
+        public int? BoothCount { get; set; }
+        public int? CommentCount { get; set; }
+        public int? OrderCount { get; set; }
     }
 }

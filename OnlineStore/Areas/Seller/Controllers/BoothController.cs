@@ -37,6 +37,7 @@ namespace OnlineStore.Areas.Seller.Controllers
                     SellerId = seller.Id,
                     Description = booth.Description,
                     Medalname = booth.Medalname,
+                    TotalCount = booth.TotalCount,
                     Name = booth.Name,
 
                 };

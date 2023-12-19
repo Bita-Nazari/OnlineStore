@@ -36,6 +36,15 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
            
         }
 
+        public async Task DeleteProduct(int? CartId, int ProductId, CancellationToken cancellationToken)
+        {
+            var product = await _storeContext.ProductCarts
+                .Where(c=> c.CartId==CartId && c.ProductBoothId==ProductId)
+                .FirstOrDefaultAsync();
+             _storeContext.ProductCarts.Remove(product);
+            await _storeContext.SaveChangesAsync(cancellationToken);
+        }
+
         public Task<List<CartProductDto>> GetAllProduct(CartProductDto cartDto, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

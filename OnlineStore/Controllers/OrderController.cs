@@ -10,11 +10,13 @@ namespace OnlineStore.Controllers
         private readonly IOrderAppService _orderAppService;
         private readonly ICustomerAppService _customerAppService;
         private readonly ICartAppService _cartAppService;
-        public OrderController(IOrderAppService orderAppService, ICustomerAppService customerAppService, ICartAppService cartAppService)
+        private readonly ICartProductAppService _cartProductAppService;
+        public OrderController(IOrderAppService orderAppService, ICustomerAppService customerAppService, ICartAppService cartAppService,ICartProductAppService cartProductAppService)
         {
             _orderAppService = orderAppService;
             _customerAppService = customerAppService;
             _cartAppService = cartAppService;
+            _cartProductAppService= cartProductAppService;
         }
         public async Task<IActionResult> OrderList(CancellationToken cancellationToken)
         {
@@ -33,6 +35,14 @@ namespace OnlineStore.Controllers
 
             }).ToList();
             return View(orderView);
+
+        }
+        public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+        {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var customer = await _customerAppService.GetCustomerByUserId(userId, cancellationToken);
+            await _cartProductAppService.DeleteProduct(customer.ActiveCartId, id,  cancellationToken);
+            return RedirectToAction("Cart", "Cart");
 
         }
         public async Task<IActionResult> OrderAuctionList(CancellationToken cancellationToken)
@@ -67,6 +77,16 @@ namespace OnlineStore.Controllers
                 ViewBag.error = "موجودی کافی نیست ";
                 return RedirectToAction("Cart", "Cart");
             }
+            foreach (var product in cart.Products)
+            {
+                if (product.Count == 0)
+                {
+
+                    TempData["Message"] = "کالای انتخابی موجود نیست ";
+                    return RedirectToAction("Cart", "Cart");
+                }
+            }
+            
             await _orderAppService.Create(customer.ActiveCartId, cancellationToken);
             await _cartAppService.Create(customer.Id, cancellationToken);
             return RedirectToAction("SuccessPayment", "Order");

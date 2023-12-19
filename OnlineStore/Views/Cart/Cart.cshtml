@@ -38,10 +38,12 @@
                                     @foreach (var item in Model.Products)
                                     {
                                         <tbody>
+
                                             <tr>
+                                                <td class="icon"><a asp-action="Delete" asp-controller="Order" asp-route-id="@item.Id"><i class="bi bi-x-circle-fill"></i></a></td>
                                                 @foreach (var picture in item.Product.ProductPictures)
                                                 {
-                                                    <td class="icon"><a href=""><i class="bi bi-x-circle-fill"></i></a></td>
+                                                    
                                                     <td class="position-relative">
                                                         <img src=@picture.Picture.Url class=""
                                                              alt="">
@@ -54,11 +56,16 @@
                                                 </td>
 
                                             </tr>
+                                            <tr>
+                                                @TempData["Message"]
+
+</tr>
                                         </tbody>
 
                                     }
 
                                 </table>
+                               
                             </div>
 
                         </div>

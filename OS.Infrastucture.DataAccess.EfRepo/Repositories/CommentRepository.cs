@@ -92,5 +92,22 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<CommentDto>> GetAllCustomerComment(int id, CancellationToken cancellationToken)
+        {
+           var comments = await _storeContext.Comments.Where(c=>c.CustomerId == id).
+                Include(c=> c.Customer)
+                .Include(c=> c.Booth)
+                .Select(c=> new CommentDto
+                {
+                    Id = c.Id,
+                    CustomerName = c.Customer.FirstName + " " + c.Customer.LastName,
+                    IsDeleted = c.IsDeleted,
+                    IsConfirmed = c.IsConfirmed,
+                    BoothName = c.Booth.Name,
+                    Text = c.Text
+                }).ToListAsync();
+            return comments;
+        }
     }
 }

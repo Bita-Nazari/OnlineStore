@@ -30,5 +30,10 @@ namespace OS.Domain.Service
         {
             return await _adminRepository.GetAdminByUserId(Userid, cancellationToken);
         }
+
+        public async Task<DashbordDto> Info(CancellationToken cancellationToken)
+        {
+            return await _adminRepository.Info(cancellationToken);
+        }
     }
 }

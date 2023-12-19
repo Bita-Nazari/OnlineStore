@@ -11,5 +11,6 @@ namespace OS.Domain.Core.Contracts.Service
     {
         Task<List<CartProductDto>> GetAllProduct(CartProductDto cartDto, CancellationToken cancellationToken);
         Task AddProduct(int CustomerId, int ProductId, CancellationToken cancellationToken);
+        Task DeleteProduct(int? CartId, int ProductId, CancellationToken cancellationToken);
     }
 }

@@ -118,7 +118,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 CreatedAt = booth.CreatedAt,
                 Description = booth.Description,
                 Medalname = booth.Medal.MedalType.Type,
-                //TotalCount = booth.TotalCount,
+                TotalCount = booth.TotalCount,
             };
 
             return boothdto;

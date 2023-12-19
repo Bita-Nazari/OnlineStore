@@ -12,5 +12,6 @@ namespace OS.Domain.Core.Contracts.Service
         public Task<AlluserDto> GetAdminById(int AdminId, CancellationToken cancellationToken);
         public Task<AlluserDto> GetAdminByUserId(int Userid, CancellationToken cancellationToken);
         public Task EditAdmin(AlluserDto user, CancellationToken cancellationToken);
+        public Task<DashbordDto> Info(CancellationToken cancellationToken);
     }
 }

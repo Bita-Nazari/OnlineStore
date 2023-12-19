@@ -22,6 +22,11 @@ namespace OS.Domain.Service
             await _cartProductRepository.AddProduct(CustomerId, ProductId, cancellationToken);
         }
 
+        public async Task DeleteProduct(int? CartId, int ProductId, CancellationToken cancellationToken)
+        {
+            await _cartProductRepository.DeleteProduct(CartId, ProductId, cancellationToken);   
+        }
+
         public Task<List<CartProductDto>> GetAllProduct(CartProductDto cartDto, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

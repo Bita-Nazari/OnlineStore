@@ -124,18 +124,18 @@
                                 <div class="col-xl-3 col-6 dashboard-cart-col">
                                     <div class="dashboard-cart shadow-box">
                                         <div class="dashboard-cart-title">
-                                            <i class="bi bi-bag-check"></i> کالا های ثبت شده
+                                            <i class="bi bi-bag-check"></i> تعداد سفارش های ثبت شده
                                             شده
                                         </div>
-                                        <div class="dashboard-cart-footer" style="background: #0476D0;">0</div>
+                                        <div class="dashboard-cart-footer" style="background: #0476D0;">@Model.OrderCount</div>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-6 dashboard-cart-col">
                                     <div class="dashboard-cart shadow-box">
                                         <div class="dashboard-cart-title">
-                                            <i class="bi bi-activity"></i> تعداد کاربران سایت
+                                            <i class="bi bi-activity"></i> تعداد مشتریان
                                         </div>
-                                        <div class="dashboard-cart-footer" style="background: #F6A21E;">0</div>
+                                        <div class="dashboard-cart-footer" style="background: #F6A21E;">@Model.CustomerCount</div>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-6 dashboard-cart-col">
@@ -144,7 +144,7 @@
                                             <i class="bi bi-repeat"></i> تعداد کامنت های ثبت شده
                                             شده
                                         </div>
-                                        <div class="dashboard-cart-footer" style="background: #0db47f;">0</div>
+                                        <div class="dashboard-cart-footer" style="background: #0db47f;">@Model.CommentCount</div>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-6 dashboard-cart-col">
@@ -152,7 +152,7 @@
                                         <div class="dashboard-cart-title">
                                             <i class="bi bi-bag-check"></i> تعداد غرفه ها
                                         </div>
-                                        <div class="dashboard-cart-footer" style="background: #BA0F30;">0</div>
+                                        <div class="dashboard-cart-footer" style="background: #BA0F30;">@Model.BoothCount</div>
                                     </div>
                                 </div>
                             </div>
