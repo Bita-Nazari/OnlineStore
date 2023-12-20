@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
+using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
@@ -8,9 +11,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly OnlineStoreContext _storeContext;
-        public CustomerRepository(OnlineStoreContext storeContext)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public CustomerRepository(OnlineStoreContext storeContext , IWebHostEnvironment hostEnvironment)
         {
             _storeContext = storeContext;
+            _hostingEnvironment = hostEnvironment;
         }
 
         public async Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken)
@@ -40,8 +45,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
 
 
-        public async Task EditCustomer(AlluserDto user, CancellationToken cancellationToken)
+        public async Task EditCustomer(AlluserDto user ,IFormFile file, CancellationToken cancellationToken)
         {
+
             var User = await _storeContext.Customers.Where(s => s.Id == user.Id)
             .Include(u => u.User)
             .Include(u => u.City).FirstOrDefaultAsync();
@@ -49,14 +55,58 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 throw new NullReferenceException("user did not found");
             }
-            User.FirstName = user.FirstName;
-            User.LastName = user.LastName;
-            User.CityId = user.CityId;
-            User.Address = user.Address;
-            User.User.Email = user.Email;
-            User.User.PhoneNumber = user.PhoneNumber;
-            User.User.UserName = user.UserName;
-            await _storeContext.SaveChangesAsync(cancellationToken);
+
+            if (file != null && file.Length > 0)
+            {
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+
+                var picture = new Picture
+                {
+
+                    Url = "/upload/" + uniqueFileName,
+                    IsDeleted = false,
+                    IsConfirmed = false,
+                    IsProfilePicture = false
+
+
+                };
+                await _storeContext.Pictures.AddAsync(picture);
+                await _storeContext.SaveChangesAsync();
+
+                var webRootPath = _hostingEnvironment.WebRootPath;
+
+                // Combine with the upload folder path
+                var uploadPath = Path.Combine(webRootPath, "upload");
+
+
+                var filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream, cancellationToken);
+                }
+                User.FirstName = user.FirstName;
+                User.LastName = user.LastName;
+                User.CityId = user.CityId;
+                User.Address = user.Address;
+                User.User.Email = user.Email;
+                User.User.PhoneNumber = user.PhoneNumber;
+                User.User.UserName = user.UserName;
+                User.PictureId = picture.Id;
+                await _storeContext.SaveChangesAsync(cancellationToken);
+            }
+            else
+            {
+                User.FirstName = user.FirstName;
+                User.LastName = user.LastName;
+                User.CityId = user.CityId;
+                User.Address = user.Address;
+                User.User.Email = user.Email;
+                User.User.PhoneNumber = user.PhoneNumber;
+                User.User.UserName = user.UserName;
+                await _storeContext.SaveChangesAsync(cancellationToken);
+            }
         }
 
 
@@ -104,6 +154,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             var customer = await _storeContext.Customers.Where(c => c.Id == CustomerId)
                 .Include(u => u.User)
                 .Include(c => c.City)
+                .Include(c=> c.Picture)
                 .FirstOrDefaultAsync(cancellationToken);
             if (customer == null)
             {
@@ -123,6 +174,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 CityName = customer.City?.Name,
                 PictureId = customer.PictureId,
                 ActiveCartId = customer.ActiveCartId,
+                PictureUrl = customer.Picture.Url
 
             };
             return userdto;

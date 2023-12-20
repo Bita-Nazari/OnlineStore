@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Contracts.Repository;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
 using System;
@@ -22,9 +23,9 @@ namespace OS.Domain.Service
             await  _sellerRepository.DeleteSeller(id, cancellationToken);
         }
 
-        public  async Task EditSeller(AlluserDto user, CancellationToken cancellationToken)
+        public  async Task EditSeller(AlluserDto user, IFormFile file, CancellationToken cancellationToken)
         {
-           await  _sellerRepository.EditSeller(user, cancellationToken);
+           await  _sellerRepository.EditSeller(user, file, cancellationToken);
         }
 
         public async Task<List<AlluserDto>> GetAllSellers(CancellationToken cancellationToken)

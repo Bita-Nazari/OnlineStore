@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace OS.Domain.Core.Contracts.Service
 
         public Task<AlluserDto> GetSellerById(int SellerId, CancellationToken cancellationToken);
 
-        public Task EditSeller(AlluserDto user, CancellationToken cancellationToken);
+        public Task EditSeller(AlluserDto user, IFormFile file, CancellationToken cancellationToken);
 
         public Task  DeleteSeller(int id, CancellationToken cancellationToken);
         public Task IsRestored(int id, CancellationToken cancellationToken);

@@ -1,16 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Dtos;
+using OS.Domain.Core.Entities;
 using OS.Infrastucture.Db.SqlServer.DataBase;
+using Microsoft.AspNetCore.Hosting;
+
 
 namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 {
     public class SellerRepository : ISellerRepository
     {
         private readonly OnlineStoreContext _storeContext;
-        public SellerRepository(OnlineStoreContext storeContext)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public SellerRepository(OnlineStoreContext storeContext , IWebHostEnvironment hostingEnvironment)
         {
             _storeContext = storeContext;
+            _hostingEnvironment = hostingEnvironment;
         }
 
 
@@ -29,7 +35,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
 
 
 
-        public async Task EditSeller(AlluserDto user, CancellationToken cancellationToken)
+        public async Task EditSeller(AlluserDto user, IFormFile file ,CancellationToken cancellationToken)
         {
             var User = await _storeContext.Sellers.Where(s => s.Id == user.Id)
                  .Include(u => u.User)
@@ -38,15 +44,61 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
             {
                 throw new NullReferenceException("user did not found");
             }
-            User.FirstName = user.FirstName;
-            User.LastName = user.LastName;
-            User.CityId = user.CityId;
-            User.NationalCode = user.NationalCode;
-            User.ShabaNumber = user.ShabaNumber;
-            User.User.Email = user.Email;
-            User.User.PhoneNumber = user.PhoneNumber;
-            User.User.UserName = user.UserName;
-            await _storeContext.SaveChangesAsync(cancellationToken);
+            if (file != null && file.Length > 0)
+            {
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+
+                var picture = new Picture
+                {
+
+                    Url = "/upload/" + uniqueFileName,
+                    IsDeleted = false,
+                    IsConfirmed = false,
+                    IsProfilePicture = false
+
+
+                };
+                await _storeContext.Pictures.AddAsync(picture);
+                await _storeContext.SaveChangesAsync();
+
+                var webRootPath = _hostingEnvironment.WebRootPath;
+
+                // Combine with the upload folder path
+                var uploadPath = Path.Combine(webRootPath, "upload");
+
+
+                var filePath = Path.Combine(uploadPath, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream, cancellationToken);
+                }
+
+                User.PictureId = picture.Id;
+                User.FirstName = user.FirstName;
+                User.LastName = user.LastName;
+                User.CityId = user.CityId;
+                User.NationalCode = user.NationalCode;
+                User.ShabaNumber = user.ShabaNumber;
+                User.User.Email = user.Email;
+                User.User.PhoneNumber = user.PhoneNumber;
+                User.User.UserName = user.UserName;
+                await _storeContext.SaveChangesAsync(cancellationToken);
+            }
+            else
+            {
+                User.FirstName = user.FirstName;
+                User.LastName = user.LastName;
+                User.CityId = user.CityId;
+                User.NationalCode = user.NationalCode;
+                User.ShabaNumber = user.ShabaNumber;
+                User.User.Email = user.Email;
+                User.User.PhoneNumber = user.PhoneNumber;
+                User.User.UserName = user.UserName;
+                await _storeContext.SaveChangesAsync(cancellationToken);
+            }
+
 
         }
 
@@ -100,7 +152,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var seller = await _storeContext.Sellers
                 .Where(c => c.Id == SellerId)
-                .Include(u => u.User).Include(c => c.City)
+                .Include(u => u.User)
+                .Include(c => c.City)
+                .Include(s=> s.Picture)
                 .FirstOrDefaultAsync(cancellationToken);
             if (seller == null)
             {
@@ -121,6 +175,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 Wallet = seller.Wallet,
                 CityName = seller.City?.Name,
                 HaveBooth = seller.HaveBooth,
+                PictureUrl = seller?.Picture?.Url
                 
     
 

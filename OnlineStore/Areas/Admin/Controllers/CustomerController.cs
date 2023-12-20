@@ -57,7 +57,7 @@ namespace OnlineStore.Areas.Admin.Controllers
             return View(userviewmodel);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(int id,CancellationToken cancellationToken)
         {
             var customer = await _customerAppService.GetCustomerById(id, cancellationToken);
             var cities = await _cityAppService.GetAll(cancellationToken);
@@ -81,7 +81,7 @@ namespace OnlineStore.Areas.Admin.Controllers
             return View(userviewmodel);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(AllUserViewModel user, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(AllUserViewModel user , IFormFile form, CancellationToken cancellationToken)
         {
             var seller = new AlluserDto()
             {
@@ -98,7 +98,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Address = user.Address,
 
             };
-            await _customerAppService.EditCustomer(seller, cancellationToken);
+            await _customerAppService.EditCustomer(seller,form, cancellationToken);
             return RedirectToAction("Customer");
         }
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)

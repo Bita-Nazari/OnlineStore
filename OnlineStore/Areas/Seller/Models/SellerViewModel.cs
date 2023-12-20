@@ -14,6 +14,8 @@ namespace OnlineStore.Areas.Seller.Models
 
         public string? PhoneNumber { get; set; }
 
+        public string? PicturUrl { get; set; }
+
         public int? CityId { get; set; }
         public string? CityName { get; set; }
         public bool? HaveBooth { get; set; }

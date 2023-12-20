@@ -4,6 +4,7 @@ using OnlineStore.Areas.Seller.Models;
 using OS.Domain.AppService;
 using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Dtos;
+using System.Security.Claims;
 
 namespace OnlineStore.Areas.Seller.Controllers
 {
@@ -12,13 +13,17 @@ namespace OnlineStore.Areas.Seller.Controllers
     {
         private readonly ISellerAppService _sellerAppService;
         private readonly ICityAppService _cityAppService;
-        public ProfileController(ISellerAppService sellerAppServic ,ICityAppService cityAppService)
+        private readonly IUserAppService _userAppService;
+        public ProfileController(ISellerAppService sellerAppServic ,ICityAppService cityAppService ,IUserAppService userAppService)
         {
             _sellerAppService = sellerAppServic; 
             _cityAppService = cityAppService;
+            _userAppService= userAppService;
         }
         public async Task<IActionResult> Profile(int id , CancellationToken cancellationtoken)
         {
+            var userId = Convert.ToInt32(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var user = await _userAppService.GetById(userId, cancellationtoken);
             var seller = await _sellerAppService.GetSellerById(id, cancellationtoken);
             var sellerView = new SellerViewModel()
             {
@@ -31,6 +36,8 @@ namespace OnlineStore.Areas.Seller.Controllers
                 Email = seller.Email,
                 CityName = seller.CityName,
                 ShabaNumber = seller.ShabaNumber,
+                PicturUrl = seller.PictureUrl,
+
 
 
             };
@@ -60,12 +67,13 @@ namespace OnlineStore.Areas.Seller.Controllers
                 }).ToList(),
                 CreatedAt = seller.CreatedAt,
                 Wallet = seller.Wallet,
+               
             };
             return View(userviewmodel);
 
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(AllUserViewModel user, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(AllUserViewModel user ,IFormFile file, CancellationToken cancellationToken)
         {
             var seller = new AlluserDto()
             {
@@ -78,10 +86,10 @@ namespace OnlineStore.Areas.Seller.Controllers
                 NationalCode = user.NationalCode,
                 CityId = user.CityId,
                 ShabaNumber = user.ShabaNumber,
-                Password = user.Password,
+                PictureUrl = user.PictureUrl,
 
             };
-            await _sellerAppService.EditSeller(seller, cancellationToken);
+            await _sellerAppService.EditSeller(seller,file, cancellationToken);
             return RedirectToAction("Profile" , new { Id = user.Id });
         }
     }

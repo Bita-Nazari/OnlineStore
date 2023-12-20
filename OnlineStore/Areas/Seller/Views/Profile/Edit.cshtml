@@ -11,11 +11,11 @@
 
 <!------ Include the above in your HEAD tag ---------->
 <body>
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
         <fieldset>
 
             <!-- Form Name -->
-            <legend>Booth</legend>
+            <legend>profile</legend>
 
             <!-- Text input-->
             <div class="form-group">
@@ -89,6 +89,16 @@
                 </div>
 
 
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="filebutton">آپلود عکس</label>
+                <div class="col-md-4">
+                    <input asp-for="file" id="filebutton"
+                           name="file"
+                           class="input-file"
+                           type="file" />
+                </div>
             </div>
             <div class="form-group">
 

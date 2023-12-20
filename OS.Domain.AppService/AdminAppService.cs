@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Contracts.AppService;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
 using OS.Domain.Core.Entities;

@@ -24,6 +24,7 @@ namespace OnlineStore.Areas.Admin.Models
         public string? Email { get; set; }
         [Display(Name = "یوزرنیم")]
         public string? UserName { get; set; }
+        public string? PictureUrl { get; set; }
 
         public int? PictureId { get; set; }
         public string? Password { get; set; }
@@ -39,7 +40,8 @@ namespace OnlineStore.Areas.Admin.Models
         public long? Wallet { get; set; }
         [Display(Name = "آدرس")]
         public string? Address { get; set; } = null!;
-
+        [DataType(DataType.Upload)]
+        public IFormFile? file { get; set; }
         public Customer? Customer { get; set; }
         //public Seller? Seller { get; set; }
         public List<City>? cities { get; set; }

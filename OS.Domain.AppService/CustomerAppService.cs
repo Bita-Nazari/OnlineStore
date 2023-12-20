@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Contracts.AppService;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Contracts.AppService;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
 using System;
@@ -28,9 +29,9 @@ namespace OS.Domain.AppService
            
         }
 
-        public async  Task EditCustomer(AlluserDto user, CancellationToken cancellationToken)
+        public async  Task EditCustomer(AlluserDto user, IFormFile file, CancellationToken cancellationToken)
         {
-           await   _customerService.EditCustomer(user, cancellationToken);
+           await   _customerService.EditCustomer(user,file, cancellationToken);
             
         }
 

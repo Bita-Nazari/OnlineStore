@@ -83,7 +83,7 @@ namespace OnlineStore.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(AllUserViewModel user, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(AllUserViewModel user,IFormFile form ,CancellationToken cancellationToken)
         {
             var seller = new AlluserDto()
             {
@@ -99,7 +99,7 @@ namespace OnlineStore.Areas.Admin.Controllers
                 Password = user.Password,
 
             };
-            await _sellerAppService.EditSeller(seller, cancellationToken);
+            await _sellerAppService.EditSeller(seller,form, cancellationToken);
             return RedirectToAction("Seller");
         }
         public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)

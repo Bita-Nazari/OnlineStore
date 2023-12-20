@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

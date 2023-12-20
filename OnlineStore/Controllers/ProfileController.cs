@@ -58,6 +58,7 @@ namespace OnlineStore.Controllers
                 ShabaNumber = customer.ShabaNumber,
                 NationalCode = customer.NationalCode,
                 //CityName = seller.CityName,
+                Address = customer.Address, 
                 Password = customer.Password,
                 cities = cities.Select(s => new OS.Domain.Core.Entities.City
                 {
@@ -71,7 +72,7 @@ namespace OnlineStore.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(AllUserViewModel user, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(AllUserViewModel user,IFormFile file, CancellationToken cancellationToken)
         {
             var customer = new AlluserDto()
             {
@@ -86,9 +87,10 @@ namespace OnlineStore.Controllers
                 ShabaNumber = user.ShabaNumber,
                 Password = user.Password,
                 Address = user.Address,
+                PictureUrl = user.PictureUrl,
 
             };
-            await _customerAppService.EditCustomer(customer, cancellationToken);
+            await _customerAppService.EditCustomer(customer, file,cancellationToken);
             return RedirectToAction("Profile", new { Id = user.Id });
         }
     }

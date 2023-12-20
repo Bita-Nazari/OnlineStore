@@ -52,7 +52,9 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
         {
             var user = await _onlineStoreContext.Users.Where(e => e.Id == id)
                 .Include(s => s.Seller)
+                .ThenInclude(s=>s.Picture)
                 .Include(c => c.Customer)
+                .ThenInclude(s => s.Picture)
                 .FirstOrDefaultAsync(cancellationToken);
             if (user == null)
             {
@@ -67,7 +69,11 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                 PhoneNumber = user.PhoneNumber,
                 SellerId = user.Seller?.Id,
                 CustomerId = user.Customer?.Id,
+                SellerPictureUrl = user.Seller?.Picture?.Url,
+                CustomerPictureUrl = user.Customer?.Picture?.Url,
+
                 //MedalName = user.Seller.Booths.
+                
 
             };
             return userdto;

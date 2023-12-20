@@ -26,7 +26,7 @@
 
 <!------ Include the above in your HEAD tag ---------->
 <body>
-    <form class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
         <fieldset>
 
             <!-- Form Name -->
@@ -79,14 +79,7 @@
                     <textarea asp-for="Address" class="form-control" id="product_name_fr"></textarea>
                 </div>
             </div>
-            @*            <div class="form-group">
-            <label class="col-md-4 control-label" for="available_quantity">رمز عبور</label>
-            <div class="col-md-4">
-            <input asp-for="Password" name="available_quantity" placeholder="رمز عبور " class="form-control input-md" required="" type="text">
-
-            </div>
-
-            </div>*@
+           
 
             <!-- Select Basic -->
             <div class="form-group">
@@ -96,7 +89,15 @@
                     @Html.ValidationMessageFor(x => x.CityId, "", new { @class = "text-danger" })
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="filebutton">آپلود عکس</label>
+                <div class="col-md-4">
+                    <input asp-for="file" id="filebutton"
+                           name="file"
+                           class="input-file"
+                           type="file" />
+                </div>
+            </div>
             <div class="form-group">
 
                 <div class="col-md-4">
@@ -105,15 +106,6 @@
             </div>
 
 
-            <!-- File Button -->
-            @* <div class="form-group">
-            <label class="col-md-4 control-label" for="filebutton">main_image</label>
-            <div class="col-md-4">
-            <input id="filebutton" name="filebutton" class="input-file" type="file">
-            </div>
-            </div>*@
-            <!-- File Button -->
-            <!-- Button -->
 
 
         </fieldset>

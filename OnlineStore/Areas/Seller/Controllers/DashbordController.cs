@@ -25,7 +25,7 @@ namespace OnlineStore.Areas.Seller.Controllers
                 UserName = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 SellerId = user.SellerId,
-
+                PicturUrl = user.SellerPictureUrl
             };
             return View(usermodel);
 

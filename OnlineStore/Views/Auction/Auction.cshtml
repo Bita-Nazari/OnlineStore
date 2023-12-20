@@ -74,6 +74,8 @@
 
                                         <span class="se-cart-price-new"> @Model.EndTime.ToPersianString("yyyy/MM/dd HH:mm") </span>
                                     </div>
+                                    <div class='countdown' data-start-time="@Model.StartTime" data-end-time="@Model.EndTime">
+                                    </div>
                                     <div class="se-cart-price">
                                         <a>اخرین قیمت ثبت شده</a>
                                         <span class="se-cart-price-new"> @Model.StartPrice</span>

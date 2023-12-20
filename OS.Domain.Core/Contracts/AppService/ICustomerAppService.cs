@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace OS.Domain.Core.Contracts.AppService
 
         public Task<AlluserDto> GetCustomerById(int CustomerId, CancellationToken cancellationToken);
         public Task<AlluserDto> GetCustomerByUserId(int Userid, CancellationToken cancellationToken);
-        public Task EditCustomer(AlluserDto user, CancellationToken cancellationToken);
+        public Task EditCustomer(AlluserDto user, IFormFile file, CancellationToken cancellationToken);
 
         public Task DeleteCustomer(int id, CancellationToken cancellationToken);
         public Task ChargeWallet(int Customerid, CustomerDto customerdto, CancellationToken cancellationToken);

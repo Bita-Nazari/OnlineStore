@@ -70,7 +70,8 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                         AuctionId = auction.Id,
                         CustomerId = winner.Id,
                         TotalPrice = auction.StartPrice,
-                        StatusId = 1
+                        StatusId = 1,
+                        Commession =0
                     };
                     _onlineStoreContext.Orders.Add(order);
 
@@ -79,6 +80,7 @@ namespace OS.Infrastucture.DataAccess.EfRepo.Repositories
                     var commission = (int)(auction.StartPrice * commissionRate);
                     var finalPrice = auction.StartPrice - commission;
                     admin.Wallet += commission;
+                    order.Commession= commission;
                     auction.Booth.Seller.Wallet += finalPrice;
                    auction.Booth.TotalCount += 1;
 

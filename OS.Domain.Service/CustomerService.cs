@@ -1,4 +1,5 @@
-﻿using OS.Domain.Core.Contracts.Repository;
+﻿using Microsoft.AspNetCore.Http;
+using OS.Domain.Core.Contracts.Repository;
 using OS.Domain.Core.Contracts.Service;
 using OS.Domain.Core.Dtos;
 using System;
@@ -27,9 +28,9 @@ namespace OS.Domain.Service
            await  _customerRepository.DeleteCustomer(id, cancellationToken);
         }
 
-        public  async Task EditCustomer(AlluserDto user, CancellationToken cancellationToken)
+        public  async Task EditCustomer(AlluserDto user, IFormFile file, CancellationToken cancellationToken)
         {
-            await  _customerRepository.EditCustomer(user, cancellationToken);
+            await  _customerRepository.EditCustomer(user,file, cancellationToken);
         }
 
         public async Task<List<AlluserDto>> GetAllCustomers(CancellationToken cancellationToken)
